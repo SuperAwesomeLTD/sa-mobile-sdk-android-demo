@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">AwesomeAdsDemo</string>
+
+    <!-- for the main tabs -->
+    <string name="tab_user">Your placement</string>
+    <string name="tab_demo">Demo formats</string>
+
+    <!-- for the "user" fragment -->
+    <string name="fragment_user_btn_more_info">Where can I find this?</string>
+    <string name="fragment_user_edit_hint">Placement ID ... </string>
+    <string name="fragment_user_btn_next">Next</string>
+
+    <!-- for the "demo formats" fragment -->
+    <string name="demo_row_title_default">Title</string>
+    <string name="demo_row_details_default">Details</string>
+
+</resources>
