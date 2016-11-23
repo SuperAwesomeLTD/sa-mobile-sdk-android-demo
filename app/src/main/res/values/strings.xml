@@ -2,6 +2,7 @@
     <string name="app_name">AwesomeAdsDemo</string>
 
     <!-- for the main tabs -->
+    <string name="tab_img_descr">SuperAwesome</string>
     <string name="tab_user">Your placement</string>
     <string name="tab_demo">Demo formats</string>
 
@@ -10,8 +11,17 @@
     <string name="fragment_user_edit_hint">Placement ID ... </string>
     <string name="fragment_user_btn_next">Next</string>
 
+    <string name="fragment_user_more_popup_title">Log in to AwesomeAds</string>
+    <string name="fragment_user_more_popup_message">Under the \'Apps and Sites\' section you\'ll see a \'Placement ID\' column next to each of your placements.</string>
+    <string name="fragment_user_more_popup_btn">Got it!</string>
+
+    <string name="fragment_user_error_popup_title">Hey!</string>
+    <string name="fragment_user_error_popup_message">The Placement ID you tried to load an ad for doesn't appear to have any data.</string>
+    <string name="fragment_user_error_popup_btn">Got it!</string>
+
     <!-- for the "demo formats" fragment -->
     <string name="demo_row_title_default">Title</string>
     <string name="demo_row_details_default">Details</string>
+    <string name="demo_row_icon_descr">Icon</string>
 
 </resources>

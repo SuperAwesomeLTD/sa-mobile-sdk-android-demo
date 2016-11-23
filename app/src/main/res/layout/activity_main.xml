@@ -15,14 +15,14 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            style="@style/ToolBarStyle"
-            app:layout_scrollFlags="scroll|enterAlways">
+            style="@style/ToolBarStyle">
 
                 <ImageView
                     android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/awesomeads"/>
+                    android:src="@drawable/awesomeads"
+                    android:contentDescription="@string/tab_img_descr" />
 
         </android.support.v7.widget.Toolbar>
 

@@ -21,7 +21,8 @@
                 android:id="@+id/DemoFormatsIcon"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:scaleType="fitXY"/>
+                android:scaleType="fitCenter"
+                android:contentDescription="@string/demo_row_icon_descr" />
 
         </LinearLayout>
 
