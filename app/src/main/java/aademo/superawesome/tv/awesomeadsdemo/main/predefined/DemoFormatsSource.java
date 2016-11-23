@@ -19,15 +19,15 @@ public class DemoFormatsSource {
 
                 // add data
                 List<ViewModel> data = new ArrayList<>();
-                data.add(new DemoFormatsRow("smallbanner", "Mobile Small Leaderboard", "Size: 300x50"));
-                data.add(new DemoFormatsRow("banner", "Mobile Leaderboard", "Size: 320x50"));
-                data.add(new DemoFormatsRow("leaderboard", "Tablet Leaderboard", "Size: 728x90"));
-                data.add(new DemoFormatsRow("mpu", "Tablet MPU", "Size: 300x250"));
-                data.add(new DemoFormatsRow("small_inter_port", "Mobile Interstitial Portrait", "Size: 320x480"));
-                data.add(new DemoFormatsRow("small_inter_land", "Mobile Interstitial Landscape", "Size: 480x320"));
-                data.add(new DemoFormatsRow("large_inter_port", "Tablet Interstitial Portrait", "Size: 768x1024"));
-                data.add(new DemoFormatsRow("large_inter_land", "Tablet Interstitial Landscape", "Size: 1024x768"));
-                data.add(new DemoFormatsRow("video", "Mobile Video", "Size: 600x480"));
+                data.add(new DemoFormatsRow(30476, "smallbanner", "Mobile Small Leaderboard", "Size: 300x50"));
+                data.add(new DemoFormatsRow(30471, "banner", "Mobile Leaderboard", "Size: 320x50"));
+                data.add(new DemoFormatsRow(30475, "leaderboard", "Tablet Leaderboard", "Size: 728x90"));
+                data.add(new DemoFormatsRow(30472, "mpu", "Tablet MPU", "Size: 300x250"));
+                data.add(new DemoFormatsRow(30473, "small_inter_port", "Mobile Interstitial Portrait", "Size: 320x480"));
+                data.add(new DemoFormatsRow(30474, "small_inter_land", "Mobile Interstitial Landscape", "Size: 480x320"));
+                data.add(new DemoFormatsRow(30477, "large_inter_port", "Tablet Interstitial Portrait", "Size: 768x1024"));
+                data.add(new DemoFormatsRow(30478, "large_inter_land", "Tablet Interstitial Landscape", "Size: 1024x768"));
+                data.add(new DemoFormatsRow(30479, "video", "Mobile Video", "Size: 600x480"));
 
                 // emmit
                 for (ViewModel vm : data) {

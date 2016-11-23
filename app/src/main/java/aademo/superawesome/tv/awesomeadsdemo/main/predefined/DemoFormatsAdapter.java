@@ -29,6 +29,11 @@ public class DemoFormatsAdapter extends ArrayAdapter<ViewModel> implements Gener
     }
 
     @Override
+    public ViewModel getItem(int position) {
+        return formats.get(position);
+    }
+
+    @Override
     public int getCount() {
         return formats.size();
     }

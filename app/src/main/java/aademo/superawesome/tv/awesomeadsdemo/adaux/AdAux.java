@@ -39,6 +39,9 @@ public class AdAux {
                 if ((width == 300 && height == 50) || (width == 320 && height == 50) || (width == 300 && height == 250)) {
                     return AdFormat.banner;
                 }
+                if ((width == 728 && height == 90)) {
+                    return AdFormat.banner;
+                }
                 if ((width == 320 && height == 480) || (width == 480 && height == 320)) {
                     return AdFormat.interstitial;
                 }
