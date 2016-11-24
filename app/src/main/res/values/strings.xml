@@ -28,4 +28,9 @@
     <string name="demo_row_details_default">Details</string>
     <string name="demo_row_icon_descr">Icon</string>
 
+    <!-- for the "settings" fragment -->
+    <string name="activity_settings_title">Settings</string>
+
+    <string name="settings_row_item_default">Item</string>
+
 </resources>

@@ -4,16 +4,17 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import aademo.superawesome.tv.awesomeadsdemo.R;
-import aademo.superawesome.tv.awesomeadsdemo.aux.ViewModel;
+import aademo.superawesome.tv.awesomeadsdemo.aux.GenericViewModelInterface;
 
 /**
  * Created by gabriel.coman on 16/11/16.
  */
-public class DemoFormatsRow implements ViewModel {
+public class DemoFormatsRow implements GenericViewModelInterface {
 
     private int placementId = 0;
     private String imageSource = null;
@@ -28,10 +29,10 @@ public class DemoFormatsRow implements ViewModel {
     }
 
     @Override
-    public View representationAsRow(Context context, View convertView) {
+    public View representationAsRow(Context context, View convertView, ViewGroup parent) {
         View v = convertView;
         if (v == null) {
-            v = LayoutInflater.from(context).inflate(R.layout.row_demoformats, null);
+            v = LayoutInflater.from(context).inflate(R.layout.row_demoformats, parent, false);
         }
 
         ImageView iconImageView = (ImageView) v.findViewById(R.id.DemoFormatsIcon);

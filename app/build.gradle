@@ -28,9 +28,7 @@ android {
 
 repositories {
     maven { url 'https://oss.jfrog.org/libs-snapshot' }
-    maven {
-        url  'http://dl.bintray.com/gabrielcoman/maven'
-    }
+    maven { url  'http://dl.bintray.com/gabrielcoman/maven' }
 }
 
 dependencies {

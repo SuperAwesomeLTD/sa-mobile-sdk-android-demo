@@ -1,10 +1,42 @@
 package aademo.superawesome.tv.awesomeadsdemo.aux;
 
+import android.content.Context;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by gabriel.coman on 16/11/16.
+ * Created by gabriel.coman on 23/11/16.
  */
-public interface GenericAdapter {
-    void updateData(List<ViewModel> newData);
+public class GenericAdapter extends ArrayAdapter<GenericViewModelInterface> implements GenericAdapterInterface {
+
+    private List<GenericViewModelInterface> data = new ArrayList<>();
+
+    public GenericAdapter(Context context) {
+        super(context, 0);
+    }
+
+    @Override
+    public void updateData(List<GenericViewModelInterface> newData) {
+        data = newData;
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public GenericViewModelInterface getItem(int position) {
+        return data.get(position);
+    }
+
+    @Override
+    public int getCount() {
+        return data.size();
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        return data.get(position).representationAsRow(getContext(), convertView, parent);
+    }
 }

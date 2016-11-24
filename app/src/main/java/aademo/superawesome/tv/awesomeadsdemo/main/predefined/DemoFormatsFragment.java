@@ -1,5 +1,6 @@
 package aademo.superawesome.tv.awesomeadsdemo.main.predefined;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,8 @@ import com.jakewharton.rxbinding.widget.RxAdapterView;
 
 import aademo.superawesome.tv.awesomeadsdemo.R;
 import aademo.superawesome.tv.awesomeadsdemo.adaux.AdPreload;
+import aademo.superawesome.tv.awesomeadsdemo.aux.GenericAdapter;
+import aademo.superawesome.tv.awesomeadsdemo.settings.SettingsActivity;
 import tv.superawesome.lib.sautils.SAAlert;
 import tv.superawesome.lib.sautils.SAProgressDialog;
 
@@ -36,7 +39,7 @@ public class DemoFormatsFragment extends Fragment {
 
         final AdPreload preload = new AdPreload(getContext());
 
-        DemoFormatsAdapter adapter = new DemoFormatsAdapter(getContext());
+        GenericAdapter adapter = new GenericAdapter(getContext());
 
         ListView listView = (ListView) view.findViewById(R.id.DemoFormatsListView);
         listView.setAdapter(adapter);
@@ -51,15 +54,16 @@ public class DemoFormatsFragment extends Fragment {
                     doOnSubscribe(() -> SAProgressDialog.getInstance().showProgress(getContext())).
                     doOnCompleted(() -> SAProgressDialog.getInstance().hideProgress()).
                     doOnError(throwable -> SAProgressDialog.getInstance().hideProgress()).
-                    subscribe(adFormat -> {
-                        Log.d("SuperAwesome", "Final format is " + adFormat);
-                    }, throwable -> {
-                        loadErrorPopup();
-                    });
+                    subscribe(adFormat -> startActivity(), throwable -> loadErrorPopup());
 
         });
 
         return view;
+    }
+
+    public void startActivity () {
+        Intent settings = new Intent(getActivity(), SettingsActivity.class);
+        getActivity().startActivity(settings);
     }
 
     public void loadErrorPopup () {

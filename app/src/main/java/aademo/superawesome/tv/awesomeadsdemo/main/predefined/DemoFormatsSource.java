@@ -3,7 +3,7 @@ package aademo.superawesome.tv.awesomeadsdemo.main.predefined;
 import java.util.ArrayList;
 import java.util.List;
 
-import aademo.superawesome.tv.awesomeadsdemo.aux.ViewModel;
+import aademo.superawesome.tv.awesomeadsdemo.aux.GenericViewModelInterface;
 import rx.Observable;
 import rx.Subscriber;
 
@@ -12,13 +12,13 @@ import rx.Subscriber;
  */
 public class DemoFormatsSource {
 
-    public Observable<ViewModel> getDemoFormats () {
-        return Observable.create(new Observable.OnSubscribe<ViewModel>() {
+    public Observable<GenericViewModelInterface> getDemoFormats () {
+        return Observable.create(new Observable.OnSubscribe<GenericViewModelInterface>() {
             @Override
-            public void call(Subscriber<? super ViewModel> subscriber) {
+            public void call(Subscriber<? super GenericViewModelInterface> subscriber) {
 
                 // add data
-                List<ViewModel> data = new ArrayList<>();
+                List<GenericViewModelInterface> data = new ArrayList<>();
                 data.add(new DemoFormatsRow(30476, "smallbanner", "Mobile Small Leaderboard", "Size: 300x50"));
                 data.add(new DemoFormatsRow(30471, "banner", "Mobile Leaderboard", "Size: 320x50"));
                 data.add(new DemoFormatsRow(30475, "leaderboard", "Tablet Leaderboard", "Size: 728x90"));
@@ -30,7 +30,7 @@ public class DemoFormatsSource {
                 data.add(new DemoFormatsRow(30479, "video", "Mobile Video", "Size: 600x480"));
 
                 // emmit
-                for (ViewModel vm : data) {
+                for (GenericViewModelInterface vm : data) {
                     subscriber.onNext(vm);
                 }
                 // complete

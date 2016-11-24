@@ -9,8 +9,7 @@
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="android:textColor">@color/colorWhite</item>
+        <item name="colorPrimaryDark">@color/colorLightGrey</item>
     </style>
 
     <!-- ToolBar Style -->

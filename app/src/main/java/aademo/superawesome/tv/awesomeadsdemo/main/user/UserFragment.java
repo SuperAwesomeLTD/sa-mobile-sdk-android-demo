@@ -1,5 +1,6 @@
 package aademo.superawesome.tv.awesomeadsdemo.main.user;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,7 @@ import com.jakewharton.rxbinding.widget.RxTextView;
 
 import aademo.superawesome.tv.awesomeadsdemo.R;
 import aademo.superawesome.tv.awesomeadsdemo.adaux.AdPreload;
+import aademo.superawesome.tv.awesomeadsdemo.settings.SettingsActivity;
 import tv.superawesome.lib.sautils.SAAlert;
 import tv.superawesome.lib.sautils.SAProgressDialog;
 
@@ -59,14 +61,15 @@ public class UserFragment extends Fragment {
                     doOnSubscribe(() -> SAProgressDialog.getInstance().showProgress(getContext())).
                     doOnCompleted(() -> SAProgressDialog.getInstance().hideProgress()).
                     doOnError(throwable -> SAProgressDialog.getInstance().hideProgress()).
-                    subscribe(adFormat -> {
-                        Log.d("SuperAwesome", "Final format is " + adFormat);
-                    }, throwable -> {
-                        loadErrorPopup();
-                    });
+                    subscribe(adFormat -> startActivity(), throwable -> loadErrorPopup());
         });
 
         return view;
+    }
+
+    private void startActivity () {
+        Intent settings = new Intent(getActivity(), SettingsActivity.class);
+        getActivity().startActivity(settings);
     }
 
     private void findOutMorePopup () {
