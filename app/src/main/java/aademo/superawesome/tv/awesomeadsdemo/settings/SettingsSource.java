@@ -3,9 +3,6 @@ package aademo.superawesome.tv.awesomeadsdemo.settings;
 import aademo.superawesome.tv.awesomeadsdemo.adaux.AdFormat;
 import aademo.superawesome.tv.awesomeadsdemo.aux.UniversalNotifier;
 
-/**
- * Created by gabriel.coman on 24/11/16.
- */
 public class SettingsSource {
 
     public boolean parentalGateStatus = false;
@@ -90,8 +87,6 @@ public class SettingsSource {
         }
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-
     public void setParentalGateStatus(boolean value) {
         parentalGateStatus = value;
         UniversalNotifier.postNotification("PARENTAL_GATE_STATUS_CHANGED");
@@ -101,8 +96,6 @@ public class SettingsSource {
         parentalGate = value;
         UniversalNotifier.postNotification("PARENTAL_GATE_VALUE_CHANGED");
     }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void setTransparentBgStatus(boolean value) {
         transparentBgStatus = value;
@@ -114,8 +107,6 @@ public class SettingsSource {
         UniversalNotifier.postNotification("TRANSPARENT_BG_VALUE_CHANGED");
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-
     public void setBackButtonStatus(boolean value) {
         backButtonStatus = value;
         UniversalNotifier.postNotification("BACK_BUTTON_STATUS_CHANGED");
@@ -125,8 +116,6 @@ public class SettingsSource {
         backButton = value;
         UniversalNotifier.postNotification("BACK_BUTTON_VALUE_CHANGED");
     }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void setLockToPortraitStatus(boolean value) {
         lockToPortraitStatus = value;
@@ -142,8 +131,6 @@ public class SettingsSource {
         UniversalNotifier.postNotification("LOCK_TO_PORTRAIT_VALUE_CHANGED");
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-
     public void setLockToLandscapeStatus(boolean value) {
         lockToLandscapeStatus = value;
         UniversalNotifier.postNotification("LOCK_TO_LANDSCAPE_STATUS_CHANGED");
@@ -157,8 +144,6 @@ public class SettingsSource {
         }
         UniversalNotifier.postNotification("LOCK_TO_LANDSCAPE_VALUE_CHANGED");
     }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void setCloseButtonStatus(boolean value) {
         closeButtonStatus = value;
@@ -174,8 +159,6 @@ public class SettingsSource {
         UniversalNotifier.postNotification("CLOSE_BUTTON_VALUE_CHANGED");
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-
     public void setAutoCloseStatus(boolean value) {
         autoCloseStatus = value;
         UniversalNotifier.postNotification("AUTO_CLOSE_STATUS_CHANGED");
@@ -189,8 +172,6 @@ public class SettingsSource {
         }
         UniversalNotifier.postNotification("AUTO_CLOSE_VALUE_CHANGED");
     }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void setSmallClickStatus(boolean value) {
         smallClickStatus = value;

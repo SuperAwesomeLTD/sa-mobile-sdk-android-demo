@@ -11,9 +11,6 @@ import android.widget.TextView;
 import aademo.superawesome.tv.awesomeadsdemo.R;
 import aademo.superawesome.tv.awesomeadsdemo.aux.GenericViewModelInterface;
 
-/**
- * Created by gabriel.coman on 16/11/16.
- */
 public class DemoFormatsRow implements GenericViewModelInterface {
 
     private int placementId = 0;

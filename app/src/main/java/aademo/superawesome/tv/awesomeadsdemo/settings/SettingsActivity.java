@@ -20,9 +20,6 @@ import tv.superawesome.sdk.views.SAInterface;
 import tv.superawesome.sdk.views.SAInterstitialAd;
 import tv.superawesome.sdk.views.SAVideoAd;
 
-/**
- * Created by gabriel.coman on 24/11/16.
- */
 public class SettingsActivity extends AppCompatActivity {
 
     @Override

@@ -8,9 +8,6 @@ import android.widget.ArrayAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by gabriel.coman on 23/11/16.
- */
 public class GenericAdapter extends ArrayAdapter<GenericViewModelInterface> implements GenericAdapterInterface {
 
     private List<GenericViewModelInterface> data = new ArrayList<>();

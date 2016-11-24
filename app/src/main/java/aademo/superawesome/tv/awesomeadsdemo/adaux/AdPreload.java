@@ -6,9 +6,6 @@ import rx.Observable;
 import tv.superawesome.lib.saadloader.SALoader;
 import tv.superawesome.lib.sasession.SASession;
 
-/**
- * Created by gabriel.coman on 23/11/16.
- */
 public class AdPreload {
 
     private Context context = null;

@@ -7,9 +7,6 @@ import aademo.superawesome.tv.awesomeadsdemo.aux.GenericViewModelInterface;
 import rx.Observable;
 import rx.Subscriber;
 
-/**
- * Created by gabriel.coman on 23/11/16.
- */
 public class DemoFormatsSource {
 
     public Observable<GenericViewModelInterface> getDemoFormats () {

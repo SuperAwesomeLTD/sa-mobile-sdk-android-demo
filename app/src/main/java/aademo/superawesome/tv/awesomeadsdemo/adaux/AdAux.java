@@ -4,9 +4,6 @@ import tv.superawesome.lib.samodelspace.SAAd;
 import tv.superawesome.lib.samodelspace.SACreativeFormat;
 import tv.superawesome.lib.samodelspace.SAResponse;
 
-/**
- * Created by gabriel.coman on 23/11/16.
- */
 public class AdAux {
 
     public AdFormat determineAdType (SAResponse response) {

@@ -1,8 +1,5 @@
 package aademo.superawesome.tv.awesomeadsdemo.main.user;
 
-/**
- * Created by gabriel.coman on 23/11/16.
- */
 public class UserModel {
 
     private String placementString = null;
