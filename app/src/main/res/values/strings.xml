@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">AwesomeAdsDemo</string>
 
+    <string name="k_intent_pid">SETTINGS_PID</string>
+    <string name="k_intent_format">SETTINGS_FORMAT</string>
+
     <!-- for the main tabs -->
     <string name="tab_img_descr">SuperAwesome</string>
     <string name="tab_user">Your placement</string>
@@ -32,5 +35,15 @@
     <string name="activity_settings_title">Settings</string>
 
     <string name="settings_row_item_default">Item</string>
+    <string name="settings_row_option_1_item">Parental gate enabled</string>
+    <string name="settings_row_option_2_item">Transparent background color</string>
+    <string name="settings_row_option_3_item">Enable back button</string>
+    <string name="settings_row_option_4_item">Lock to portrait</string>
+    <string name="settings_row_option_5_item">Lock to landscape</string>
+    <string name="settings_row_option_6_item">Enable close button</string>
+    <string name="settings_row_option_7_item">Enable auto close</string>
+    <string name="settings_row_option_8_item">Enable small click</string>
+
+    <string name="activity_settings_load_button">Load Ad</string>
 
 </resources>

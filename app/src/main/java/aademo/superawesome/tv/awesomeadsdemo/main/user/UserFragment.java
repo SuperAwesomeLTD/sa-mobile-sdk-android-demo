@@ -15,6 +15,7 @@ import com.jakewharton.rxbinding.view.RxView;
 import com.jakewharton.rxbinding.widget.RxTextView;
 
 import aademo.superawesome.tv.awesomeadsdemo.R;
+import aademo.superawesome.tv.awesomeadsdemo.adaux.AdFormat;
 import aademo.superawesome.tv.awesomeadsdemo.adaux.AdPreload;
 import aademo.superawesome.tv.awesomeadsdemo.settings.SettingsActivity;
 import tv.superawesome.lib.sautils.SAAlert;
@@ -57,18 +58,22 @@ public class UserFragment extends Fragment {
 
         RxView.clicks(nextButton).subscribe(aVoid -> {
 
+            int pid = current.getPlacementId();
+
             preload.loadAd(current.getPlacementId(), false).
                     doOnSubscribe(() -> SAProgressDialog.getInstance().showProgress(getContext())).
                     doOnCompleted(() -> SAProgressDialog.getInstance().hideProgress()).
                     doOnError(throwable -> SAProgressDialog.getInstance().hideProgress()).
-                    subscribe(adFormat -> startActivity(), throwable -> loadErrorPopup());
+                    subscribe(format -> startActivity(pid, format), throwable -> loadErrorPopup());
         });
 
         return view;
     }
 
-    private void startActivity () {
+    private void startActivity (int placementId, AdFormat format) {
         Intent settings = new Intent(getActivity(), SettingsActivity.class);
+        settings.putExtra(getString(R.string.k_intent_pid), placementId);
+        settings.putExtra(getString(R.string.k_intent_format), format.ordinal());
         getActivity().startActivity(settings);
     }
 

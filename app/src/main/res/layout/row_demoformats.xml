@@ -54,7 +54,7 @@
     </LinearLayout>
     <View
         android:layout_width="match_parent"
-        android:background="@color/colorLightGrey2"
+        android:background="@color/colorLightGrey3"
         android:layout_height="1dp"/>
 
 </LinearLayout>

@@ -8,5 +8,16 @@ public enum AdFormat {
     banner,
     interstitial,
     video,
-    gamewall
+    gamewall;
+
+    public static AdFormat fromInteger(int x) {
+        switch(x) {
+            case 0: return unknown;
+            case 1: return banner;
+            case 2: return interstitial;
+            case 3: return video;
+            case 4: return gamewall;
+        }
+        return null;
+    }
 }

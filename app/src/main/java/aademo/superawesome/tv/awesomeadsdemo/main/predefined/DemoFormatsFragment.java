@@ -13,6 +13,7 @@ import android.widget.ListView;
 import com.jakewharton.rxbinding.widget.RxAdapterView;
 
 import aademo.superawesome.tv.awesomeadsdemo.R;
+import aademo.superawesome.tv.awesomeadsdemo.adaux.AdFormat;
 import aademo.superawesome.tv.awesomeadsdemo.adaux.AdPreload;
 import aademo.superawesome.tv.awesomeadsdemo.aux.GenericAdapter;
 import aademo.superawesome.tv.awesomeadsdemo.settings.SettingsActivity;
@@ -48,21 +49,23 @@ public class DemoFormatsFragment extends Fragment {
         source.getDemoFormats().toList().subscribe(adapter::updateData);
 
         RxAdapterView.itemClicks(listView).subscribe(pos -> {
-            int placementId = ((DemoFormatsRow) adapter.getItem(pos)).getPlacementId();
+            int pid = ((DemoFormatsRow) adapter.getItem(pos)).getPlacementId();
 
-            preload.loadAd(placementId, true).
+            preload.loadAd(pid, true).
                     doOnSubscribe(() -> SAProgressDialog.getInstance().showProgress(getContext())).
                     doOnCompleted(() -> SAProgressDialog.getInstance().hideProgress()).
                     doOnError(throwable -> SAProgressDialog.getInstance().hideProgress()).
-                    subscribe(adFormat -> startActivity(), throwable -> loadErrorPopup());
+                    subscribe(format -> startActivity(pid, format), throwable -> loadErrorPopup());
 
         });
 
         return view;
     }
 
-    public void startActivity () {
+    public void startActivity (int placementId, AdFormat format) {
         Intent settings = new Intent(getActivity(), SettingsActivity.class);
+        settings.putExtra(getString(R.string.k_intent_pid), placementId);
+        settings.putExtra(getString(R.string.k_intent_format), format.ordinal());
         getActivity().startActivity(settings);
     }
 

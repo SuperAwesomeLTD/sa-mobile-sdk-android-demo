@@ -32,7 +32,9 @@ public class MainActivity extends AppCompatActivity {
 
         tabs = Arrays.asList(getString(R.string.tab_user),  getString(R.string.tab_demo));
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        }
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         MainAdapter adapter = new MainAdapter(getSupportFragmentManager());

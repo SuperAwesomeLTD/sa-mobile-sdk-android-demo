@@ -7,6 +7,7 @@
     <color name="colorWhite">#ffffff</color>
     <color name="colorLightGrey">#fafafa</color>
     <color name="colorLightGrey2">#ececec</color>
+    <color name="colorLightGrey3">#d8d8d8</color>
     <color name="colorGrey">#b7b7b7</color>
     <color name="colorBlack">#000000</color>
 </resources>
