@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorLightGrey2"
+    android:orientation="vertical"
+    tools:context=".display.DisplayActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/MyMaterialTheme.Base">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/DisplayToolbar"
+            android:layout_width="match_parent"
+            android:background="@color/colorLightGrey"
+            android:layout_height="?attr/actionBarSize">
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_margin="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <tv.superawesome.sdk.views.SABannerAd
+                android:id="@+id/Banner1"
+                android:background="@color/colorLightGrey3"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"/>
+
+            <View
+                android:layout_marginTop="12dp"
+                android:background="@color/colorLightGrey3"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"/>
+
+            <LinearLayout
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <tv.superawesome.sdk.views.SABannerAd
+                    android:id="@+id/Banner3"
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:background="@color/colorLightGrey3"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_height="200dp"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="200dp"
+                    android:background="@color/colorLightGrey3"
+                    android:layout_weight="2"/>
+
+            </LinearLayout>
+
+            <tv.superawesome.sdk.views.SABannerAd
+                android:id="@+id/Banner2"
+                android:background="@color/colorLightGrey3"
+                android:layout_width="match_parent"
+                android:layout_marginTop="12dp"
+                android:layout_height="40dp"/>
+
+            <View
+                android:background="@color/colorLightGrey3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="12dp"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

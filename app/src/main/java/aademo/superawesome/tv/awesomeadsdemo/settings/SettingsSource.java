@@ -60,7 +60,10 @@ public class SettingsSource {
 
         switch (format) {
             case unknown:
-            case banner: {
+            case smallbanner:
+            case normalbanner:
+            case bigbanner:
+            case mpu: {
                 setTransparentBgStatus(true);
                 break;
             }
@@ -164,6 +167,10 @@ public class SettingsSource {
 
     public void setCloseButton (boolean value) {
         closeButton = value;
+        if (!autoClose && !closeButton) {
+            autoClose = true;
+            UniversalNotifier.postNotification("AUTO_CLOSE_VALUE_CHANGED");
+        }
         UniversalNotifier.postNotification("CLOSE_BUTTON_VALUE_CHANGED");
     }
 
@@ -176,6 +183,10 @@ public class SettingsSource {
 
     public void setAutoClose (boolean value) {
         autoClose = value;
+        if (!autoClose && !closeButton) {
+            closeButton = true;
+            UniversalNotifier.postNotification("CLOSE_BUTTON_VALUE_CHANGED");
+        }
         UniversalNotifier.postNotification("AUTO_CLOSE_VALUE_CHANGED");
     }
 

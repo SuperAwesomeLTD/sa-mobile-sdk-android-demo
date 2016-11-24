@@ -19,10 +19,10 @@ public class DemoFormatsSource {
 
                 // add data
                 List<GenericViewModelInterface> data = new ArrayList<>();
-                data.add(new DemoFormatsRow(30476, "smallbanner", "Mobile Small Leaderboard", "Size: 300x50"));
+                data.add(new DemoFormatsRow(30472, "smallbanner", "Mobile Small Leaderboard", "Size: 300x50"));
                 data.add(new DemoFormatsRow(30471, "banner", "Mobile Leaderboard", "Size: 320x50"));
                 data.add(new DemoFormatsRow(30475, "leaderboard", "Tablet Leaderboard", "Size: 728x90"));
-                data.add(new DemoFormatsRow(30472, "mpu", "Tablet MPU", "Size: 300x250"));
+                data.add(new DemoFormatsRow(30476, "mpu", "Tablet MPU", "Size: 300x250"));
                 data.add(new DemoFormatsRow(30473, "small_inter_port", "Mobile Interstitial Portrait", "Size: 320x480"));
                 data.add(new DemoFormatsRow(30474, "small_inter_land", "Mobile Interstitial Landscape", "Size: 480x320"));
                 data.add(new DemoFormatsRow(30477, "large_inter_port", "Tablet Interstitial Portrait", "Size: 768x1024"));

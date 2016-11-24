@@ -5,7 +5,10 @@ package aademo.superawesome.tv.awesomeadsdemo.adaux;
  */
 public enum AdFormat {
     unknown,
-    banner,
+    smallbanner,
+    normalbanner,
+    bigbanner,
+    mpu,
     interstitial,
     video,
     gamewall;
@@ -13,10 +16,13 @@ public enum AdFormat {
     public static AdFormat fromInteger(int x) {
         switch(x) {
             case 0: return unknown;
-            case 1: return banner;
-            case 2: return interstitial;
-            case 3: return video;
-            case 4: return gamewall;
+            case 1: return smallbanner;
+            case 2: return normalbanner;
+            case 3: return bigbanner;
+            case 4: return mpu;
+            case 5: return interstitial;
+            case 6: return video;
+            case 7: return gamewall;
         }
         return null;
     }

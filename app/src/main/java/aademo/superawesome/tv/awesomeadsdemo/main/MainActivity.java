@@ -17,7 +17,7 @@ import aademo.superawesome.tv.awesomeadsdemo.main.user.UserFragment;
 public class MainActivity extends AppCompatActivity {
 
     // private vars
-    private List<Fragment> fragments = Arrays.asList(new UserFragment(), new DemoFormatsFragment());
+    private List<Fragment> fragments = Arrays.asList(new DemoFormatsFragment(), new UserFragment());
     private List<String> tabs = null;
 
     @Override
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
 
-        tabs = Arrays.asList(getString(R.string.tab_user),  getString(R.string.tab_demo));
+        tabs = Arrays.asList(getString(R.string.tab_demo), getString(R.string.tab_user));
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);

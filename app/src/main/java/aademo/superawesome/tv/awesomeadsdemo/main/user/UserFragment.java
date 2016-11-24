@@ -74,6 +74,7 @@ public class UserFragment extends Fragment {
         Intent settings = new Intent(getActivity(), SettingsActivity.class);
         settings.putExtra(getString(R.string.k_intent_pid), placementId);
         settings.putExtra(getString(R.string.k_intent_format), format.ordinal());
+        settings.putExtra(getString(R.string.k_intent_test), false);
         getActivity().startActivity(settings);
     }
 

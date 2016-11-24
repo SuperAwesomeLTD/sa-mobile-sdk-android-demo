@@ -1,8 +1,11 @@
 <resources>
-    <string name="app_name">AwesomeAdsDemo</string>
+    <string name="app_name">Awesome Ads</string>
 
     <string name="k_intent_pid">SETTINGS_PID</string>
     <string name="k_intent_format">SETTINGS_FORMAT</string>
+    <string name="k_intent_test">SETTINGS_TEST</string>
+    <string name="k_intent_pg">SETTINGS_PG</string>
+    <string name="k_intent_bg">SETTINGS_BG</string>
 
     <!-- for the main tabs -->
     <string name="tab_img_descr">SuperAwesome</string>
@@ -31,7 +34,7 @@
     <string name="demo_row_details_default">Details</string>
     <string name="demo_row_icon_descr">Icon</string>
 
-    <!-- for the "settings" fragment -->
+    <!-- for the "settings" activity -->
     <string name="activity_settings_title">Settings</string>
 
     <string name="settings_row_item_default">Item</string>
@@ -45,5 +48,17 @@
     <string name="settings_row_option_8_item">Enable small click</string>
 
     <string name="activity_settings_load_button">Load Ad</string>
+
+    <string name="activity_settings_demo_error_load_popup_title">Hey!</string>
+    <string name="activity_settings_demo_error_load_popup_message">The Placement ID you tried to load an ad for doesn\'t appear to have any data.</string>
+    <string name="activity_settings_demo_error_load_popup_btn">Got it!</string>
+
+    <string name="activity_settings_demo_error_show_popup_title">Hey!</string>
+    <string name="activity_settings_demo_error_show_popup_message">The Placement ID could load the ad but cannot display it.</string>
+    <string name="activity_settings_demo_error_show_popup_btn">Got it!</string>
+
+    <!-- for the "display activity -->
+    <string name="activity_display_title">Display Ads</string>
+
 
 </resources>
