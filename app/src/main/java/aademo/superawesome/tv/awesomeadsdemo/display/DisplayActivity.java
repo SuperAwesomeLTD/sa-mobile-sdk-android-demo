@@ -7,12 +7,8 @@ import aademo.superawesome.tv.awesomeadsdemo.R;
 import aademo.superawesome.tv.awesomeadsdemo.adaux.AdFormat;
 import tv.superawesome.lib.sautils.SAAlert;
 import tv.superawesome.sdk.views.SABannerAd;
-import tv.superawesome.sdk.views.SAEvent;
 import tv.superawesome.sdk.views.SAInterface;
 
-/**
- * Created by gabriel.coman on 24/11/16.
- */
 public class DisplayActivity extends AppCompatActivity {
 
     @Override
