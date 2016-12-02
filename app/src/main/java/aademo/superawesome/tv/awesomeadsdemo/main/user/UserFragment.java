@@ -14,18 +14,12 @@ import com.jakewharton.rxbinding.view.RxView;
 import com.jakewharton.rxbinding.widget.RxTextView;
 
 import aademo.superawesome.tv.awesomeadsdemo.R;
-import aademo.superawesome.tv.awesomeadsdemo.adaux.AdFormat;
-import aademo.superawesome.tv.awesomeadsdemo.adaux.AdPreload;
 import aademo.superawesome.tv.awesomeadsdemo.settings.SettingsActivity;
 import tv.superawesome.lib.sautils.SAAlert;
-import tv.superawesome.lib.sautils.SAProgressDialog;
 
 public class UserFragment extends Fragment {
 
     private UserModel current = null;
-
-    public UserFragment () {
-    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,8 +30,6 @@ public class UserFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user, container, false);
-
-        final AdPreload preload = new AdPreload(getContext());
 
         EditText placementIdEditText = (EditText) view.findViewById(R.id.UserPlacementId);
         Button findOutMoreButton = (Button) view.findViewById(R.id.UserFindOutMore);
@@ -52,24 +44,15 @@ public class UserFragment extends Fragment {
                 map(UserModel::isValid).
                 subscribe(nextButton::setEnabled);
 
-        RxView.clicks(nextButton).subscribe(aVoid -> {
-
-            int pid = current.getPlacementId();
-
-            preload.loadAd(current.getPlacementId(), false).
-                    doOnSubscribe(() -> SAProgressDialog.getInstance().showProgress(getContext())).
-                    doOnCompleted(() -> SAProgressDialog.getInstance().hideProgress()).
-                    doOnError(throwable -> SAProgressDialog.getInstance().hideProgress()).
-                    subscribe(format -> startActivity(pid, format), throwable -> loadErrorPopup());
-        });
+        RxView.clicks(nextButton).
+                subscribe(aVoid -> startActivity(current.getPlacementId()));
 
         return view;
     }
 
-    private void startActivity (int placementId, AdFormat format) {
+    private void startActivity (int placementId) {
         Intent settings = new Intent(getActivity(), SettingsActivity.class);
         settings.putExtra(getString(R.string.k_intent_pid), placementId);
-        settings.putExtra(getString(R.string.k_intent_format), format.ordinal());
         settings.putExtra(getString(R.string.k_intent_test), false);
         getActivity().startActivity(settings);
     }
@@ -80,18 +63,6 @@ public class UserFragment extends Fragment {
                 getString(R.string.fragment_user_more_popup_title),
                 getString(R.string.fragment_user_more_popup_message),
                 getString(R.string.fragment_user_more_popup_btn),
-                null,
-                false,
-                0,
-                null);
-    }
-
-    public void loadErrorPopup () {
-        SAAlert.getInstance().show(
-                getContext(),
-                getString(R.string.fragment_user_error_popup_title),
-                getString(R.string.fragment_user_error_popup_message),
-                getString(R.string.fragment_user_error_popup_btn),
                 null,
                 false,
                 0,

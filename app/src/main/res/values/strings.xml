@@ -37,7 +37,8 @@
     <!-- for the "settings" activity -->
     <string name="activity_settings_title">Settings</string>
 
-    <string name="settings_row_item_default">Item</string>
+    <string name="settings_row_option_name_default">Item</string>
+    <string name="settings_row_option_details_default">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</string>
     <string name="settings_row_option_1_item">Parental gate enabled</string>
     <string name="settings_row_option_2_item">Transparent background color</string>
     <string name="settings_row_option_3_item">Enable back button</string>

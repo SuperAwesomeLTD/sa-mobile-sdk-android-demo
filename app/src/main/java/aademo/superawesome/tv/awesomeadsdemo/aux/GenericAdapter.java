@@ -1,6 +1,7 @@
 package aademo.superawesome.tv.awesomeadsdemo.aux;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -8,22 +9,24 @@ import android.widget.ArrayAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GenericAdapter extends ArrayAdapter<GenericViewModelInterface> implements GenericAdapterInterface {
+public class GenericAdapter <T extends GenericRow> extends ArrayAdapter<T>{
 
-    private List<GenericViewModelInterface> data = new ArrayList<>();
+    private List<T> data = new ArrayList<>();
 
     public GenericAdapter(Context context) {
         super(context, 0);
     }
 
-    @Override
-    public void updateData(List<GenericViewModelInterface> newData) {
+    void updateData(List<T> newData) {
         data = newData;
+    }
+
+    void reloadTable () {
         notifyDataSetChanged();
     }
 
     @Override
-    public GenericViewModelInterface getItem(int position) {
+    public T getItem(int position) {
         return data.get(position);
     }
 
@@ -32,8 +35,13 @@ public class GenericAdapter extends ArrayAdapter<GenericViewModelInterface> impl
         return data.size();
     }
 
+    @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        return data.get(position).representationAsRow(getContext(), convertView, parent);
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
+        return data.get(position).getHolderView();
+    }
+
+    public List<T> getData() {
+        return data;
     }
 }
