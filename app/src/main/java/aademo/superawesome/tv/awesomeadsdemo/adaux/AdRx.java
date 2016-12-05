@@ -3,6 +3,8 @@ package aademo.superawesome.tv.awesomeadsdemo.adaux;
 import android.content.Context;
 
 import rx.Observable;
+import tv.superawesome.lib.saadloader.SALoader;
+import tv.superawesome.lib.sasession.SASession;
 import tv.superawesome.sdk.views.SAAppWall;
 import tv.superawesome.sdk.views.SABannerAd;
 import tv.superawesome.sdk.views.SAEvent;
@@ -72,6 +74,25 @@ public class AdRx {
 
             SAAppWall.load(placementId, context);
 
+        });
+    }
+
+    public static Observable<AdFormat> loadAd (Context context, int placementId, boolean test) {
+
+        final SASession session = new SASession(context);
+        if (test) {
+            session.enableTestMode();
+        }
+        final SALoader loader = new SALoader(context);
+        final AdAux adAux = new AdAux();
+
+        return Observable.create(subscriber -> {
+            loader.loadAd(placementId, session, saResponse -> {
+
+                AdFormat format = adAux.determineAdType(saResponse);
+                subscriber.onNext(format);
+                subscriber.onCompleted();
+            });
         });
     }
 

@@ -17,9 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import aademo.superawesome.tv.awesomeadsdemo.R;
-import aademo.superawesome.tv.awesomeadsdemo.aux.GenericDataSource;
-import aademo.superawesome.tv.awesomeadsdemo.aux.GenericRow;
 import aademo.superawesome.tv.awesomeadsdemo.settings.SettingsActivity;
+import gabrielcoman.com.rxdatasource.RxDataSource;
 
 public class DemoFormatsFragment extends Fragment {
 
@@ -46,44 +45,25 @@ public class DemoFormatsFragment extends Fragment {
         data.add(new DemoFormatsViewModel(30478, "large_inter_land", "Tablet Interstitial Landscape", "Size: 1024x768"));
         data.add(new DemoFormatsViewModel(30479, "video", "Mobile Video", "Size: 600x480"));
 
-        GenericDataSource <DemoFormatsViewModel, GenericRow> source = new GenericDataSource<>(getContext());
-        source.bindTo(listView, R.layout.row_demoformats)
-                .withDataSet(data)
-                .match((viewModel, row) -> {
+        RxDataSource.from(getContext(), data)
+                .bindTo(listView)
+                .customiseRow(R.layout.row_demoformats, DemoFormatsViewModel.class, (viewModel, holderView) -> {
 
                     Context context = getContext();
-                    View v = row.getHolderView();
+                    ImageView iconImageView = (ImageView) holderView.findViewById(R.id.DemoFormatsIcon);
+                    Resources resources = container.getResources();
+                    final int resourceId = resources.getIdentifier(viewModel.getImageSource(), "drawable", context.getPackageName());
+                    iconImageView.setImageDrawable(resources.getDrawable(resourceId));
 
-                    ImageView iconImageView = (ImageView) v.findViewById(R.id.DemoFormatsIcon);
-                    TextView nameTextView = (TextView) v.findViewById(R.id.DemoFormatsTitle);
-                    TextView detailsTextView = (TextView) v.findViewById(R.id.DemoFormatsDetails);
+                    TextView nameTextView = (TextView) holderView.findViewById(R.id.DemoFormatsTitle);
+                    nameTextView.setText(viewModel.getFormatName() != null ? viewModel.getFormatName() : context.getString(R.string.demo_row_title_default));
 
-                    if (iconImageView != null) {
-                        Resources resources = container.getResources();
-                        final int resourceId = resources.getIdentifier(viewModel.getImageSource(), "drawable", context.getPackageName());
-                        iconImageView.setImageDrawable(resources.getDrawable(resourceId));
-                    }
-                    if (nameTextView != null) {
-                        nameTextView.setText(viewModel.getFormatName() != null ? viewModel.getFormatName() : context.getString(R.string.demo_row_title_default));
-                    }
-                    if (detailsTextView != null) {
-                        detailsTextView.setText(viewModel.getFormatDetails() != null ? viewModel.getFormatDetails() : context.getString(R.string.demo_row_details_default));
-                    }
+                    TextView detailsTextView = (TextView) holderView.findViewById(R.id.DemoFormatsDetails);
+                    detailsTextView.setText(viewModel.getFormatDetails() != null ? viewModel.getFormatDetails() : context.getString(R.string.demo_row_details_default));
 
-                    return v;
                 })
-                .onRowClick((integer, demoFormatsRow) -> {
-                    startActivity(demoFormatsRow.getPlacementId());
-                });
-
-//        ((GenericJimmySource<DemoFormatsViewModel>)GenericJimmySource.fromData(data))
-//                .bindTo(getContext(), listView, R.layout.row_demoformats)
-//                .match(new Func2<DemoFormatsViewModel, GenericRow, View>() {
-//                    @Override
-//                    public View call(DemoFormatsViewModel demoFormatsViewModel, GenericRow genericRow) {
-//                        return null;
-//                    }
-//                });
+                .onRowClick(R.layout.row_demoformats, (integer, viewModel) -> startActivity(viewModel.getPlacementId()))
+                .fire();
 
         return view;
     }

@@ -2,11 +2,8 @@ package aademo.superawesome.tv.awesomeadsdemo.settings;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.audiofx.BassBoost;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Switch;
@@ -14,25 +11,14 @@ import android.widget.TextView;
 
 import com.jakewharton.rxbinding.view.RxView;
 
-import java.util.Set;
-
 import aademo.superawesome.tv.awesomeadsdemo.R;
 import aademo.superawesome.tv.awesomeadsdemo.adaux.AdFormat;
-import aademo.superawesome.tv.awesomeadsdemo.adaux.AdPreload;
 import aademo.superawesome.tv.awesomeadsdemo.adaux.AdRx;
-import aademo.superawesome.tv.awesomeadsdemo.aux.GenericDataSource;
-import aademo.superawesome.tv.awesomeadsdemo.aux.GenericRow;
 import aademo.superawesome.tv.awesomeadsdemo.display.DisplayActivity;
+import gabrielcoman.com.rxdatasource.RxDataSource;
 import rx.Observable;
-import rx.functions.Action0;
-import rx.functions.Action1;
-import rx.functions.Action2;
 import rx.functions.Func1;
-import rx.functions.Func2;
-import tv.superawesome.lib.saadloader.SAAdParser;
-import tv.superawesome.lib.saevents.SAEvents;
 import tv.superawesome.lib.sautils.SAAlert;
-import tv.superawesome.lib.sautils.SAAlertInterface;
 import tv.superawesome.lib.sautils.SAProgressDialog;
 import tv.superawesome.sdk.views.SAEvent;
 import tv.superawesome.sdk.views.SAInterstitialAd;
@@ -64,11 +50,9 @@ public class SettingsActivity extends AppCompatActivity {
 
         // create the provider and the preload object
         SettingsProvider provider = new SettingsProvider();
-        GenericDataSource <SettingsViewModel, GenericRow> source = new GenericDataSource<>(this);
-        AdPreload preload = new AdPreload(this);
 
         // create an Rx shared observable
-        Observable<AdFormat> formatRx = preload.loadAd(placementId, test).share();
+        Observable<AdFormat> formatRx = AdRx.loadAd(this, placementId, test).share();
         Observable<Void> buttonRx = RxView.clicks(loadBtn).share();
 
         // act on the loading observable
@@ -86,37 +70,26 @@ public class SettingsActivity extends AppCompatActivity {
                 .toList()
                 .subscribe(settingsViewModels -> {
 
-                    source.withDataSet(settingsViewModels)
-                            .bindTo(listView, R.layout.row_settings)
-                            .match((viewModel, row) -> {
+                    RxDataSource.from(SettingsActivity.this, settingsViewModels)
+                            .bindTo(listView)
+                            .customiseRow(R.layout.row_settings, SettingsViewModel.class, (viewModel, holderView) -> {
 
                                 Context context = SettingsActivity.this;
-                                View v = row.getHolderView();
 
-                                Switch itemSwitch = (Switch) v.findViewById(R.id.OptionSwitch);
-                                TextView nameTextView = (TextView) v.findViewById(R.id.OptionName);
-                                TextView detailsTextView = (TextView) v.findViewById(R.id.OptionDetails);
+                                Switch itemSwitch = (Switch) holderView.findViewById(R.id.OptionSwitch);
+                                itemSwitch.setChecked(viewModel.isValue());
+                                RxView.clicks(itemSwitch).subscribe(aVoid -> {
+                                    viewModel.setValue(itemSwitch.isChecked());
+                                });
 
-                                if (itemSwitch != null) {
-                                    itemSwitch.setChecked(viewModel.isValue());
-                                    RxView.clicks(itemSwitch).subscribe(aVoid -> {
-                                        viewModel.setValue(itemSwitch.isChecked());
-                                    });
-                                }
-                                if (nameTextView != null) {
-                                    nameTextView.setText(viewModel.getItem() != null ? viewModel.getItem() : context.getString(R.string.settings_row_option_name_default));
-                                }
-                                if (detailsTextView != null) {
-                                    detailsTextView.setText(viewModel.getDetails() != null ? viewModel.getDetails() : context.getString(R.string.settings_row_option_details_default));
-                                }
+                                TextView nameTextView = (TextView) holderView.findViewById(R.id.OptionName);
+                                nameTextView.setText(viewModel.getItem() != null ? viewModel.getItem() : context.getString(R.string.settings_row_option_name_default));
 
-                                return v;
+                                TextView detailsTextView = (TextView) holderView.findViewById(R.id.OptionDetails);
+                                detailsTextView.setText(viewModel.getDetails() != null ? viewModel.getDetails() : context.getString(R.string.settings_row_option_details_default));
+
                             })
-                            .onRowViewClick(R.id.OptionSwitch, (view, viewModel) -> {
-                                Switch itemSwitch = (Switch) view;
-                                viewModel.setValue(itemSwitch.isChecked());
-                            });
-
+                            .fire();
                 });
 
         // case for error
@@ -137,7 +110,6 @@ public class SettingsActivity extends AppCompatActivity {
 
         // act on the loading and button observables together to make a
         // decision for the banner type ad
-
         Observable
                 .combineLatest(formatRx, buttonRx, (adFormat, aVoid) -> adFormat)
                 .filter(adFormat -> adFormat == AdFormat.smallbanner ||
@@ -175,7 +147,6 @@ public class SettingsActivity extends AppCompatActivity {
                 .flatMap(new Func1<AdFormat, Observable<SAEvent>>() {
                     @Override
                     public Observable<SAEvent> call(AdFormat adFormat) {
-                        Log.d("SuperAwesome-RX", "Load interstitial!");
                         return AdRx.loadInterstitial(SettingsActivity.this, placementId);
                     }
                 })
@@ -186,7 +157,6 @@ public class SettingsActivity extends AppCompatActivity {
 
         // act on the loading and button observables together to make a
         // decision for the video type ad
-
         Observable
                 .combineLatest(formatRx, buttonRx, (adFormat, aVoid) -> adFormat)
                 .filter(adFormat -> adFormat == AdFormat.video)
