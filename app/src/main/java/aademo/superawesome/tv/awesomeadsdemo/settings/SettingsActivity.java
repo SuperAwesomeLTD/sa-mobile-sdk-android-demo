@@ -89,7 +89,7 @@ public class SettingsActivity extends AppCompatActivity {
                                 detailsTextView.setText(viewModel.getDetails() != null ? viewModel.getDetails() : context.getString(R.string.settings_row_option_details_default));
 
                             })
-                            .fire();
+                            .update();
                 });
 
         // case for error

@@ -63,7 +63,7 @@ public class DemoFormatsFragment extends Fragment {
 
                 })
                 .onRowClick(R.layout.row_demoformats, (integer, viewModel) -> startActivity(viewModel.getPlacementId()))
-                .fire();
+                .update();
 
         return view;
     }
