@@ -23,8 +23,7 @@
                 android:src="@drawable/banner"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:scaleType="fitCenter"
-                android:contentDescription="@string/demo_row_icon_descr" />
+                android:scaleType="fitCenter"/>
 
         </LinearLayout>
 
@@ -39,12 +38,12 @@
                 android:id="@+id/DemoFormatsTitle"
                 android:textColor="@color/colorBlack"
                 android:textStyle="bold"
-                android:text="@string/demo_row_title_default"
+                android:text="@string/page_demo_table_row_def_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <TextView
                 android:id="@+id/DemoFormatsDetails"
-                android:text="@string/demo_row_details_default"
+                android:text="@string/page_demo_table_row_def_details"
                 android:textColor="@color/colorBlack"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>

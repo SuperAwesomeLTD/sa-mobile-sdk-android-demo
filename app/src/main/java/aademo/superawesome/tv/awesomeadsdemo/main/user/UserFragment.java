@@ -60,9 +60,9 @@ public class UserFragment extends Fragment {
     private void findOutMorePopup () {
         SAAlert.getInstance().show(
                 getContext(),
-                getString(R.string.fragment_user_more_popup_title),
-                getString(R.string.fragment_user_more_popup_message),
-                getString(R.string.fragment_user_more_popup_btn),
+                getString(R.string.page_user_popup_more_title),
+                getString(R.string.page_user_popup_more_message),
+                getString(R.string.page_user_popup_more_ok_button),
                 null,
                 false,
                 0,

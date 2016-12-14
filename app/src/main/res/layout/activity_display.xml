@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorLightGrey2"
     android:orientation="vertical"
     tools:context=".display.DisplayActivity">
@@ -16,6 +17,7 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/DisplayToolbar"
             android:layout_width="match_parent"
+            app:titleTextAppearance="@style/AppTheme.Toolbar.Title"
             style="@style/SmallToolBarStyle"
             android:layout_height="?attr/actionBarSize">
         </android.support.v7.widget.Toolbar>

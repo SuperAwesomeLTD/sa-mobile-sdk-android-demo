@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorLightGrey2"
     android:orientation="vertical"
     tools:context=".settings.SettingsActivity">
@@ -16,6 +17,7 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/SettingsToolbar"
             android:layout_width="match_parent"
+            app:titleTextAppearance="@style/AppTheme.Toolbar.Title"
             style="@style/SmallToolBarStyle"
             android:layout_height="?attr/actionBarSize">
         </android.support.v7.widget.Toolbar>
@@ -48,7 +50,7 @@
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 style="@style/BlueButtonStyle"
-                android:text="@string/activity_settings_load_button"/>
+                android:text="@string/page_settings_button_load"/>
         </LinearLayout>
     </LinearLayout>
 

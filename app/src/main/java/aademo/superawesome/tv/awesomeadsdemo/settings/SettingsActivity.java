@@ -49,7 +49,7 @@ public class SettingsActivity extends AppCompatActivity {
         Button loadBtn = (Button) findViewById(R.id.LoadAdButton);
 
         // create the provider and the preload object
-        SettingsProvider provider = new SettingsProvider();
+        SettingsProvider provider = new SettingsProvider(this);
 
         // create an Rx shared observable
         Observable<AdFormat> formatRx = AdRx.loadAd(this, placementId, test).share();
@@ -83,10 +83,10 @@ public class SettingsActivity extends AppCompatActivity {
                                 });
 
                                 TextView nameTextView = (TextView) holderView.findViewById(R.id.OptionName);
-                                nameTextView.setText(viewModel.getItem() != null ? viewModel.getItem() : context.getString(R.string.settings_row_option_name_default));
+                                nameTextView.setText(viewModel.getItem() != null ? viewModel.getItem() : context.getString(R.string.page_settings_row_default_title));
 
                                 TextView detailsTextView = (TextView) holderView.findViewById(R.id.OptionDetails);
-                                detailsTextView.setText(viewModel.getDetails() != null ? viewModel.getDetails() : context.getString(R.string.settings_row_option_details_default));
+                                detailsTextView.setText(viewModel.getDetails() != null ? viewModel.getDetails() : context.getString(R.string.page_settings_row_default_details));
 
                             })
                             .update();
@@ -98,9 +98,9 @@ public class SettingsActivity extends AppCompatActivity {
                 .subscribe(adFormat -> {
                     SAAlert.getInstance().show(
                             SettingsActivity.this,
-                            getString(R.string.activity_settings_demo_error_load_popup_title),
-                            getString(R.string.activity_settings_demo_error_load_popup_message),
-                            getString(R.string.activity_settings_demo_error_load_popup_btn),
+                            getString(R.string.page_settings_popup_error_title),
+                            getString(R.string.page_settings_popup_error_message),
+                            getString(R.string.page_settings_popup_error_ok_button),
                             null,
                             false,
                             0,

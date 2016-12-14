@@ -35,15 +35,60 @@ public class DemoFormatsFragment extends Fragment {
         ListView listView = (ListView) view.findViewById(R.id.DemoFormatsListView);
 
         List<DemoFormatsViewModel> data = new ArrayList<>();
-        data.add(new DemoFormatsViewModel(30472, "smallbanner", "Mobile Small Leaderboard", "Size: 300x50"));
-        data.add(new DemoFormatsViewModel(30471, "banner", "Mobile Leaderboard", "Size: 320x50"));
-        data.add(new DemoFormatsViewModel(30475, "leaderboard", "Tablet Leaderboard", "Size: 728x90"));
-        data.add(new DemoFormatsViewModel(30476, "mpu", "Tablet MPU", "Size: 300x250"));
-        data.add(new DemoFormatsViewModel(30473, "small_inter_port", "Mobile Interstitial Portrait", "Size: 320x480"));
-        data.add(new DemoFormatsViewModel(30474, "small_inter_land", "Mobile Interstitial Landscape", "Size: 480x320"));
-        data.add(new DemoFormatsViewModel(30477, "large_inter_port", "Tablet Interstitial Portrait", "Size: 768x1024"));
-        data.add(new DemoFormatsViewModel(30478, "large_inter_land", "Tablet Interstitial Landscape", "Size: 1024x768"));
-        data.add(new DemoFormatsViewModel(30479, "video", "Mobile Video", "Size: 600x480"));
+        data.add(new DemoFormatsViewModel(
+                30472,
+                "smallbanner",
+                getString(R.string.page_demo_table_row_1_title),
+                getString(R.string.page_demo_table_row_1_details)
+        ));
+        data.add(new DemoFormatsViewModel(
+                30471,
+                "banner",
+                getString(R.string.page_demo_table_row_2_title),
+                getString(R.string.page_demo_table_row_2_details)
+        ));
+        data.add(new DemoFormatsViewModel(
+                30475,
+                "leaderboard",
+                getString(R.string.page_demo_table_row_3_title),
+                getString(R.string.page_demo_table_row_3_details)
+        ));
+        data.add(new DemoFormatsViewModel(
+                30476,
+                "mpu",
+                getString(R.string.page_demo_table_row_4_title),
+                getString(R.string.page_demo_table_row_4_details)
+        ));
+        data.add(new DemoFormatsViewModel(
+                30473,
+                "small_inter_port",
+                getString(R.string.page_demo_table_row_5_title),
+                getString(R.string.page_demo_table_row_5_details)
+        ));
+        data.add(new DemoFormatsViewModel(
+                30474,
+                "small_inter_land",
+                getString(R.string.page_demo_table_row_6_title),
+                getString(R.string.page_demo_table_row_6_details)
+        ));
+        data.add(new DemoFormatsViewModel(
+                30477,
+                "large_inter_port",
+                getString(R.string.page_demo_table_row_7_title),
+                getString(R.string.page_demo_table_row_7_details)
+        ));
+        data.add(new DemoFormatsViewModel(
+                30478,
+                "large_inter_land",
+                getString(R.string.page_demo_table_row_8_title),
+                getString(R.string.page_demo_table_row_8_details)
+        ));
+        data.add(new DemoFormatsViewModel(
+                30479,
+                "video",
+                getString(R.string.page_demo_table_row_9_title),
+                getString(R.string.page_demo_table_row_9_details)
+        ));
 
         RxDataSource.from(getContext(), data)
                 .bindTo(listView)
@@ -56,10 +101,10 @@ public class DemoFormatsFragment extends Fragment {
                     iconImageView.setImageDrawable(resources.getDrawable(resourceId));
 
                     TextView nameTextView = (TextView) holderView.findViewById(R.id.DemoFormatsTitle);
-                    nameTextView.setText(viewModel.getFormatName() != null ? viewModel.getFormatName() : context.getString(R.string.demo_row_title_default));
+                    nameTextView.setText(viewModel.getFormatName() != null ? viewModel.getFormatName() : context.getString(R.string.page_demo_table_row_def_title));
 
                     TextView detailsTextView = (TextView) holderView.findViewById(R.id.DemoFormatsDetails);
-                    detailsTextView.setText(viewModel.getFormatDetails() != null ? viewModel.getFormatDetails() : context.getString(R.string.demo_row_details_default));
+                    detailsTextView.setText(viewModel.getFormatDetails() != null ? viewModel.getFormatDetails() : context.getString(R.string.page_demo_table_row_def_details));
 
                 })
                 .onRowClick(R.layout.row_demoformats, (integer, viewModel) -> startActivity(viewModel.getPlacementId()))

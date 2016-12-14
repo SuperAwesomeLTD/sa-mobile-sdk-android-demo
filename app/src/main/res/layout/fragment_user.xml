@@ -14,7 +14,7 @@
         android:layout_marginStart="12dp"
         android:layout_marginTop="90dp"
         android:layout_width="match_parent"
-        android:hint="@string/fragment_user_edit_hint"
+        android:hint="@string/page_user_textfield_placement_placeholder"
         android:inputType="number"
         android:layout_height="40dp" />
 
@@ -35,7 +35,7 @@
             android:layout_height="40dp"
             style="@style/LinkButtonStyle"
             android:textColor="@color/colorBlue"
-            android:text="@string/fragment_user_btn_more_info"/>
+            android:text="@string/page_user_button_more_title"/>
 
         <Button
             android:id="@+id/UserNext"
@@ -43,7 +43,7 @@
             android:layout_gravity="end"
             android:layout_width="100dp"
             android:layout_height="40dp"
-            android:text="@string/fragment_user_btn_next"
+            android:text="@string/page_user_button_next_title"
             style="@style/BlueButtonStyle"/>
     </RelativeLayout>
 

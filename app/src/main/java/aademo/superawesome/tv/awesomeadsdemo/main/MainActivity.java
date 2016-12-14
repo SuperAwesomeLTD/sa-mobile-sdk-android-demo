@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
 
-        tabs = Arrays.asList(getString(R.string.tab_demo), getString(R.string.tab_user));
+        tabs = Arrays.asList(getString(R.string.page_demo_title), getString(R.string.page_user_title));
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);

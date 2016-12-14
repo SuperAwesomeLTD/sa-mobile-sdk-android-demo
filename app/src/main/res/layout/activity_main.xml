@@ -22,8 +22,7 @@
                     android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/awesomeads"
-                    android:contentDescription="@string/tab_img_descr" />
+                    android:src="@drawable/awesomeads"/>
 
         </android.support.v7.widget.Toolbar>
 

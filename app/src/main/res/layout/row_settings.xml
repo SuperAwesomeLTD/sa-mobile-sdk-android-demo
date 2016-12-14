@@ -33,11 +33,11 @@
                 android:textColor="@color/colorBlack"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/settings_row_option_name_default"/>
+                android:text="@string/page_settings_row_default_title"/>
 
             <TextView
                 android:id="@+id/OptionDetails"
-                android:text="@string/settings_row_option_details_default"
+                android:text="@string/page_settings_row_default_details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
