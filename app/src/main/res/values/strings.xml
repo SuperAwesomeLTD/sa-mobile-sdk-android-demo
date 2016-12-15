@@ -19,7 +19,7 @@
     <string name="page_user_popup_more_ok_button">Got it!</string>
 
     <!-- for the "demo formats" fragment -->
-    <string name="page_demo_title">Demo formats</string>
+    <string name="page_demo_title">Default formats</string>
 
     <string name="page_demo_table_row_1_title">Mobile Small Leaderboard</string>
     <string name="page_demo_table_row_1_details">Size: 300x50</string>
