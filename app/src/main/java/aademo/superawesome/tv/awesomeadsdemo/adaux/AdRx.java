@@ -12,10 +12,6 @@ import tv.superawesome.sdk.views.SAInterface;
 import tv.superawesome.sdk.views.SAInterstitialAd;
 import tv.superawesome.sdk.views.SAVideoAd;
 
-/**
- * Created by gabriel.coman on 02/12/2016.
- */
-
 public class AdRx {
 
     public static Observable<SAEvent> loadBanner (SABannerAd bannerAd, int placementId) {

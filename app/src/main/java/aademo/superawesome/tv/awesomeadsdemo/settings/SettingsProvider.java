@@ -10,10 +10,6 @@ import aademo.superawesome.tv.awesomeadsdemo.R;
 import aademo.superawesome.tv.awesomeadsdemo.adaux.AdFormat;
 import rx.Observable;
 
-/**
- * Created by gabriel.coman on 02/12/2016.
- */
-
 class SettingsProvider {
 
     // constants

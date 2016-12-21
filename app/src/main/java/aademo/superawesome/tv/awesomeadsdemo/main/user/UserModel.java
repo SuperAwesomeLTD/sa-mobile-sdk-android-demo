@@ -1,6 +1,6 @@
 package aademo.superawesome.tv.awesomeadsdemo.main.user;
 
-public class UserModel {
+class UserModel {
 
     private String placementString = null;
     private int placementId = 0;

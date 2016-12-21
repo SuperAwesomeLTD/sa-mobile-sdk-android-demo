@@ -120,7 +120,7 @@ public class SettingsActivity extends AppCompatActivity {
 
                     Intent settings = new Intent(SettingsActivity.this, DisplayActivity.class);
                     settings.putExtra(getString(R.string.k_intent_pid), placementId);
-                    settings.putExtra(getString(R.string.k_intent_test), true);
+                    settings.putExtra(getString(R.string.k_intent_test), test);
                     settings.putExtra(getString(R.string.k_intent_format), adFormat.ordinal());
                     settings.putExtra(getString(R.string.k_intent_pg), provider.getParentalGateValue());
                     settings.putExtra(getString(R.string.k_intent_bg), provider.getTransparentBgValue());

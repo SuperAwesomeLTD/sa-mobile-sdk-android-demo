@@ -1,12 +1,6 @@
 package aademo.superawesome.tv.awesomeadsdemo.settings;
 
-import android.os.Parcelable;
-
-/**
- * Created by gabriel.coman on 02/12/2016.
- */
-
-public class SettingsViewModel {
+class SettingsViewModel {
 
     private String item;
     private String details;
@@ -31,7 +25,7 @@ public class SettingsViewModel {
         return value;
     }
 
-    public void setValue(boolean value) {
+    void setValue(boolean value) {
         this.value = value;
     }
 
