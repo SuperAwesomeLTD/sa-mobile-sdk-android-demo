@@ -8,8 +8,8 @@ android {
         applicationId "aademo.superawesome.tv.awesomeadsdemo"
         minSdkVersion 17
         targetSdkVersion 23
-        versionCode 2
-        versionName "1.1"
+        versionCode 4
+        versionName "2.0"
         jackOptions {
             enabled true
         }
@@ -39,6 +39,6 @@ dependencies {
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'io.reactivex:rxjava:1.1.6'
     compile 'com.jakewharton.rxbinding:rxbinding:0.4.0'
-    compile 'tv.superawesome.sdk:superawesome:5.3.7'
+    compile 'tv.superawesome.sdk:superawesome:5.4.3'
     compile 'gabrielcoman.com.rxdatasource:rxdatasource:1.0.3'
 }

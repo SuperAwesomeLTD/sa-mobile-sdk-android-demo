@@ -1,6 +1,7 @@
 package aademo.superawesome.tv.awesomeadsdemo.adaux;
 
 import android.content.Context;
+import android.util.Log;
 
 import rx.Observable;
 import tv.superawesome.lib.saadloader.SALoader;
@@ -20,7 +21,10 @@ public class AdRx {
 
             bannerAd.setListener((SAInterface) (i, saEvent) -> {
                 subscriber.onNext(saEvent);
-                subscriber.onCompleted();
+
+                if (saEvent == SAEvent.adLoaded) {
+                    subscriber.onCompleted();
+                }
             });
 
             bannerAd.load(placementId);
@@ -35,7 +39,10 @@ public class AdRx {
 
             SAInterstitialAd.setListener((SAInterface) (i, saEvent) -> {
                 subscriber.onNext(saEvent);
-                subscriber.onCompleted();
+
+                if (saEvent == SAEvent.adLoaded) {
+                    subscriber.onCompleted();
+                }
             });
 
             SAInterstitialAd.load(placementId, context);
@@ -50,7 +57,10 @@ public class AdRx {
 
             SAVideoAd.setListener((SAInterface) (i, saEvent) -> {
                 subscriber.onNext(saEvent);
-                subscriber.onCompleted();
+
+                if (saEvent == SAEvent.adLoaded) {
+                    subscriber.onCompleted();
+                }
             });
 
             SAVideoAd.load(placementId, context);
@@ -65,7 +75,10 @@ public class AdRx {
 
             SAAppWall.setListener((SAInterface) (i, saEvent) -> {
                 subscriber.onNext(saEvent);
-                subscriber.onCompleted();
+
+                if (saEvent == SAEvent.adLoaded) {
+                    subscriber.onCompleted();
+                }
             });
 
             SAAppWall.load(placementId, context);

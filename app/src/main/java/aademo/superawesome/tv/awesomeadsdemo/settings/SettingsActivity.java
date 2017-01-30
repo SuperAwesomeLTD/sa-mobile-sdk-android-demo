@@ -19,7 +19,7 @@ import gabrielcoman.com.rxdatasource.RxDataSource;
 import rx.Observable;
 import rx.functions.Func1;
 import tv.superawesome.lib.sautils.SAAlert;
-import tv.superawesome.lib.sautils.SAProgressDialog;
+import tv.superawesome.lib.sautils.SALoadScreen;
 import tv.superawesome.sdk.views.SAEvent;
 import tv.superawesome.sdk.views.SAInterstitialAd;
 import tv.superawesome.sdk.views.SAOrientation;
@@ -57,9 +57,9 @@ public class SettingsActivity extends AppCompatActivity {
 
         // act on the loading observable
         formatRx
-                .doOnSubscribe(() -> SAProgressDialog.getInstance().showProgress(SettingsActivity.this))
-                .doOnCompleted(() -> SAProgressDialog.getInstance().hideProgress())
-                .doOnError(throwable -> SAProgressDialog.getInstance().hideProgress())
+                .doOnSubscribe(() -> SALoadScreen.getInstance().show(SettingsActivity.this))
+                .doOnCompleted(() -> SALoadScreen.getInstance().hide())
+                .doOnError(throwable -> SALoadScreen.getInstance().hide())
                 .flatMap(new Func1<AdFormat, Observable<SettingsViewModel>>() {
                     @Override
                     public Observable<SettingsViewModel> call(AdFormat adFormat) {

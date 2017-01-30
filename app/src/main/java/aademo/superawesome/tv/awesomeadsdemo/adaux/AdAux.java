@@ -14,7 +14,7 @@ public class AdAux {
         }
 
         // gamewall just reverts back to gamewall
-        if (response.format == SACreativeFormat.gamewall) {
+        if (response.format == SACreativeFormat.appwall) {
             return AdFormat.gamewall;
         }
         // video just reverts back to video

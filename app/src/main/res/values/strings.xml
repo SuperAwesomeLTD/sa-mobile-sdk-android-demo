@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SuperAwesome Ads</string>
+    <string name="app_name">Awesome Ads</string>
 
     <string name="k_intent_pid">SETTINGS_PID</string>
     <string name="k_intent_format">SETTINGS_FORMAT</string>

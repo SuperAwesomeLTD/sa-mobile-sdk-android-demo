@@ -2,13 +2,16 @@ package aademo.superawesome.tv.awesomeadsdemo.display;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import aademo.superawesome.tv.awesomeadsdemo.R;
 import aademo.superawesome.tv.awesomeadsdemo.adaux.AdFormat;
 import aademo.superawesome.tv.awesomeadsdemo.adaux.AdRx;
+import rx.functions.Action1;
 import rx.subjects.PublishSubject;
 import tv.superawesome.sdk.views.SABannerAd;
 import tv.superawesome.sdk.views.SAEvent;
+import tv.superawesome.sdk.views.SAInterface;
 
 public class DisplayActivity extends AppCompatActivity {
 
@@ -55,7 +58,12 @@ public class DisplayActivity extends AppCompatActivity {
 
                             AdRx.loadBanner(normalAndSmallBanner, placementId)
                                     .filter(saEvent -> saEvent == SAEvent.adLoaded)
-                                    .subscribe(saEvent -> normalAndSmallBanner.play(DisplayActivity.this));
+                                    .subscribe(saEvent -> normalAndSmallBanner.play(DisplayActivity.this), new Action1<Throwable>() {
+                                        @Override
+                                        public void call(Throwable throwable) {
+                                            Log.d("SuperAwesome", throwable.toString());
+                                        }
+                                    });
 
                             break;
                         }
