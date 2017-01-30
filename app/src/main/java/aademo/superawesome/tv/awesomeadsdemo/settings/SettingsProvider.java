@@ -53,7 +53,7 @@ class SettingsProvider {
         );
         settingsDict.put(KEY_LOCK_LANSCAPE,
                 new SettingsViewModel(
-                        c.getString(R.string.page_settings_row_lock_portrait_title),
+                        c.getString(R.string.page_settings_row_lock_landscape_title),
                         c.getString(R.string.page_settings_row_lock_landscape_details),
                         false)
         );
