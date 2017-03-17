@@ -70,13 +70,13 @@ public class CreativeAux {
     }
 
     public void getTagBitmap (Context context, String tag, int width, int height, int scaledW, int scaledH,  Listener listener) {
-        String tagString = tag;
-        tagString = tagString.replace("[keywords]", "");
-        tagString = tagString.replace("[timestamp]", "");
-        tagString = tagString.replace("target=\"_blank\"", "");
-        tagString = tagString.replace("“", "\"");
-        tagString = tagString.replace("\n", "");
-        getWebViewBitmap(context, tagString, width, height, scaledW, scaledH, listener);
+//        String tagString = tag;
+//        tagString = tagString.replace("[keywords]", "");
+//        tagString = tagString.replace("[timestamp]", "");
+//        tagString = tagString.replace("target=\"_blank\"", "");
+//        tagString = tagString.replace("“", "\"");
+//        tagString = tagString.replace("\n", "");
+        getWebViewBitmap(context, tag, width, height, scaledW, scaledH, listener);
     }
 
     void getUrlBitmap(Context context, String url, AdFormat format, Listener listener) {
