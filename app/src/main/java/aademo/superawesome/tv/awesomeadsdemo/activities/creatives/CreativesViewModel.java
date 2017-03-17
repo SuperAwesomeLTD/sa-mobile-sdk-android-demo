@@ -27,13 +27,13 @@ class CreativesViewModel {
 
     private SACreative creative;
     private AdFormat mFormat;
-    private Target target = null;
-    private WebView webView;
+    private CreativeAux aux;
 
     CreativesViewModel(SACreative creative) {
         this.creative = creative;
         AdAux adAux = new AdAux();
         mFormat = adAux.determineCreativeFormat(creative);
+        aux = new CreativeAux();
     }
 
     public SACreative getCreative() {
@@ -65,95 +65,38 @@ class CreativesViewModel {
         return source;
     }
 
-    void getIconBitmap (Context context, Listener listener) {
+    void getIconBitmap (Context context, CreativeAux.Listener listener) {
 
         switch (creative.format) {
             case image: {
-
-                target = new Target() {
-                    @Override
-                    public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                        listener.gotBitmap(bitmap);
-                    }
-
-                    @Override
-                    public void onBitmapFailed(Drawable errorDrawable) {
-                        getLocalBitmap(context, listener);
-                    }
-
-                    @Override
-                    public void onPrepareLoad(Drawable placeHolderDrawable) {
-                        getLocalBitmap(context, listener);
-                    }
-                };
-
-                Picasso.with(context).load(creative.details.image).into(target);
-
+                aux.getUrlBitmap(context, creative.details.image, mFormat, listener);
                 break;
             }
             case rich: {
-
-                try {
-
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        WebView.enableSlowWholeDocumentDraw();
-                    }
-
-                    final float scale =  SAUtils.getScaleFactor((Activity)context);
-
-                    final int width = Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT ? (int) (scale * creative.details.width) : creative.details.width;
-                    final int height = Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT ? (int) (scale * creative.details.height) : creative.details.height;
-                    final int scaledWidth = creative.details.width / 4 ;
-                    final  int scaledHeight = creative.details.height / 4;
-
-                    Log.d("SuperAwesome", "For " + creative.name + " ==> (" + width + ", " + height + "); (" + scaledWidth + ", " + scaledHeight + ")");
-
-                    webView = new WebView(context);
-                    webView.setDrawingCacheEnabled(true);
-                    webView.buildDrawingCache();
-                    webView.setInitialScale(100);
-
-                    String baseHtml = "<html><header><style>html, body, div { margin: 0px; padding: 0px; width: 100%; height: 100%; }</style></header><body>_CONTENT_</body></html>";
-                    String iframeHtml = "<iframe style='padding:0;border:0;' width='100%' height='100%' src='" + creative.details.url + "'></iframe>";
-                    String fullHtml = baseHtml.replace("_CONTENT_", iframeHtml);
-
-                    webView.setWebViewClient(new WebViewClient() {
-                        @Override
-                        public void onPageFinished(final WebView view, String url) {
-                            super.onPageFinished(view, url);
-
-                            Log.d("SuperAwesome", "FINISHED!!!");
-
-                            final ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
-                            executor.schedule(() -> {
-
-                                Log.d("SuperAwesome", "FINISHED 2!!!");
-
-                                Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-                                final Canvas c = new Canvas(bitmap);
-                                view.draw(c);
-                                final Bitmap scaled = Bitmap.createScaledBitmap(bitmap, 120, 80, true);
-
-                                ((Activity)context).runOnUiThread(() -> listener.gotBitmap(scaled));
-
-                            }, 1, TimeUnit.SECONDS);
-                        }
-
-                    });
-
-                    webView.layout(0, 0, width, height);
-                    webView.loadDataWithBaseURL(null, fullHtml, "text/html", "UTF-8", null);
-
-                } catch (Exception ex) {
-                    getIconBitmap(context, listener);
-                }
-
+                aux.getRichMediaBitmap(
+                        context,
+                        creative.details.url,
+                        creative.details.width,
+                        creative.details.height,
+                        creative.details.width / 4,
+                        creative.details.height/ 4,
+                        listener);
+                break;
+            }
+            case tag: {
+                aux.getTagBitmap(
+                        context,
+                        creative.details.tag,
+                        creative.details.width,
+                        creative.details.height,
+                        creative.details.width / 4,
+                        creative.details.height/ 4,
+                        listener);
                 break;
             }
             case video:
-            case tag:
             case appwall: {
-                getLocalBitmap(context, listener);
+                aux.getLocalBitmap(context, mFormat, listener);
                 break;
             }
             case invalid: {
@@ -162,56 +105,5 @@ class CreativesViewModel {
             }
         }
 
-    }
-
-    private void getLocalBitmap (Context context, Listener listener) {
-
-        String drawable = null;
-
-        switch (mFormat) {
-            case unknown:
-                drawable = null;
-                break;
-            case smallbanner:
-                drawable = "smallbanner";
-                break;
-            case normalbanner:
-                drawable = "banner";
-                break;
-            case bigbanner:
-                drawable = "leaderboard";
-                break;
-            case mpu:
-                drawable = "mpu";
-                break;
-            case mobile_portrait_interstitial:
-                drawable = "small_inter_port";
-                break;
-            case mobile_landscape_interstitial:
-                drawable = "small_inter_land";
-                break;
-            case tablet_portrait_interstitial:
-                drawable = "large_inter_port";
-                break;
-            case tablet_landscape_interstitial:
-                drawable = "large_inter_land";
-                break;
-            case video:
-                drawable = "video";
-                break;
-            case appwall:
-                drawable = "appwall";
-                break;
-        }
-
-        Resources resources = context.getResources();
-        int resourceId = resources.getIdentifier(drawable, "drawable", context.getPackageName());
-        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), resourceId);
-        listener.gotBitmap(bitmap);
-
-    }
-
-    public interface Listener {
-        void gotBitmap (Bitmap bitmap);
     }
 }
