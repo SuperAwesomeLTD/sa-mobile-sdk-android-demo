@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/MyMaterialTheme">
         <activity
-            android:name=".main.MainActivity"
+            android:name=".activities.main.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,12 +17,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".settings.SettingsActivity"
+            android:name=".activities.settings.SettingsActivity"
             android:label="@string/page_settings_title"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".display.DisplayActivity"
+            android:name=".activities.display.DisplayActivity"
             android:label="@string/page_display_title"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activities.creatives.CreativesActivity"
+            android:label="@string/page_creatives_title"
             android:screenOrientation="portrait"/>
     </application>
 

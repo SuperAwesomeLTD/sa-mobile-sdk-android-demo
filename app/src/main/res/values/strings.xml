@@ -90,5 +90,7 @@
     <!-- for the "display activity -->
     <string name="page_display_title">Display Ads</string>
 
+    <!-- for the "creatives" activity -->
+    <string name="page_creatives_title">Select Ad</string>
 
 </resources>
