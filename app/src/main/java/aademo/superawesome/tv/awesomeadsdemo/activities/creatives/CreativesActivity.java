@@ -3,6 +3,7 @@ package aademo.superawesome.tv.awesomeadsdemo.activities.creatives;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -11,6 +12,7 @@ import com.squareup.picasso.Picasso;
 
 import aademo.superawesome.tv.awesomeadsdemo.R;
 import aademo.superawesome.tv.awesomeadsdemo.activities.BaseActivity;
+import aademo.superawesome.tv.awesomeadsdemo.activities.creatives.bitmap.BitmapListener;
 import aademo.superawesome.tv.awesomeadsdemo.adaux.AdRx;
 import gabrielcoman.com.rxdatasource.RxDataSource;
 
@@ -48,7 +50,6 @@ public class CreativesActivity extends BaseActivity {
                                             ((TextView) view.findViewById(R.id.CreativeSource)).setText(model.getCreativeSource());
 
                                             ImageView icon = (ImageView) view.findViewById(R.id.CreativeIcon);
-
                                             model.getIconBitmap(CreativesActivity.this, icon::setImageBitmap);
 
                                         })

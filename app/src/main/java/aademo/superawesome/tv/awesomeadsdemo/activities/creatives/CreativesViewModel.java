@@ -1,39 +1,34 @@
 package aademo.superawesome.tv.awesomeadsdemo.activities.creatives;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
-import android.util.Log;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
-
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
-
+import aademo.superawesome.tv.awesomeadsdemo.activities.creatives.bitmap.BitmapListener;
+import aademo.superawesome.tv.awesomeadsdemo.activities.creatives.bitmap.LocalBitmap;
+import aademo.superawesome.tv.awesomeadsdemo.activities.creatives.bitmap.RemoteBitmap;
+import aademo.superawesome.tv.awesomeadsdemo.activities.creatives.bitmap.VideoBitmap;
+import aademo.superawesome.tv.awesomeadsdemo.activities.creatives.bitmap.WebViewBitmap;
 import aademo.superawesome.tv.awesomeadsdemo.adaux.AdAux;
 import aademo.superawesome.tv.awesomeadsdemo.adaux.AdFormat;
 import tv.superawesome.lib.samodelspace.saad.SACreative;
-import tv.superawesome.lib.sautils.SAUtils;
 
 class CreativesViewModel {
 
     private SACreative creative;
     private AdFormat mFormat;
-    private CreativeAux aux;
+    private LocalBitmap localBitmap;
+    private RemoteBitmap remoteBitmap;
+    private VideoBitmap videoBitmap;
+    private WebViewBitmap webViewBitmap;
 
     CreativesViewModel(SACreative creative) {
         this.creative = creative;
         AdAux adAux = new AdAux();
         mFormat = adAux.determineCreativeFormat(creative);
-        aux = new CreativeAux();
+        localBitmap = new LocalBitmap();
+        remoteBitmap = new RemoteBitmap();
+        videoBitmap = new VideoBitmap();
+        webViewBitmap = new WebViewBitmap();
     }
 
     public SACreative getCreative() {
@@ -65,45 +60,83 @@ class CreativesViewModel {
         return source;
     }
 
-    void getIconBitmap (Context context, CreativeAux.Listener listener) {
+    void getIconBitmap (Context context, Listener listener) {
 
         switch (creative.format) {
             case image: {
-                aux.getUrlBitmap(context, creative.details.image, mFormat, listener);
+
+                remoteBitmap.getBitmap(context, creative.details.image, new BitmapListener() {
+                    @Override
+                    public void gotBitmap(Bitmap bitmap) {
+                        listener.gotBitmap(bitmap);
+                    }
+
+                    @Override
+                    public void noBitmap() {
+                        listener.gotBitmap(localBitmap.getBitmap(context, mFormat));
+                    }
+                });
                 break;
             }
             case rich: {
-                aux.getRichMediaBitmap(
-                        context,
-                        creative.details.url,
-                        creative.details.width,
-                        creative.details.height,
-                        creative.details.width / 4,
-                        creative.details.height/ 4,
-                        listener);
+
+                String html = "<iframe style='padding:0;border:0;' width='100%' height='100%' src='" + creative.details.url + "'></iframe>";
+
+                webViewBitmap.getBitmap(context, html, creative.details.width, creative.details.height, new BitmapListener() {
+                    @Override
+                    public void gotBitmap(Bitmap bitmap) {
+                        listener.gotBitmap(bitmap);
+                    }
+
+                    @Override
+                    public void noBitmap() {
+                        listener.gotBitmap(localBitmap.getBitmap(context, mFormat));
+                    }
+                });
+
                 break;
             }
             case tag: {
-                aux.getTagBitmap(
-                        context,
-                        creative.details.tag,
-                        creative.details.width,
-                        creative.details.height,
-                        creative.details.width / 4,
-                        creative.details.height/ 4,
-                        listener);
+
+                webViewBitmap.getBitmap(context, creative.details.tag, creative.details.width, creative.details.height, new BitmapListener() {
+                    @Override
+                    public void gotBitmap(Bitmap bitmap) {
+                        listener.gotBitmap(bitmap);
+                    }
+
+                    @Override
+                    public void noBitmap() {
+                        listener.gotBitmap(localBitmap.getBitmap(context, mFormat));
+                    }
+                });
+
                 break;
             }
-            case video:
+            case video:{
+
+                videoBitmap.getBitmap(context, creative.details.video, new BitmapListener() {
+                    @Override
+                    public void gotBitmap(Bitmap bitmap) {
+                        listener.gotBitmap(bitmap);
+                    }
+
+                    @Override
+                    public void noBitmap() {
+                        listener.gotBitmap(localBitmap.getBitmap(context, mFormat));
+                    }
+                });
+
+                break;
+            }
+            case invalid:
             case appwall: {
-                aux.getLocalBitmap(context, mFormat, listener);
-                break;
-            }
-            case invalid: {
-                listener.gotBitmap(null);
+                listener.gotBitmap(localBitmap.getBitmap(context, mFormat));
                 break;
             }
         }
+    }
 
+    interface Listener {
+        void gotBitmap (Bitmap bitmap);
     }
 }

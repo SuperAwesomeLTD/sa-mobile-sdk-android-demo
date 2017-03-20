@@ -23,7 +23,7 @@ public class CreativeAux {
     private Target target = null;
     private Handler handler = null;
 
-    private void getWebViewBitmap (Context context, String content, int width, int height, int scaledW, int scaledH,  Listener listener) {
+    private void getWebViewBitmap (Context context, String content, int width, int height,  Listener listener) {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             WebView.enableSlowWholeDocumentDraw();
@@ -50,6 +50,8 @@ public class CreativeAux {
                         Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
                         final Canvas c = new Canvas(bitmap);
                         view.draw(c);
+                        int scaledW = width / 4;
+                        int scaledH = height / 4;
                         final Bitmap scaled = Bitmap.createScaledBitmap(bitmap, scaledW, scaledH, true);
                         listener.gotBitmap(scaled);
                     }
@@ -64,22 +66,16 @@ public class CreativeAux {
 
     }
 
-    void getRichMediaBitmap(Context context, String url, int width, int height, int scaledW, int scaledH, Listener listener) {
+    void getRichMediaBitmap(Context context, String url, int width, int height, Listener listener) {
         String iframeHtml = "<iframe style='padding:0;border:0;' width='100%' height='100%' src='" + url + "'></iframe>";
-        getWebViewBitmap(context, iframeHtml, width, height, scaledW, scaledH, listener);
+        getWebViewBitmap(context, iframeHtml, width, height, listener);
     }
 
-    public void getTagBitmap (Context context, String tag, int width, int height, int scaledW, int scaledH,  Listener listener) {
-//        String tagString = tag;
-//        tagString = tagString.replace("[keywords]", "");
-//        tagString = tagString.replace("[timestamp]", "");
-//        tagString = tagString.replace("target=\"_blank\"", "");
-//        tagString = tagString.replace("“", "\"");
-//        tagString = tagString.replace("\n", "");
-        getWebViewBitmap(context, tag, width, height, scaledW, scaledH, listener);
+    public void getTagBitmap (Context context, String tag, int width, int height,  Listener listener) {
+        getWebViewBitmap(context, tag, width, height, listener);
     }
 
-    void getUrlBitmap(Context context, String url, AdFormat format, Listener listener) {
+    void getRemoteBitmap(Context context, String url, AdFormat format, Listener listener) {
 
         target = new Target() {
             @Override
