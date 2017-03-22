@@ -55,4 +55,11 @@ public class LocalBitmap {
         return BitmapFactory.decodeResource(res, resourceId);
     }
 
+    public static Bitmap getPlaceholder (Context context) {
+        String drawable = "icon_placeholder";
+        Resources res = context.getResources();
+        int resourceId = res.getIdentifier(drawable, "drawable", context.getPackageName());
+        return BitmapFactory.decodeResource(res, resourceId);
+    }
+
 }

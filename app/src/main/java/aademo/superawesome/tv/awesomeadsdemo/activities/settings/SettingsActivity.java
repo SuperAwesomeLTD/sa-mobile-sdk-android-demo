@@ -1,9 +1,6 @@
 package aademo.superawesome.tv.awesomeadsdemo.activities.settings;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Switch;
@@ -12,29 +9,26 @@ import android.widget.TextView;
 import com.jakewharton.rxbinding.view.RxView;
 
 import aademo.superawesome.tv.awesomeadsdemo.R;
+import aademo.superawesome.tv.awesomeadsdemo.activities.BaseActivity;
+import aademo.superawesome.tv.awesomeadsdemo.activities.display.DisplayActivity;
 import aademo.superawesome.tv.awesomeadsdemo.adaux.AdFormat;
 import aademo.superawesome.tv.awesomeadsdemo.adaux.AdRx;
-import aademo.superawesome.tv.awesomeadsdemo.activities.display.DisplayActivity;
 import gabrielcoman.com.rxdatasource.RxDataSource;
-import rx.Observable;
-import rx.functions.Func1;
+import rx.functions.Action0;
+import rx.functions.Action1;
+import tv.superawesome.lib.samodelspace.saad.SAResponse;
 import tv.superawesome.lib.sautils.SAAlert;
 import tv.superawesome.lib.sautils.SALoadScreen;
-import tv.superawesome.sdk.views.SAEvent;
 import tv.superawesome.sdk.views.SAInterstitialAd;
 import tv.superawesome.sdk.views.SAOrientation;
 import tv.superawesome.sdk.views.SAVideoAd;
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends BaseActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-
-        // get intent data
-        int placementId = getIntent().getIntExtra(getString(R.string.k_intent_pid), 0);
-        boolean test = getIntent().getBooleanExtra(getString(R.string.k_intent_test), false);
 
         android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.SettingsToolbar);
         setSupportActionBar(toolbar);
@@ -44,54 +38,56 @@ public class SettingsActivity extends AppCompatActivity {
         }
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
-        // get the list view
         ListView listView = (ListView) findViewById(R.id.SettingsListView);
         Button loadBtn = (Button) findViewById(R.id.LoadAdButton);
 
-        // create the provider and the preload object
-        SettingsProvider provider = new SettingsProvider(this);
-
-        // create an Rx shared observable
-        Observable<AdFormat> formatRx = AdRx.loadAd(this, placementId, test).share();
-        Observable<Void> buttonRx = RxView.clicks(loadBtn).share();
-
-        // act on the loading observable
-        formatRx
+        getStringExtras(getString(R.string.k_intent_ad))
+                .flatMap(data -> AdRx.processAd(SettingsActivity.this, data))
                 .doOnSubscribe(() -> SALoadScreen.getInstance().show(SettingsActivity.this))
-                .doOnCompleted(() -> SALoadScreen.getInstance().hide())
+                .doOnSuccess(response -> SALoadScreen.getInstance().hide())
                 .doOnError(throwable -> SALoadScreen.getInstance().hide())
-                .flatMap(new Func1<AdFormat, Observable<SettingsViewModel>>() {
-                    @Override
-                    public Observable<SettingsViewModel> call(AdFormat adFormat) {
-                        return provider.getSettings(adFormat);
-                    }
-                })
-                .filter(SettingsViewModel::isActive)
-                .toList()
-                .subscribe(settingsViewModels -> {
+                .subscribe(saResponse -> {
 
-                    RxDataSource.create(SettingsActivity.this)
-                            .bindTo(listView)
-                            .customiseRow(R.layout.row_settings, SettingsViewModel.class, (view, viewModel) -> {
+                    AdFormat format = AdFormat.fromResponse(saResponse);
 
-                                Context context = SettingsActivity.this;
+                    SettingsProvider provider = new SettingsProvider(SettingsActivity.this);
+                    provider.getSettings(format)
+                            .filter(SettingsViewModel::isActive)
+                            .toList()
+                            .subscribe(settingsViewModels -> {
 
-                                Switch itemSwitch = (Switch) view.findViewById(R.id.OptionSwitch);
-                                itemSwitch.setChecked(viewModel.isValue());
-                                RxView.clicks(itemSwitch).subscribe(aVoid -> {
-                                    viewModel.setValue(itemSwitch.isChecked());
-                                });
+                                RxDataSource.create(SettingsActivity.this)
+                                        .bindTo(listView)
+                                        .customiseRow(R.layout.row_settings, SettingsViewModel.class, (view, viewModel) -> {
 
-                                TextView nameTextView = (TextView) view.findViewById(R.id.OptionName);
-                                nameTextView.setText(viewModel.getItem() != null ? viewModel.getItem() : context.getString(R.string.page_settings_row_default_title));
+                                            Switch itemSwitch = (Switch) view.findViewById(R.id.OptionSwitch);
+                                            itemSwitch.setChecked(viewModel.isValue());
+                                            RxView.clicks(itemSwitch).subscribe(aVoid -> {
+                                                viewModel.setValue(itemSwitch.isChecked());
+                                            });
 
-                                TextView detailsTextView = (TextView) view.findViewById(R.id.OptionDetails);
-                                detailsTextView.setText(viewModel.getDetails() != null ? viewModel.getDetails() : context.getString(R.string.page_settings_row_default_details));
+                                            ((TextView) view.findViewById(R.id.OptionName)).setText(viewModel.getItem());
+                                            ((TextView) view.findViewById(R.id.OptionDetails)).setText(viewModel.getDetails());
 
-                            })
-                            .update(settingsViewModels);
+                                        })
+                                        .update(settingsViewModels);
+                            });
+
+                    RxView.clicks(loadBtn)
+                            .subscribe(aVoid -> {
+
+                                if (AdFormat.isBannerType(format))
+                                    playBanner(saResponse, format, provider);
+                                else if (AdFormat.isInterstitialType(format))
+                                    playInterstitial(saResponse, provider);
+                                else if (AdFormat.isVideoType(format))
+                                    playVideo(saResponse, provider);
+                                else if (AdFormat.isAppWallType(format))
+                                    playAppWall();
+
+                            });
+
                 }, throwable -> {
-
                     SAAlert.getInstance().show(
                             SettingsActivity.this,
                             getString(R.string.page_settings_popup_error_title),
@@ -100,91 +96,47 @@ public class SettingsActivity extends AppCompatActivity {
                             null,
                             false,
                             0,
-                            (i, s) -> onBackPressed()
-                    );
-
+                            (i, s) -> onBackPressed());
                 });
 
-        // act on the loading and button observables together to make a
-        // decision for the banner type ad
-        Observable
-                .combineLatest(formatRx, buttonRx, (adFormat, aVoid) -> adFormat)
-                .filter(adFormat -> adFormat == AdFormat.smallbanner ||
-                        adFormat == AdFormat.normalbanner ||
-                        adFormat == AdFormat.bigbanner ||
-                        adFormat == AdFormat.mpu)
-                .subscribe(adFormat -> {
+    }
 
-                    Intent settings = new Intent(SettingsActivity.this, DisplayActivity.class);
-                    settings.putExtra(getString(R.string.k_intent_pid), placementId);
-                    settings.putExtra(getString(R.string.k_intent_test), test);
-                    settings.putExtra(getString(R.string.k_intent_format), adFormat.ordinal());
-                    settings.putExtra(getString(R.string.k_intent_pg), provider.getParentalGateValue());
-                    settings.putExtra(getString(R.string.k_intent_bg), provider.getTransparentBgValue());
-                    SettingsActivity.this.startActivity(settings);
+    private void playBanner (SAResponse response, AdFormat format, SettingsProvider provider) {
+        DisplayActivity.setBackground(provider.getTransparentBgValue());
+        DisplayActivity.setParentalGate(provider.getParentalGateValue());
+        DisplayActivity.setFormat(format);
+        DisplayActivity.setResponse(response);
+        DisplayActivity.play(this);
+    }
 
-                }, throwable -> {});
+    private void playInterstitial (SAResponse response, SettingsProvider provider) {
+        SAInterstitialAd.setParentalGate(provider.getParentalGateValue());
+        SAInterstitialAd.setBackButton(provider.getBackButtonValue());
+        SAInterstitialAd.setOrientation(
+                provider.getLockToLandscapeValue() ?
+                        SAOrientation.LANDSCAPE :
+                        provider.getLockToPortraitValue() ?
+                                SAOrientation.PORTRAIT : SAOrientation.ANY);
+        SAInterstitialAd.setAd(response);
+        SAInterstitialAd.play(response.ads.get(0).placementId, this);
+    }
 
-        // act on the loading and button observables together to make a
-        // decision for the mobile_portrait_interstitial type ad
-        Observable
-                .combineLatest(formatRx, buttonRx, (adFormat, aVoid) -> adFormat)
-                .filter(adFormat -> adFormat == AdFormat.mobile_portrait_interstitial ||
-                        adFormat == AdFormat.mobile_landscape_interstitial ||
-                        adFormat == AdFormat.tablet_portrait_interstitial ||
-                        adFormat == AdFormat.tablet_landscape_interstitial)
-                .doOnNext(adFormat -> {
+    private void playVideo (SAResponse response, SettingsProvider provider) {
+        SAVideoAd.setParentalGate(provider.getParentalGateValue());
+        SAVideoAd.setBackButton(provider.getBackButtonValue());
+        SAVideoAd.setCloseButton(provider.getCloseButtonValue());
+        SAVideoAd.setCloseAtEnd(provider.getAutoCloseValue());
+        SAVideoAd.setSmallClick(provider.getSmallClickValue());
+        SAVideoAd.setOrientation(
+                provider.getLockToLandscapeValue() ?
+                        SAOrientation.LANDSCAPE :
+                        provider.getLockToPortraitValue() ?
+                                SAOrientation.PORTRAIT : SAOrientation.ANY);
+        SAVideoAd.setAd(response);
+        SAVideoAd.play(response.ads.get(0).placementId, this);
+    }
 
-                    SAInterstitialAd.setTestMode(test);
-                    SAInterstitialAd.setParentalGate(provider.getParentalGateValue());
-                    SAInterstitialAd.setBackButton(provider.getBackButtonValue());
-                    SAInterstitialAd.setOrientation(
-                            provider.getLockToLandscapeValue() ?
-                                    SAOrientation.LANDSCAPE :
-                                    provider.getLockToPortraitValue() ?
-                                            SAOrientation.PORTRAIT : SAOrientation.ANY);
-                })
-                .flatMap(new Func1<AdFormat, Observable<SAEvent>>() {
-                    @Override
-                    public Observable<SAEvent> call(AdFormat adFormat) {
-                        return AdRx.loadInterstitial(SettingsActivity.this, placementId);
-                    }
-                })
-                .filter(saEvent -> saEvent == SAEvent.adLoaded)
-                .subscribe(saEvent -> {
-                    SAInterstitialAd.play(placementId, SettingsActivity.this);
-                }, throwable -> {});
-
-        // act on the loading and button observables together to make a
-        // decision for the video type ad
-        Observable
-                .combineLatest(formatRx, buttonRx, (adFormat, aVoid) -> adFormat)
-                .filter(adFormat -> adFormat == AdFormat.video)
-                .doOnNext(adFormat -> {
-
-                    SAVideoAd.setTestMode(test);
-                    SAVideoAd.setParentalGate(provider.getParentalGateValue());
-                    SAVideoAd.setBackButton(provider.getBackButtonValue());
-                    SAVideoAd.setCloseButton(provider.getCloseButtonValue());
-                    SAVideoAd.setCloseAtEnd(provider.getAutoCloseValue());
-                    SAVideoAd.setSmallClick(provider.getSmallClickValue());
-                    SAVideoAd.setOrientation(
-                            provider.getLockToLandscapeValue() ?
-                                    SAOrientation.LANDSCAPE :
-                                    provider.getLockToPortraitValue() ?
-                                            SAOrientation.PORTRAIT : SAOrientation.ANY);
-
-                })
-                .flatMap(new Func1<AdFormat, Observable<SAEvent>>() {
-                    @Override
-                    public Observable<SAEvent> call(AdFormat adFormat) {
-                        return AdRx.loadVideo(SettingsActivity.this, placementId);
-                    }
-                })
-                .filter(saEvent -> saEvent == SAEvent.adLoaded)
-                .subscribe(saEvent -> {
-                    SAVideoAd.play(placementId, SettingsActivity.this);
-                }, throwable -> {});
-
+    private void playAppWall () {
+        //
     }
 }

@@ -6,118 +6,61 @@ import org.json.JSONObject;
 
 import java.util.List;
 
+import aademo.superawesome.tv.awesomeadsdemo.loginaux.LoginManager;
 import rx.Observable;
+import rx.Single;
 import tv.superawesome.lib.saadloader.SALoader;
 import tv.superawesome.lib.sajsonparser.SAJsonParser;
 import tv.superawesome.lib.sajsonparser.SAJsonToList;
+import tv.superawesome.lib.samodelspace.saad.SAAd;
 import tv.superawesome.lib.samodelspace.saad.SACreative;
+import tv.superawesome.lib.samodelspace.saad.SAResponse;
 import tv.superawesome.lib.sanetwork.request.SANetwork;
 import tv.superawesome.lib.sasession.SASession;
-import tv.superawesome.sdk.views.SAAppWall;
-import tv.superawesome.sdk.views.SABannerAd;
-import tv.superawesome.sdk.views.SAEvent;
-import tv.superawesome.sdk.views.SAInterface;
-import tv.superawesome.sdk.views.SAInterstitialAd;
-import tv.superawesome.sdk.views.SAVideoAd;
 
 public class AdRx {
 
-    public static Observable<SAEvent> loadBanner (SABannerAd bannerAd, int placementId) {
+    public static Single<SAAd> loadTestAd (Context context, int placementId) {
 
-        return Observable.create(subscriber -> {
-
-            bannerAd.setListener((SAInterface) (i, saEvent) -> {
-                subscriber.onNext(saEvent);
-
-                if (saEvent == SAEvent.adLoaded) {
-                    subscriber.onCompleted();
-                }
-            });
-
-            bannerAd.load(placementId);
-
-        });
-
-    }
-
-    public static Observable<SAEvent> loadInterstitial (Context context, int placementId) {
-
-        return Observable.create(subscriber -> {
-
-            SAInterstitialAd.setListener((SAInterface) (i, saEvent) -> {
-                subscriber.onNext(saEvent);
-
-                if (saEvent == SAEvent.adLoaded) {
-                    subscriber.onCompleted();
-                }
-            });
-
-            SAInterstitialAd.load(placementId, context);
-
-        });
-
-    }
-
-    public static Observable<SAEvent> loadVideo (Context context, int placementId) {
-
-        return Observable.create(subscriber -> {
-
-            SAVideoAd.setListener((SAInterface) (i, saEvent) -> {
-                subscriber.onNext(saEvent);
-
-                if (saEvent == SAEvent.adLoaded) {
-                    subscriber.onCompleted();
-                }
-            });
-
-            SAVideoAd.load(placementId, context);
-
-        });
-
-    }
-
-    public static Observable<SAEvent> loadAppWall (Context context, int placementId) {
-
-        return Observable.create(subscriber -> {
-
-            SAAppWall.setListener((SAInterface) (i, saEvent) -> {
-                subscriber.onNext(saEvent);
-
-                if (saEvent == SAEvent.adLoaded) {
-                    subscriber.onCompleted();
-                }
-            });
-
-            SAAppWall.load(placementId, context);
-
-        });
-    }
-
-    public static Observable<AdFormat> loadAd (Context context, int placementId, boolean test) {
-
-        final SASession session = new SASession(context);
-        if (test) {
-            session.enableTestMode();
-        }
         final SALoader loader = new SALoader(context);
-        final AdAux adAux = new AdAux();
+        final SASession session = new SASession(context);
+        session.enableTestMode();
 
-        return Observable.create(subscriber -> {
+        return Single.create(subscriber -> {
 
             loader.loadAd(placementId, session, saResponse -> {
 
-                AdFormat format = adAux.determineAdType(saResponse);
-
-                if (format == AdFormat.unknown) {
-                    subscriber.onError(new Throwable());
+                if (saResponse.isValid()) {
+                    subscriber.onSuccess(saResponse.ads.get(0));
                 } else {
-                    subscriber.onNext(format);
-                    subscriber.onCompleted();
+                    subscriber.onError(new Throwable());
                 }
 
             });
 
         });
+
+    }
+
+    public static Single<SAResponse> processAd (Context context, String payload) {
+
+        final int testPlacement = 10000;
+        final SALoader loader = new SALoader(context);
+        final SASession session = new SASession(context);
+
+        return Single.create(subscriber -> {
+
+            loader.processAd(testPlacement, payload, 200, session, saResponse -> {
+
+                if (saResponse.isValid()) {
+                    subscriber.onSuccess(saResponse);
+                } else {
+                    subscriber.onError(new Throwable());
+                }
+            });
+
+        });
+
     }
 
     public static Observable<SACreative> loadCreative (Context context, int placementId) {
@@ -129,7 +72,7 @@ public class AdRx {
         JSONObject query = SAJsonParser.newObject(new Object[] {
                 "debug", "json",
                 "forceCreative", 1,
-                "jwtToken", "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6NiwidXNlcm5hbWUiOiJBZG1pbiIsImVtYWlsIjoiYXdlc29tZWFkcy5hZG1pbkBzdXBlcmF3ZXNvbWUudHYiLCJpYXQiOjE0ODk2ODM4MTAsImV4cCI6MTQ5MDI4ODYxMCwiaXNzIjoiZGFzaGJvYXJkLnN0YXNnaW5nLnN1cGVyYXdlc29tZS50diJ9.xob0vNjEvMQcp2Fe1_MJkTLxNlSa2zgUbIndtCH_51Y"
+                "jwtToken", LoginManager.getManager().getLoggedUserToken()
         });
 
         return Observable.create(subscriber -> {

@@ -9,6 +9,7 @@ import java.util.List;
 import aademo.superawesome.tv.awesomeadsdemo.R;
 import aademo.superawesome.tv.awesomeadsdemo.adaux.AdFormat;
 import rx.Observable;
+import tv.superawesome.sdk.SuperAwesome;
 
 class SettingsProvider {
 
@@ -31,19 +32,19 @@ class SettingsProvider {
                 new SettingsViewModel(
                         c.getString(R.string.page_settings_row_pg_gate_title),
                         c.getString(R.string.page_settings_row_pg_gate_details),
-                        true)
+                        SuperAwesome.getInstance().defaultParentalGate())
         );
         settingsDict.put(KEY_TRANSPARENT_BG,
                 new SettingsViewModel(
                         c.getString(R.string.page_settings_row_bg_color_title),
                         c.getString(R.string.page_settings_row_bg_color_details),
-                        false)
+                        SuperAwesome.getInstance().defaultBgColor())
         );
         settingsDict.put(KEY_BACK_BUTTON,
                 new SettingsViewModel(
                         c.getString(R.string.page_settings_row_back_button_title),
                         c.getString(R.string.page_settings_row_back_button_details) ,
-                        false)
+                        SuperAwesome.getInstance().defaultBackButton())
         );
         settingsDict.put(KEY_LOCK_PORTRAIT,
                 new SettingsViewModel(
@@ -61,19 +62,19 @@ class SettingsProvider {
                 new SettingsViewModel(
                         c.getString(R.string.page_settings_row_close_button_title),
                         c.getString(R.string.page_settings_row_close_button_details),
-                        true)
+                        SuperAwesome.getInstance().defaultCloseButton())
         );
         settingsDict.put(KEY_AUTO_CLOSE,
                 new SettingsViewModel(
                         c.getString(R.string.page_settings_row_auto_close_title),
                         c.getString(R.string.page_settings_row_auto_close_details),
-                        false)
+                        SuperAwesome.getInstance().defaultCloseAtEnd())
         );
         settingsDict.put(KEY_SMALL_CLICK,
                 new SettingsViewModel(
                         c.getString(R.string.page_settings_row_small_click_title),
                         c.getString(R.string.page_settings_row_small_click_details),
-                        false)
+                        SuperAwesome.getInstance().defaultSmallClick())
         );
 
     }

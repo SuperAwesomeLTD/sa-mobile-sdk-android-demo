@@ -1,22 +1,22 @@
 package aademo.superawesome.tv.awesomeadsdemo.activities.creatives;
 
-import android.content.res.Resources;
-import android.graphics.Bitmap;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
-
-import com.squareup.picasso.Picasso;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import aademo.superawesome.tv.awesomeadsdemo.R;
 import aademo.superawesome.tv.awesomeadsdemo.activities.BaseActivity;
-import aademo.superawesome.tv.awesomeadsdemo.activities.creatives.bitmap.BitmapListener;
+import aademo.superawesome.tv.awesomeadsdemo.activities.settings.SettingsActivity;
+import aademo.superawesome.tv.awesomeadsdemo.adaux.AdFormat;
 import aademo.superawesome.tv.awesomeadsdemo.adaux.AdRx;
-import gabrielcoman.com.rxdatasource.RxDataSource;
+import tv.superawesome.lib.samodelspace.saad.SAAd;
+import tv.superawesome.lib.sautils.SAAlert;
 
 public class CreativesActivity extends BaseActivity {
+
+    private CreativesAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +31,7 @@ public class CreativesActivity extends BaseActivity {
         }
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
-        ListView creativeListView = (ListView) findViewById(R.id.CreativesListView);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.CreativesRecyclerView);
 
         getIntExtras(getString(R.string.k_intent_pid))
                 .subscribe(placementId -> {
@@ -41,26 +41,66 @@ public class CreativesActivity extends BaseActivity {
                             .toList()
                             .subscribe(viewModels -> {
 
-                                RxDataSource.create(CreativesActivity.this)
-                                        .bindTo(creativeListView)
-                                        .customiseRow(R.layout.row_creatives, CreativesViewModel.class, (view, model) -> {
+                                adapter = new CreativesAdapter(viewModels);
 
-                                            ((TextView) view.findViewById(R.id.CreativeName)).setText(model.getCreativeName());
-                                            ((TextView) view.findViewById(R.id.CreativeFormat)).setText(model.getCreativeFormat());
-                                            ((TextView) view.findViewById(R.id.CreativeSource)).setText(model.getCreativeSource());
+                                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+                                recyclerView.setLayoutManager(mLayoutManager);
+                                recyclerView.setItemAnimator(new DefaultItemAnimator());
+                                recyclerView.setAdapter(adapter);
 
-                                            ImageView icon = (ImageView) view.findViewById(R.id.CreativeIcon);
-                                            model.getIconBitmap(CreativesActivity.this, icon::setImageBitmap);
+                                adapter.notifyDataSetChanged();
 
+                                adapter.getItemClicks()
+                                        .filter(viewModel -> !AdFormat.isUnknownType(viewModel.getFormat()))
+                                        .map(CreativesViewModel::getCreative)
+                                        .map(creative -> {
+                                            SAAd ad = new SAAd();
+                                            ad.placementId = placementId;
+                                            ad.creative = creative;
+                                            return ad;
                                         })
-                                        .update(viewModels);
+                                        .map(saAd -> saAd.writeToJson().toString())
+                                        .subscribe(this::startSettingsActivityWithAd);
 
-                            }, throwable -> {
-                                // error
-                            });
+                                adapter.getItemClicks()
+                                        .map(CreativesViewModel::getFormat)
+                                        .filter(AdFormat::isUnknownType)
+                                        .subscribe(this::unsupportedFormatError);
 
+
+                            }, this::loadAdError);
 
                 });
 
+    }
+
+    private void startSettingsActivityWithAd (String jsonData) {
+        Intent settingsIntent = new Intent(this, SettingsActivity.class);
+        settingsIntent.putExtra(getString(R.string.k_intent_ad), jsonData);
+        startActivity(settingsIntent);
+    }
+
+    private void loadAdError(Throwable error) {
+        SAAlert.getInstance().show(
+                CreativesActivity.this,
+                getString(R.string.page_creatives_popup_error_load_title),
+                getString(R.string.page_creatives_popup_error_load_message),
+                getString(R.string.page_creatives_popup_error_load_ok_button),
+                null,
+                false,
+                0,
+                (i, s) -> onBackPressed());
+    }
+
+    private void unsupportedFormatError(AdFormat format) {
+        SAAlert.getInstance().show(
+                CreativesActivity.this,
+                getString(R.string.page_creatives_popup_error_format_title),
+                getString(R.string.page_creatives_popup_error_format_message),
+                getString(R.string.page_creatives_popup_error_format_ok_button),
+                null,
+                false,
+                0,
+                (i, s) -> onBackPressed());
     }
 }

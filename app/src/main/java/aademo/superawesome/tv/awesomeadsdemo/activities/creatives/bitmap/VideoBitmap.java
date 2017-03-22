@@ -3,23 +3,47 @@ package aademo.superawesome.tv.awesomeadsdemo.activities.creatives.bitmap;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.media.MediaMetadataRetriever;
 import android.util.Log;
+
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.util.HashMap;
 
 public class VideoBitmap {
 
+    private Target target;
+
     public void getBitmap (Context context, String url, BitmapListener listener) {
+
+        target = new Target() {
+            @Override
+            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+
+            }
+
+            @Override
+            public void onBitmapFailed(Drawable errorDrawable) {
+
+            }
+
+            @Override
+            public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+            }
+        };
+
+
 
         (new Thread(() -> {
             try {
                 Bitmap bitmap = getVideoFrameFromUrl(url);
                 Bitmap scaled = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth() / 4, bitmap.getHeight() / 4, false);
-                Log.d("SuperAwesome", "Bitmap " + url + " ==> " + scaled.getWidth() + ", " + scaled.getHeight());
                 ((Activity) context).runOnUiThread(() -> listener.gotBitmap(scaled));
             } catch (Throwable throwable) {
-                listener.noBitmap();
+                ((Activity) context).runOnUiThread(listener::noBitmap);
             }
         })).start();
 

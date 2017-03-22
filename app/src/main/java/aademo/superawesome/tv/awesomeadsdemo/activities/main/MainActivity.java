@@ -11,14 +11,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import aademo.superawesome.tv.awesomeadsdemo.R;
-import aademo.superawesome.tv.awesomeadsdemo.activities.main.predefined.DemoFormatsFragment;
-import aademo.superawesome.tv.awesomeadsdemo.activities.main.user.UserFragment;
+import aademo.superawesome.tv.awesomeadsdemo.activities.main.demo.DemoPlacementFragment;
+import aademo.superawesome.tv.awesomeadsdemo.activities.main.user.UserPlacementFragment;
 
 public class MainActivity extends AppCompatActivity {
-
-    // private vars
-    private List<Fragment> fragments = Arrays.asList(new DemoFormatsFragment(), new UserFragment());
-    private List<String> tabs = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
 
-        tabs = Arrays.asList(getString(R.string.page_demo_title), getString(R.string.page_user_title));
+        List<String> tabs = Arrays.asList(getString(R.string.page_demo_title), getString(R.string.page_user_title));
+        List<Fragment> fragments = Arrays.asList(new DemoPlacementFragment(), new UserPlacementFragment());
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);

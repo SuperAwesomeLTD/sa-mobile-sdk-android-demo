@@ -3,6 +3,9 @@ package aademo.superawesome.tv.awesomeadsdemo.activities;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import rx.Single;
 
 public class BaseActivity extends AppCompatActivity {
@@ -32,6 +35,32 @@ public class BaseActivity extends AppCompatActivity {
                 singleSubscriber.onError(new Throwable());
             }
         });
+    }
+
+    public Single<Map<String, Object>> getExtras (String[] keys) {
+
+        return Single.create(subscriber -> {
+
+            Bundle bundle = BaseActivity.this.getIntent().getExtras();
+            if (bundle != null) {
+
+                Map<String, Object> result = new HashMap<>();
+
+                for (String key : keys) {
+                    Object extra = bundle.get(key);
+                    if (extra != null) {
+                        result.put(key, extra);
+                    }
+                }
+
+                subscriber.onSuccess(result);
+
+            } else {
+                subscriber.onError(new Throwable());
+            }
+
+        });
+
     }
 
 }

@@ -1,11 +1,19 @@
 <resources>
     <string name="app_name">Awesome Ads</string>
 
+    <string name="k_intent_ad">SETTINGS_AD</string>
     <string name="k_intent_pid">SETTINGS_PID</string>
     <string name="k_intent_format">SETTINGS_FORMAT</string>
-    <string name="k_intent_test">SETTINGS_TEST</string>
-    <string name="k_intent_pg">SETTINGS_PG</string>
-    <string name="k_intent_bg">SETTINGS_BG</string>
+
+    <!-- for the login activity -->
+    <string name="page_login_title">Login to AwesomeAds</string>
+    <string name="page_login_textfield_user_placeholder">User name</string>
+    <string name="page_login_textfield_password_placeholder">Password</string>
+    <string name="page_login_button_login">Login</string>
+
+    <string name="page_login_popup_more_title">Login failed</string>
+    <string name="page_login_popup_more_message">Username of password incorrect.</string>
+    <string name="page_login_popup_more_ok_button">Try again!</string>
 
     <!-- for the "user" fragment -->
     <string name="page_user_title">Your placement</string>
@@ -17,6 +25,10 @@
     <string name="page_user_popup_more_title">Log in to AwesomeAds</string>
     <string name="page_user_popup_more_message">Under the \'Apps and Sites\' section you\'ll see a \'Placement ID\' column next to each of your placements.</string>
     <string name="page_user_popup_more_ok_button">Got it!</string>
+
+    <string name="page_user_popup_error_title">Something went wrong!</string>
+    <string name="page_user_popup_error_message">Could not load ad data for this test placement.</string>
+    <string name="page_user_popup_error_ok_button">Got it!</string>
 
     <!-- for the "demo formats" fragment -->
     <string name="page_demo_title">Default formats</string>
@@ -92,5 +104,15 @@
 
     <!-- for the "creatives" activity -->
     <string name="page_creatives_title">Select Ad</string>
+
+    <string name="page_creatives_popup_error_load_title">Hey!</string>
+    <string name="page_creatives_popup_error_load_message">The Placement ID you tried to load an ad for doesn\'t appear to have any data.</string>
+    <string name="page_creatives_popup_error_load_ok_button">Got it!</string>
+
+
+    <string name="page_creatives_popup_error_format_title">Hey!</string>
+    <string name="page_creatives_popup_error_format_message">The format you\'re tyring to display is not supported on mobile.</string>
+    <string name="page_creatives_popup_error_format_ok_button">Got it!</string>
+
 
 </resources>

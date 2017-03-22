@@ -15,12 +15,11 @@ import com.jakewharton.rxbinding.widget.RxTextView;
 
 import aademo.superawesome.tv.awesomeadsdemo.R;
 import aademo.superawesome.tv.awesomeadsdemo.activities.creatives.CreativesActivity;
-import aademo.superawesome.tv.awesomeadsdemo.activities.settings.SettingsActivity;
 import tv.superawesome.lib.sautils.SAAlert;
 
-public class UserFragment extends Fragment {
+public class UserPlacementFragment extends Fragment {
 
-    private UserModel current = null;
+    private UserPlacementModel current = null;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,7 +29,7 @@ public class UserFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_user, container, false);
+        View view = inflater.inflate(R.layout.fragment_userplacement, container, false);
 
         EditText placementIdEditText = (EditText) view.findViewById(R.id.UserPlacementId);
         Button findOutMoreButton = (Button) view.findViewById(R.id.UserFindOutMore);
@@ -40,29 +39,21 @@ public class UserFragment extends Fragment {
 
         RxTextView.textChanges(placementIdEditText).
                 map(charSequence -> charSequence.toString().trim()).
-                map(UserModel::new).
+                map(UserPlacementModel::new).
                 doOnNext(userModel -> current = userModel).
-                map(UserModel::isValid).
+                map(UserPlacementModel::isValid).
                 subscribe(nextButton::setEnabled);
 
         RxView.clicks(nextButton).
-                subscribe(aVoid -> startActivity2(current.getPlacementId()));
+                subscribe(aVoid -> startActivity(current.getPlacementId()));
 
         return view;
     }
 
-    private void startActivity2 (int placementId) {
+    private void startActivity (int placementId) {
         Intent creatives = new Intent(getActivity(), CreativesActivity.class);
         creatives.putExtra(getString(R.string.k_intent_pid), placementId);
-        creatives.putExtra(getString(R.string.k_intent_test), false);
         getActivity().startActivity(creatives);
-    }
-
-    private void startActivity (int placementId) {
-        Intent settings = new Intent(getActivity(), SettingsActivity.class);
-        settings.putExtra(getString(R.string.k_intent_pid), placementId);
-        settings.putExtra(getString(R.string.k_intent_test), false);
-        getActivity().startActivity(settings);
     }
 
     private void findOutMorePopup () {

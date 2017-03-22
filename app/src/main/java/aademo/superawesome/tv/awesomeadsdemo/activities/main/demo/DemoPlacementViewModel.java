@@ -1,13 +1,13 @@
-package aademo.superawesome.tv.awesomeadsdemo.activities.main.predefined;
+package aademo.superawesome.tv.awesomeadsdemo.activities.main.demo;
 
-class DemoFormatsViewModel {
+class DemoPlacementViewModel {
 
     private int placementId = 0;
     private String imageSource = null;
     private String formatName = null;
     private String formatDetails = null;
 
-    DemoFormatsViewModel(int placementId, String imageSource, String formatName, String formatDetails) {
+    DemoPlacementViewModel(int placementId, String imageSource, String formatName, String formatDetails) {
         this.placementId = placementId;
         this.imageSource = imageSource;
         this.formatName = formatName;

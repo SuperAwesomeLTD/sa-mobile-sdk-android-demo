@@ -1,11 +1,11 @@
 package aademo.superawesome.tv.awesomeadsdemo.activities.main.user;
 
-class UserModel {
+class UserPlacementModel {
 
     private String placementString = null;
     private int placementId = 0;
 
-    public UserModel (String placementString) {
+    public UserPlacementModel(String placementString) {
         this.placementString = placementString;
         try {
             placementId = Integer.parseInt(this.placementString);

@@ -11,7 +11,7 @@ class MainAdapter extends FragmentPagerAdapter {
     private final List<Fragment> mFragmentList = new ArrayList<>();
     private final List<String> mFragmentTitleList = new ArrayList<>();
 
-    public MainAdapter(FragmentManager manager) {
+    MainAdapter(FragmentManager manager) {
         super(manager);
     }
 
@@ -25,7 +25,7 @@ class MainAdapter extends FragmentPagerAdapter {
         return mFragmentList.size();
     }
 
-    public void addFragment(Fragment fragment, String title) {
+    void addFragment(Fragment fragment, String title) {
         mFragmentList.add(fragment);
         mFragmentTitleList.add(title);
     }
