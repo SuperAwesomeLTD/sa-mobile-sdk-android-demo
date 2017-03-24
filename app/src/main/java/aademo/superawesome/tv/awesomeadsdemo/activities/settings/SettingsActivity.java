@@ -117,7 +117,7 @@ public class SettingsActivity extends BaseActivity {
                         SAOrientation.LANDSCAPE :
                         provider.getLockToPortraitValue() ?
                                 SAOrientation.PORTRAIT : SAOrientation.ANY);
-        SAInterstitialAd.setAd(response);
+        SAInterstitialAd.setAd(response.ads.get(0));
         SAInterstitialAd.play(response.ads.get(0).placementId, this);
     }
 
@@ -132,7 +132,7 @@ public class SettingsActivity extends BaseActivity {
                         SAOrientation.LANDSCAPE :
                         provider.getLockToPortraitValue() ?
                                 SAOrientation.PORTRAIT : SAOrientation.ANY);
-        SAVideoAd.setAd(response);
+        SAVideoAd.setAd(response.ads.get(0));
         SAVideoAd.play(response.ads.get(0).placementId, this);
     }
 

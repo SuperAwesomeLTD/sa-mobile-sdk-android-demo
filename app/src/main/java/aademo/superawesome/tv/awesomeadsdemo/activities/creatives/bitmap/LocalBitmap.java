@@ -9,7 +9,7 @@ import aademo.superawesome.tv.awesomeadsdemo.adaux.AdFormat;
 
 public class LocalBitmap {
 
-    public Bitmap getBitmap (Context context, AdFormat format) {
+    public static Bitmap getBitmap (Context context, AdFormat format) {
 
         String drawable;
 
@@ -54,12 +54,4 @@ public class LocalBitmap {
         int resourceId = res.getIdentifier(drawable, "drawable", context.getPackageName());
         return BitmapFactory.decodeResource(res, resourceId);
     }
-
-    public static Bitmap getPlaceholder (Context context) {
-        String drawable = "icon_placeholder";
-        Resources res = context.getResources();
-        int resourceId = res.getIdentifier(drawable, "drawable", context.getPackageName());
-        return BitmapFactory.decodeResource(res, resourceId);
-    }
-
 }

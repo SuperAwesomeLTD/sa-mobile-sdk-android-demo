@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-public class WebViewBitmap extends WebViewClient {
+public class RichMediaBitmap extends WebViewClient {
 
     private WebView webView;
     private Handler handler;
@@ -19,7 +19,7 @@ public class WebViewBitmap extends WebViewClient {
     private int scaledH = 0;
     private BitmapListener listener;
 
-    public void getBitmap (Context context, String content, int width, int height, BitmapListener listener) {
+    public void getBitmap (Context context, String url, String content, int width, int height, BitmapListener listener) {
 
         // get all needed params
         this.width = width;
@@ -45,7 +45,7 @@ public class WebViewBitmap extends WebViewClient {
         webView.setWebViewClient(this);
         webView.setLayoutParams(new ViewGroup.LayoutParams(width, height));
         webView.layout(0, 0, width, height);
-        webView.loadDataWithBaseURL(null, html, "text/html", "UTF-8", null);
+        webView.loadDataWithBaseURL(url, html, "text/html", "UTF-8", null);
     }
 
     @Override

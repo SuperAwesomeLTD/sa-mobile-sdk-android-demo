@@ -1,19 +1,49 @@
 package aademo.superawesome.tv.awesomeadsdemo.activities.creatives;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import aademo.superawesome.tv.awesomeadsdemo.adaux.AdFormat;
 import tv.superawesome.lib.samodelspace.saad.SACreative;
+import tv.superawesome.lib.samodelspace.saad.SACreativeFormat;
 
 public class CreativesViewModel {
 
+    private static final String cdnUrl = "https://s3-eu-west-1.amazonaws.com/beta-ads-video-transcoded-thumbnails/";
     private SACreative creative;
     private AdFormat mFormat;
     private Bitmap bitmap;
+    private String bitmapUrl;
 
     CreativesViewModel(SACreative creative) {
+
         this.creative = creative;
         mFormat = AdFormat.fromCreative(creative);
+
+        switch (creative.format) {
+            case image: {
+                bitmapUrl = creative.details.image;
+                break;
+            }
+            case video: {
+                String videoUrl = creative.details.video;
+                if (videoUrl != null) {
+                    String[] parts = videoUrl.split("/");
+                    if (parts.length > 0) {
+                        String name = parts[parts.length - 1].replace(".mp4", "-low-00001.jpg");
+                        bitmapUrl = cdnUrl + name;
+                    }
+                }
+                break;
+            }
+            case invalid:
+            case rich:
+            case tag:
+            case appwall: {
+                // do nothing
+                break;
+            }
+        }
     }
 
     public SACreative getCreative() {
@@ -51,5 +81,9 @@ public class CreativesViewModel {
 
     public void setBitmap(Bitmap bitmap) {
         this.bitmap = bitmap;
+    }
+
+    public String getBitmapUrl () {
+        return bitmapUrl;
     }
 }

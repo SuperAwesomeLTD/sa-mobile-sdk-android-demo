@@ -1,12 +1,18 @@
 package aademo.superawesome.tv.awesomeadsdemo.activities.creatives;
 
+import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import aademo.superawesome.tv.awesomeadsdemo.R;
@@ -15,11 +21,17 @@ import rx.subjects.PublishSubject;
 
 public class CreativesAdapter extends RecyclerView.Adapter<CreativesAdapter.CreativesViewHolder> {
 
+    private Context context;
     private List<CreativesViewModel> models;
     private PublishSubject<CreativesViewModel> clickSubject = PublishSubject.create();
+    private List<BitmapProvider> providers = new ArrayList<>();
 
-    public CreativesAdapter(List<CreativesViewModel> models) {
+    public CreativesAdapter(Context context, List<CreativesViewModel> models) {
+        this.context = context;
         this.models = models;
+        for (int i = 0; i < models.size(); i++){
+            providers.add(new BitmapProvider());
+        }
     }
 
     public class CreativesViewHolder extends RecyclerView.ViewHolder {
@@ -49,14 +61,21 @@ public class CreativesAdapter extends RecyclerView.Adapter<CreativesAdapter.Crea
         holder.creativeFormat.setText(model.getCreativeFormat());
         holder.creativeSource.setText(model.getCreativeSource());
 
+        holder.creativeIcon.setImageBitmap(providers.get(position).getPlaceholder(context));
+
+        if (model.getBitmap() != null) {
+            holder.creativeIcon.setImageBitmap(model.getBitmap());
+        } else {
+            providers.get(position).getBitmap(context, position, model, (position1, bitmap) -> {
+                models.get(position1).setBitmap(bitmap);
+                holder.creativeIcon.setImageBitmap(bitmap);
+            });
+
+        }
+
         holder.itemView.setOnClickListener(v -> {
             clickSubject.onNext(model);
         });
-    }
-
-    @Override
-    public void onViewRecycled(CreativesViewHolder holder) {
-        super.onViewRecycled(holder);
     }
 
     @Override

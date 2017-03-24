@@ -1,17 +1,27 @@
 package aademo.superawesome.tv.awesomeadsdemo.activities.creatives;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import aademo.superawesome.tv.awesomeadsdemo.R;
 import aademo.superawesome.tv.awesomeadsdemo.activities.BaseActivity;
 import aademo.superawesome.tv.awesomeadsdemo.activities.settings.SettingsActivity;
 import aademo.superawesome.tv.awesomeadsdemo.adaux.AdFormat;
 import aademo.superawesome.tv.awesomeadsdemo.adaux.AdRx;
+import gabrielcoman.com.rxdatasource.RxDataSource;
+import rx.functions.Action1;
+import rx.functions.Action2;
 import tv.superawesome.lib.samodelspace.saad.SAAd;
+import tv.superawesome.lib.samodelspace.saad.SACreativeFormat;
 import tv.superawesome.lib.sautils.SAAlert;
 
 public class CreativesActivity extends BaseActivity {
@@ -41,7 +51,7 @@ public class CreativesActivity extends BaseActivity {
                             .toList()
                             .subscribe(viewModels -> {
 
-                                adapter = new CreativesAdapter(viewModels);
+                                adapter = new CreativesAdapter(CreativesActivity.this, viewModels);
 
                                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
                                 recyclerView.setLayoutManager(mLayoutManager);
@@ -57,6 +67,10 @@ public class CreativesActivity extends BaseActivity {
                                             SAAd ad = new SAAd();
                                             ad.placementId = placementId;
                                             ad.creative = creative;
+                                            if (ad.creative.format == SACreativeFormat.tag && ad.creative.details.format.equals("video")) {
+                                                ad.creative.format = SACreativeFormat.video;
+                                                ad.creative.details.vast = ad.creative.details.tag;
+                                            }
                                             return ad;
                                         })
                                         .map(saAd -> saAd.writeToJson().toString())
@@ -101,6 +115,6 @@ public class CreativesActivity extends BaseActivity {
                 null,
                 false,
                 0,
-                (i, s) -> onBackPressed());
+                null);
     }
 }
