@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import aademo.superawesome.tv.awesomeadsdemo.R;
 import aademo.superawesome.tv.awesomeadsdemo.activities.settings.SettingsActivity;
-import aademo.superawesome.tv.awesomeadsdemo.adaux.AdRx;
+import aademo.superawesome.tv.awesomeadsdemo.aux.AdRx;
 import gabrielcoman.com.rxdatasource.RxDataSource;
 import rx.functions.Action2;
 import tv.superawesome.lib.sautils.SAAlert;

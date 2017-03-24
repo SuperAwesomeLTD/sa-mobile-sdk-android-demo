@@ -1,7 +1,6 @@
-package aademo.superawesome.tv.awesomeadsdemo.adaux;
+package aademo.superawesome.tv.awesomeadsdemo.aux;
 
 import android.content.Context;
-import android.util.Log;
 
 import org.json.JSONObject;
 

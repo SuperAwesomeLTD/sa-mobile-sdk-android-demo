@@ -26,8 +26,8 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
 
-        List<String> tabs = Arrays.asList(getString(R.string.page_demo_title), getString(R.string.page_user_title));
-        List<Fragment> fragments = Arrays.asList(new DemoPlacementFragment(), new UserPlacementFragment());
+        List<String> tabs = Arrays.asList(getString(R.string.page_user_title), getString(R.string.page_demo_title));
+        List<Fragment> fragments = Arrays.asList(new UserPlacementFragment(), new DemoPlacementFragment());
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);

@@ -1,4 +1,4 @@
-package aademo.superawesome.tv.awesomeadsdemo.adaux;
+package aademo.superawesome.tv.awesomeadsdemo.aux;
 
 import tv.superawesome.lib.samodelspace.saad.SAAd;
 import tv.superawesome.lib.samodelspace.saad.SACreative;

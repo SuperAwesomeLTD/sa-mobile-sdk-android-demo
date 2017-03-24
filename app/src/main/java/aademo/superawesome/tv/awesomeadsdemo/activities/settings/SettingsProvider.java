@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import aademo.superawesome.tv.awesomeadsdemo.R;
-import aademo.superawesome.tv.awesomeadsdemo.adaux.AdFormat;
+import aademo.superawesome.tv.awesomeadsdemo.aux.AdFormat;
 import rx.Observable;
 import tv.superawesome.sdk.SuperAwesome;
 

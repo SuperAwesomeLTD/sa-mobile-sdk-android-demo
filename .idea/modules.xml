@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/aadatabase/aadatabase.iml" filepath="$PROJECT_DIR$/aadatabase/aadatabase.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/sa-mobile-sdk-android-demo.iml" filepath="$PROJECT_DIR$/sa-mobile-sdk-android-demo.iml" />
     </modules>

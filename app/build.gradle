@@ -46,4 +46,6 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
 
     compile 'tv.superawesome.sdk:superawesome:5.5.6'
+
+    compile project(':aadatabase')
 }

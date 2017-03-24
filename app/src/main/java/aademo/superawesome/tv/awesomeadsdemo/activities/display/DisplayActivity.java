@@ -4,17 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import aademo.superawesome.tv.awesomeadsdemo.R;
-import aademo.superawesome.tv.awesomeadsdemo.adaux.AdFormat;
-import aademo.superawesome.tv.awesomeadsdemo.adaux.AdRx;
-import rx.functions.Action1;
-import rx.subjects.PublishSubject;
+import aademo.superawesome.tv.awesomeadsdemo.aux.AdFormat;
 import tv.superawesome.lib.samodelspace.saad.SAResponse;
 import tv.superawesome.sdk.views.SABannerAd;
-import tv.superawesome.sdk.views.SAEvent;
-import tv.superawesome.sdk.views.SAInterstitialAd;
 
 public class DisplayActivity extends AppCompatActivity {
 

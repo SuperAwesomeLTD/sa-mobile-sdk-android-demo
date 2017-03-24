@@ -19,7 +19,7 @@
     <string name="page_user_title">Your placement</string>
 
     <string name="page_user_button_more_title">Where can I find this?</string>
-    <string name="page_user_button_next_title">Next</string>
+    <string name="page_user_button_next_title">Load</string>
     <string name="page_user_textfield_placement_placeholder">Placement ID ... </string>
 
     <string name="page_user_popup_more_title">Log in to AwesomeAds</string>

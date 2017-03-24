@@ -1,25 +1,16 @@
 package aademo.superawesome.tv.awesomeadsdemo.activities.creatives;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import aademo.superawesome.tv.awesomeadsdemo.R;
 import aademo.superawesome.tv.awesomeadsdemo.activities.BaseActivity;
 import aademo.superawesome.tv.awesomeadsdemo.activities.settings.SettingsActivity;
-import aademo.superawesome.tv.awesomeadsdemo.adaux.AdFormat;
-import aademo.superawesome.tv.awesomeadsdemo.adaux.AdRx;
-import gabrielcoman.com.rxdatasource.RxDataSource;
-import rx.functions.Action1;
-import rx.functions.Action2;
+import aademo.superawesome.tv.awesomeadsdemo.aux.AdFormat;
+import aademo.superawesome.tv.awesomeadsdemo.aux.AdRx;
 import tv.superawesome.lib.samodelspace.saad.SAAd;
 import tv.superawesome.lib.samodelspace.saad.SACreativeFormat;
 import tv.superawesome.lib.sautils.SAAlert;

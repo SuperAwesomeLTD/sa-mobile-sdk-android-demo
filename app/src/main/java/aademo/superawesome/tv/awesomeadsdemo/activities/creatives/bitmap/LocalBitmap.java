@@ -5,7 +5,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-import aademo.superawesome.tv.awesomeadsdemo.adaux.AdFormat;
+import aademo.superawesome.tv.awesomeadsdemo.aux.AdFormat;
 
 public class LocalBitmap {
 

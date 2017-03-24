@@ -1,11 +1,9 @@
 package aademo.superawesome.tv.awesomeadsdemo.activities.creatives;
 
 import android.graphics.Bitmap;
-import android.util.Log;
 
-import aademo.superawesome.tv.awesomeadsdemo.adaux.AdFormat;
+import aademo.superawesome.tv.awesomeadsdemo.aux.AdFormat;
 import tv.superawesome.lib.samodelspace.saad.SACreative;
-import tv.superawesome.lib.samodelspace.saad.SACreativeFormat;
 
 public class CreativesViewModel {
 
