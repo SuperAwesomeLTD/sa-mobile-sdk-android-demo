@@ -31,7 +31,7 @@ class LoginService {
         });
     }
 
-    Single<LoginResponse> login(Context context, String username, String password) {
+    Single<LoginUser> login(Context context, String username, String password) {
 
         SANetwork network = new SANetwork();
 
@@ -43,7 +43,7 @@ class LoginService {
         return Single.create(subscriber -> {
 
             network.sendPOST(context, endpoint, query, header, body, (status, payload, success) -> {
-                subscriber.onSuccess(new LoginResponse(payload));
+                subscriber.onSuccess(new LoginUser(payload));
             });
 
         });

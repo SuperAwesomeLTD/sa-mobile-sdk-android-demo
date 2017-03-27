@@ -30,11 +30,7 @@ public class LoginManager {
     }
 
     public Observable<LoginUser> login (Context context, String username, String password) {
-
-        return service.login(context, username, password)
-                .map(loginResponse -> LoginUser.getUserFromToken(loginResponse.getToken()))
-                .toObservable();
-
+        return service.login(context, username, password).toObservable();
     }
 
     public void logout (Context context) {
@@ -42,7 +38,7 @@ public class LoginManager {
         context.getSharedPreferences(LOGIN_FILE, Context.MODE_PRIVATE)
                 .edit()
                 .remove(LOGIN_KEY)
-                .apply();;
+                .apply();
     }
 
     public Single<LoginUser> check (Context context) {
