@@ -23,6 +23,8 @@
         android:hint="@string/page_login_textfield_user_placeholder"/>
     <EditText
         android:id="@+id/PasswordTextView"
+        android:inputType="textPassword"
+        android:fontFamily="sans-serif"
         android:layout_marginTop="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"

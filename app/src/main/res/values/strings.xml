@@ -114,5 +114,7 @@
     <string name="page_creatives_popup_error_format_message">The format you\'re tyring to display is not supported on mobile.</string>
     <string name="page_creatives_popup_error_format_ok_button">Got it!</string>
 
+    <!-- logout -->
+    <string name="page_logout">Logout</string>
 
 </resources>

@@ -37,6 +37,14 @@ public class LoginManager {
 
     }
 
+    public void logout (Context context) {
+        loginUser = null;
+        context.getSharedPreferences(LOGIN_FILE, Context.MODE_PRIVATE)
+                .edit()
+                .remove(LOGIN_KEY)
+                .apply();;
+    }
+
     public Single<LoginUser> check (Context context) {
         return Single.create(subscriber -> {
 

@@ -15,8 +15,10 @@ import aademo.superawesome.tv.awesomeadsdemo.activities.main.MainActivity;
 import aademo.superawesome.tv.awesomeadsdemo.loginaux.LoginManager;
 import aademo.superawesome.tv.awesomeadsdemo.loginaux.LoginUser;
 import rx.Observable;
+import rx.functions.Action1;
 import rx.functions.Func1;
 import tv.superawesome.lib.sautils.SAAlert;
+import tv.superawesome.lib.sautils.SALoadScreen;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -49,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
                 .subscribe(login::setEnabled);
 
         RxView.clicks(login)
+                .doOnNext(aVoid -> SALoadScreen.getInstance().show(LoginActivity.this))
                 .flatMap(new Func1<Void, Observable<LoginUser>>() {
                     @Override
                     public Observable<LoginUser> call(Void aVoid) {
@@ -56,6 +59,8 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 })
                 .subscribe(loginUser -> {
+
+                    SALoadScreen.getInstance().hide();
 
                     if (loginUser.isValid()) {
                         LoginManager.getManager().setLoggedUser(loginUser);
