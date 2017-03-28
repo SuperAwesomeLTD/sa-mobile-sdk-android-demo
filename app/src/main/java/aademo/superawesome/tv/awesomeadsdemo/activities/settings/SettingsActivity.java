@@ -74,13 +74,13 @@ public class SettingsActivity extends BaseActivity {
                     RxView.clicks(loadBtn)
                             .subscribe(aVoid -> {
 
-                                if (AdFormat.isBannerType(format))
+                                if (format.isBannerType())
                                     playBanner(saResponse, format, provider);
-                                else if (AdFormat.isInterstitialType(format))
+                                else if (format.isInterstitialType())
                                     playInterstitial(saResponse, provider);
-                                else if (AdFormat.isVideoType(format))
+                                else if (format.isVideoType())
                                     playVideo(saResponse, provider);
-                                else if (AdFormat.isAppWallType(format))
+                                else if (format.isAppWallType())
                                     playAppWall();
 
                             });

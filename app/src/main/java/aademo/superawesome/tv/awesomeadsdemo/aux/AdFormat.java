@@ -124,11 +124,17 @@ public enum AdFormat {
                 if (width == 300 && height == 250) {
                     return AdFormat.mpu;
                 }
-                if ((width == 320 && height == 480) || (width == 480 && height == 320)) {
+                if (width == 320 && height == 480) {
                     return AdFormat.mobile_portrait_interstitial;
                 }
-                if ((width == 768 && height == 1024) || (width == 1024 && height == 768)) {
-                    return AdFormat.mobile_portrait_interstitial;
+                if (width == 480 && height == 320) {
+                    return AdFormat.mobile_landscape_interstitial;
+                }
+                if (width == 768 && height == 1024) {
+                    return AdFormat.tablet_portrait_interstitial;
+                }
+                if (width == 1024 && height == 768) {
+                    return AdFormat.tablet_landscape_interstitial;
                 }
 
                 return AdFormat.unknown;
@@ -193,29 +199,29 @@ public enum AdFormat {
         }
     }
 
-    public static boolean isBannerType (AdFormat format) {
-        return format == smallbanner ||
-                format == bigbanner ||
-                format == normalbanner ||
-                format == mpu;
+    public boolean isBannerType () {
+        return this == smallbanner ||
+                this == bigbanner ||
+                this == normalbanner ||
+                this == mpu;
     }
 
-    public static boolean isInterstitialType (AdFormat format) {
-        return format == mobile_portrait_interstitial ||
-                format == mobile_landscape_interstitial ||
-                format == tablet_portrait_interstitial ||
-                format == tablet_landscape_interstitial;
+    public boolean isInterstitialType () {
+        return this == mobile_portrait_interstitial ||
+                this == mobile_landscape_interstitial ||
+                this == tablet_portrait_interstitial ||
+                this == tablet_landscape_interstitial;
     }
 
-    public static boolean isVideoType (AdFormat format) {
-        return format == video;
+    public boolean isVideoType () {
+        return this == video;
     }
 
-    public static boolean isAppWallType (AdFormat format) {
-        return format == appwall;
+    public boolean isAppWallType () {
+        return this == appwall;
     }
 
-    public static boolean isUnknownType (AdFormat format) {
-        return format == unknown;
+    public boolean isUnknownType () {
+        return this == unknown;
     }
 }

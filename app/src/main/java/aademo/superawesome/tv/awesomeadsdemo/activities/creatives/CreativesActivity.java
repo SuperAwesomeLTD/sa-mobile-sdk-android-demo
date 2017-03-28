@@ -52,7 +52,7 @@ public class CreativesActivity extends BaseActivity {
                                 adapter.notifyDataSetChanged();
 
                                 adapter.getItemClicks()
-                                        .filter(viewModel -> !AdFormat.isUnknownType(viewModel.getFormat()))
+                                        .filter(viewModel -> !viewModel.getFormat().isUnknownType())
                                         .map(CreativesViewModel::getCreative)
                                         .map(creative -> {
                                             SAAd ad = new SAAd();
