@@ -29,6 +29,7 @@
             android:id="@+id/UserNext"
             android:layout_gravity="end"
             android:layout_marginRight="20dp"
+            android:layout_marginEnd="20dp"
             android:layout_width="100dp"
             android:layout_height="40dp"
             android:layout_marginBottom="30dp"

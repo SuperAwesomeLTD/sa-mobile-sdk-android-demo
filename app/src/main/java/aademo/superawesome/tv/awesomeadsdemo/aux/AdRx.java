@@ -86,7 +86,11 @@ public class AdRx {
                     List<SACreative> creatives = SAJsonParser.getListFromJsonArray(jsonObject, "allCreatives", new SAJsonToList<SACreative, JSONObject>() {
                         @Override
                         public SACreative traverseItem(JSONObject jsonObject) {
-                            return new SACreative(jsonObject);
+                            SACreative creative = new SACreative(jsonObject);
+                            if (creative.clickUrl == null) {
+                                creative.clickUrl = SAJsonParser.getString(jsonObject, "clickUrl");
+                            }
+                            return creative;
                         }
                     });
 

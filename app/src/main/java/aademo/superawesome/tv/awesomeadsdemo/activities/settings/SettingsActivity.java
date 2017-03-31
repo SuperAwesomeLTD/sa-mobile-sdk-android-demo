@@ -2,6 +2,7 @@ package aademo.superawesome.tv.awesomeadsdemo.activities.settings;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Switch;
@@ -114,6 +115,8 @@ public class SettingsActivity extends BaseActivity {
     }
 
     private void playInterstitial (SAResponse response, SettingsProvider provider) {
+        Log.d("SuperAwesome", "HTML is " + response.ads.get(0).creative.details.media.html);
+        Log.d("SuperAwesome", "Click is " + response.ads.get(0).creative.clickUrl);
         SAInterstitialAd.setParentalGate(provider.getParentalGateValue());
         SAInterstitialAd.setBackButton(provider.getBackButtonValue());
         SAInterstitialAd.setOrientation(
