@@ -2,12 +2,14 @@ package aademo.superawesome.tv.awesomeadsdemo.activities.creatives;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -19,14 +21,14 @@ import aademo.superawesome.tv.awesomeadsdemo.R;
 import rx.Observable;
 import rx.subjects.PublishSubject;
 
-public class CreativesAdapter extends RecyclerView.Adapter<CreativesAdapter.CreativesViewHolder> {
+class CreativesAdapter extends RecyclerView.Adapter<CreativesAdapter.CreativesViewHolder> {
 
     private Context context;
     private List<CreativesViewModel> models;
     private PublishSubject<CreativesViewModel> clickSubject = PublishSubject.create();
     private List<BitmapProvider> providers = new ArrayList<>();
 
-    public CreativesAdapter(Context context, List<CreativesViewModel> models) {
+    CreativesAdapter(Context context, List<CreativesViewModel> models) {
         this.context = context;
         this.models = models;
         for (int i = 0; i < models.size(); i++){
@@ -34,17 +36,19 @@ public class CreativesAdapter extends RecyclerView.Adapter<CreativesAdapter.Crea
         }
     }
 
-    public class CreativesViewHolder extends RecyclerView.ViewHolder {
+    class CreativesViewHolder extends RecyclerView.ViewHolder {
 
-        public ImageView creativeIcon;
-        public TextView creativeName, creativeFormat, creativeSource;
+        ImageView creativeIcon;
+        TextView creativeName, creativeFormat, creativeSource;
+        LinearLayout creativeRoot;
 
-        public CreativesViewHolder(View itemView) {
+        CreativesViewHolder(View itemView) {
             super(itemView);
             creativeIcon = (ImageView) itemView.findViewById(R.id.CreativeIcon);
             creativeName = (TextView) itemView.findViewById(R.id.CreativeName);
             creativeFormat = (TextView) itemView.findViewById(R.id.CreativeFormat);
             creativeSource = (TextView) itemView.findViewById(R.id.CreativeSource);
+            creativeRoot = (LinearLayout) itemView.findViewById(R.id.CreativeRoot);
         }
     }
 
@@ -57,10 +61,10 @@ public class CreativesAdapter extends RecyclerView.Adapter<CreativesAdapter.Crea
     @Override
     public void onBindViewHolder(CreativesViewHolder holder, int position) {
         CreativesViewModel model = models.get(position);
+        holder.creativeRoot.setBackgroundColor(position % 2 == 0 ? 0xFFF7F7F7 : Color.WHITE);
         holder.creativeName.setText(model.getCreativeName());
         holder.creativeFormat.setText(model.getCreativeFormat());
         holder.creativeSource.setText(model.getCreativeSource());
-
         holder.creativeIcon.setImageBitmap(providers.get(position).getPlaceholder(context));
 
         if (model.getBitmap() != null) {
@@ -83,7 +87,7 @@ public class CreativesAdapter extends RecyclerView.Adapter<CreativesAdapter.Crea
         return models.size();
     }
 
-    public Observable<CreativesViewModel> getItemClicks(){
+    Observable<CreativesViewModel> getItemClicks(){
         return clickSubject.asObservable();
     }
 

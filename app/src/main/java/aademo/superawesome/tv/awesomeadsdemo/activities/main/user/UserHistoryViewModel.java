@@ -5,23 +5,23 @@ import android.util.Log;
 import java.util.Calendar;
 import java.util.Locale;
 
-class UserHistoryViewModel {
+class UserHistoryViewModel implements Comparable{
 
     private int placementId;
     private String placementString;
     private String date;
+    private long timestamp;
 
     private Calendar calendar;
 
     UserHistoryViewModel(UserHistory history) {
-
-        Log.d("SuperAwesome", "Timestamp " + history.getTimestamp());
 
         // Init calendar
         calendar = Calendar.getInstance();
         calendar.setTimeInMillis(history.getTimestamp());
 
         // init fields
+        this.timestamp = history.getTimestamp();
         this.placementId = history.getPlacementId();
         this.placementString = "" + placementId;
         this.date = getDayOfMonth() + " " + getMonth() + " " + getYear();
@@ -50,5 +50,11 @@ class UserHistoryViewModel {
 
     String getPlacementString() {
         return placementString;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        UserHistoryViewModel u = (UserHistoryViewModel) o;
+        return timestamp > u.timestamp ? - 1 : 1;
     }
 }

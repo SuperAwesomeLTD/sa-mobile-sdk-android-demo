@@ -3,6 +3,7 @@ package aademo.superawesome.tv.awesomeadsdemo.activities.main.demo;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -20,6 +22,7 @@ import aademo.superawesome.tv.awesomeadsdemo.aux.AdRx;
 import gabrielcoman.com.rxdatasource.RxDataSource;
 import rx.functions.Action2;
 import tv.superawesome.lib.sautils.SAAlert;
+import tv.superawesome.lib.sautils.SALoadScreen;
 
 public class DemoPlacementFragment extends Fragment {
 
@@ -42,7 +45,9 @@ public class DemoPlacementFragment extends Fragment {
 
                     RxDataSource.create(getContext())
                             .bindTo(listView)
-                            .customiseRow(R.layout.row_demoplacement, DemoPlacementViewModel.class, (view1, viewModel) -> {
+                            .customiseRow(R.layout.row_demoplacement, DemoPlacementViewModel.class, (i, view1, viewModel) -> {
+
+                                 view1.setBackgroundColor(i % 2 == 0 ? 0xFFF7F7F7 : Color.WHITE);
 
                                 Context context = getContext();
                                 Resources resources = container.getResources();
@@ -68,14 +73,20 @@ public class DemoPlacementFragment extends Fragment {
     }
 
     private void loadAd (int placementId) {
+
+        SALoadScreen.getInstance().show(getActivity());
+
         AdRx.loadTestAd(getContext(), placementId)
                 .subscribe(ad -> {
+
+                    SALoadScreen.getInstance().hide();
 
                     Intent settings = new Intent(getActivity(), SettingsActivity.class);
                     settings.putExtra(getActivity().getString(R.string.k_intent_ad), ad.writeToJson().toString());
                     getActivity().startActivity(settings);
 
                 }, throwable -> {
+                    SALoadScreen.getInstance().hide();
                     showError();
                 });
     }

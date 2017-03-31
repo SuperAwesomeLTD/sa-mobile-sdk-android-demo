@@ -3,42 +3,38 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorLightGrey2"
+    android:background="@color/colorWhite"
     android:orientation="vertical">
 
     <LinearLayout
-        android:layout_marginRight="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="30dp"
+        android:id="@+id/ActionHolder"
+        android:layout_marginTop="110dp"
         android:layout_width="match_parent"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_height="wrap_content">
 
         <EditText
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="12dp"
             android:id="@+id/UserPlacementId"
-            android:layout_marginEnd="12dp"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="match_parent"
             android:hint="@string/page_user_textfield_placement_placeholder"
             android:inputType="number"
-            android:layout_height="match_parent" />
+            android:layout_height="40dp" />
 
         <Button
             android:id="@+id/UserNext"
             android:layout_gravity="end"
+            android:layout_marginRight="20dp"
             android:layout_width="100dp"
             android:layout_height="40dp"
+            android:layout_marginBottom="30dp"
             android:text="@string/page_user_button_next_title"
             style="@style/BlueButtonStyle"/>
     </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/colorLightGrey3"/>
 
     <ListView
         android:id="@+id/History"

@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/colorLightGrey2"
     android:orientation="vertical"
     tools:context=".activities.settings.SettingsActivity">
 
@@ -28,6 +27,7 @@
         android:layout_marginTop="?attr/actionBarSize"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorWhite"
         android:orientation="vertical">
 
         <ListView
@@ -42,7 +42,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="64dp"
-            android:background="#efefef"
+            android:background="@color/colorWhite"
             android:gravity="end">
             <Button
                 android:layout_margin="10dp"

@@ -1,5 +1,6 @@
 package aademo.superawesome.tv.awesomeadsdemo.activities.settings;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ListView;
@@ -39,12 +40,14 @@ public class SettingsActivity extends BaseActivity {
         ListView listView = (ListView) findViewById(R.id.SettingsListView);
         Button loadBtn = (Button) findViewById(R.id.LoadAdButton);
 
+        SALoadScreen.getInstance().show(this);
+
         getStringExtras(getString(R.string.k_intent_ad))
                 .flatMap(data -> AdRx.processAd(SettingsActivity.this, data))
-                .doOnSubscribe(() -> SALoadScreen.getInstance().show(SettingsActivity.this))
-                .doOnSuccess(response -> SALoadScreen.getInstance().hide())
-                .doOnError(throwable -> SALoadScreen.getInstance().hide())
                 .subscribe(saResponse -> {
+
+
+                    SALoadScreen.getInstance().hide();
 
                     AdFormat format = AdFormat.fromResponse(saResponse);
 
@@ -56,7 +59,9 @@ public class SettingsActivity extends BaseActivity {
 
                                 RxDataSource.create(SettingsActivity.this)
                                         .bindTo(listView)
-                                        .customiseRow(R.layout.row_settings, SettingsViewModel.class, (view, viewModel) -> {
+                                        .customiseRow(R.layout.row_settings, SettingsViewModel.class, (i, view, viewModel) -> {
+
+                                            view.setBackgroundColor(i % 2 == 0 ? 0xFFF7F7F7 : Color.WHITE);
 
                                             Switch itemSwitch = (Switch) view.findViewById(R.id.OptionSwitch);
                                             itemSwitch.setChecked(viewModel.isValue());
@@ -86,6 +91,7 @@ public class SettingsActivity extends BaseActivity {
                             });
 
                 }, throwable -> {
+                    SALoadScreen.getInstance().hide();
                     SAAlert.getInstance().show(
                             SettingsActivity.this,
                             getString(R.string.page_settings_popup_error_title),

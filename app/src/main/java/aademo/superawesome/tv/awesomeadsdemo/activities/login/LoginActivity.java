@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.jakewharton.rxbinding.view.RxView;
 import com.jakewharton.rxbinding.widget.RxTextView;
+import com.jakewharton.rxbinding.widget.TextViewTextChangeEvent;
 
 import aademo.superawesome.tv.awesomeadsdemo.R;
 import aademo.superawesome.tv.awesomeadsdemo.activities.main.MainActivity;
@@ -21,6 +22,7 @@ import tv.superawesome.lib.sautils.SAAlert;
 import tv.superawesome.lib.sautils.SALoadScreen;
 
 public class LoginActivity extends AppCompatActivity {
+
 
     private LoginModel model;
 
