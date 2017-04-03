@@ -5,7 +5,7 @@ import android.graphics.Bitmap;
 import aademo.superawesome.tv.awesomeadsdemo.aux.AdFormat;
 import tv.superawesome.lib.samodelspace.saad.SACreative;
 
-public class CreativesViewModel {
+public class CreativesViewModel implements Comparable {
 
     private static final String cdnUrl = "https://s3-eu-west-1.amazonaws.com/beta-ads-video-transcoded-thumbnails/";
     private SACreative creative;
@@ -95,5 +95,11 @@ public class CreativesViewModel {
 
     public String getVideoStartThumbnailUrl() {
         return videoStartThumbnailUrl;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        CreativesViewModel om = (CreativesViewModel)o;
+        return creative.name.compareToIgnoreCase(om.creative.name);
     }
 }

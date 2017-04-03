@@ -95,10 +95,15 @@ public class AdRx {
                         }
                     });
 
-                    for (SACreative creative : creatives) {
-                        subscriber.onNext(creative);
+                    if (creatives.size() > 0) {
+
+                        for (SACreative creative : creatives) {
+                            subscriber.onNext(creative);
+                        }
+                        subscriber.onCompleted();
+                    } else {
+                        subscriber.onError(new Throwable("No data"));
                     }
-                    subscriber.onCompleted();
 
                 } else {
                     subscriber.onError(new Throwable("Network error"));

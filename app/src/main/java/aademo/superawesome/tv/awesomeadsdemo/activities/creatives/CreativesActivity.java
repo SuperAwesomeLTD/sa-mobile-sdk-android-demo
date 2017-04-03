@@ -6,6 +6,8 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import java.util.Collections;
+
 import aademo.superawesome.tv.awesomeadsdemo.R;
 import aademo.superawesome.tv.awesomeadsdemo.activities.BaseActivity;
 import aademo.superawesome.tv.awesomeadsdemo.activities.settings.SettingsActivity;
@@ -41,6 +43,8 @@ public class CreativesActivity extends BaseActivity {
                             .map(CreativesViewModel::new)
                             .toList()
                             .subscribe(viewModels -> {
+
+                                Collections.sort(viewModels);
 
                                 adapter = new CreativesAdapter(CreativesActivity.this, viewModels);
 
