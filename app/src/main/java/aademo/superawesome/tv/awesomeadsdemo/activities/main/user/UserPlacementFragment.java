@@ -31,7 +31,6 @@ import tv.superawesome.lib.sautils.SAUtils;
 
 public class UserPlacementFragment extends Fragment {
 
-    private static final int kTOP_MARGIN_NODATA = 110;
     private static final int kTOP_MARGIN_DATA = 30;
 
     private UserPlacementModel current = null;

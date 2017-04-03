@@ -11,7 +11,9 @@ public class CreativesViewModel {
     private SACreative creative;
     private AdFormat mFormat;
     private Bitmap bitmap;
-    private String bitmapUrl;
+    private String imageThumbnailUrl;
+    private String videoMidpointThumbnailUrl;
+    private String videoStartThumbnailUrl;
 
     CreativesViewModel(SACreative creative) {
 
@@ -20,7 +22,7 @@ public class CreativesViewModel {
 
         switch (creative.format) {
             case image: {
-                bitmapUrl = creative.details.image;
+                imageThumbnailUrl = creative.details.image;
                 break;
             }
             case video: {
@@ -28,8 +30,10 @@ public class CreativesViewModel {
                 if (videoUrl != null) {
                     String[] parts = videoUrl.split("/");
                     if (parts.length > 0) {
-                        String name = parts[parts.length - 1].replace(".mp4", "-low-00001.jpg");
-                        bitmapUrl = cdnUrl + name;
+                        String startName = parts[parts.length - 1].replace(".mp4", "-low-00001.jpg");
+                        videoStartThumbnailUrl = cdnUrl + startName;
+                        String midpointName = parts[parts.length - 1].replace(".mp4", "-low-00002.jpg");
+                        videoMidpointThumbnailUrl = cdnUrl + midpointName;
                     }
                 }
                 break;
@@ -81,7 +85,15 @@ public class CreativesViewModel {
         this.bitmap = bitmap;
     }
 
-    public String getBitmapUrl () {
-        return bitmapUrl;
+    public String getImageThumbnailUrl () {
+        return imageThumbnailUrl;
+    }
+
+    public String getVideoMidpointThumbnailUrl() {
+        return videoMidpointThumbnailUrl;
+    }
+
+    public String getVideoStartThumbnailUrl() {
+        return videoStartThumbnailUrl;
     }
 }

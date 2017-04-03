@@ -58,6 +58,7 @@ public class CreativesActivity extends BaseActivity {
                                             SAAd ad = new SAAd();
                                             ad.placementId = placementId;
                                             ad.creative = creative;
+                                            ad.lineItemId = 10000;
                                             if (ad.creative.format == SACreativeFormat.tag && ad.creative.details.format.equals("video")) {
                                                 ad.creative.format = SACreativeFormat.video;
                                                 ad.creative.details.vast = ad.creative.details.tag;

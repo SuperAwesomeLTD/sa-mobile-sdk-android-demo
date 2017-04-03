@@ -5,7 +5,6 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
@@ -17,6 +16,7 @@ import tv.superawesome.lib.samodelspace.saad.SACreative;
 
 public class BitmapProvider {
 
+    private Target primaryTarget;
     private Target target;
     private RichMediaBitmap richMediaBitmap;
 
@@ -30,8 +30,7 @@ public class BitmapProvider {
         Bitmap def = LocalBitmap.getBitmap(context, model.getFormat());
 
         switch (creative.format) {
-            case image:
-            case video: {
+            case image: {
 
                 target = new Target() {
                     @Override
@@ -41,7 +40,6 @@ public class BitmapProvider {
 
                     @Override
                     public void onBitmapFailed(Drawable errorDrawable) {
-                        Log.d("SuperAwesome", "Failed bitmap for pos " + pos);
                         listener.gotBitmap(pos, def);
                     }
 
@@ -51,7 +49,47 @@ public class BitmapProvider {
                     }
                 };
 
-                Picasso.with(context).load(model.getBitmapUrl()).into(target);
+                Picasso.with(context).load(model.getImageThumbnailUrl()).into(target);
+
+                break;
+            }
+            case video: {
+
+                primaryTarget = new Target() {
+                    @Override
+                    public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                        listener.gotBitmap(pos, bitmap);
+                    }
+
+                    @Override
+                    public void onBitmapFailed(Drawable errorDrawable) {
+                        Picasso.with(context).load(model.getVideoStartThumbnailUrl()).into(target);
+                    }
+
+                    @Override
+                    public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+                    }
+                };
+
+                target = new Target() {
+                    @Override
+                    public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                        listener.gotBitmap(pos, bitmap);
+                    }
+
+                    @Override
+                    public void onBitmapFailed(Drawable errorDrawable) {
+                        listener.gotBitmap(pos, def);
+                    }
+
+                    @Override
+                    public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+                    }
+                };
+
+                Picasso.with(context).load(model.getVideoMidpointThumbnailUrl()).into(primaryTarget);
 
                 break;
             }

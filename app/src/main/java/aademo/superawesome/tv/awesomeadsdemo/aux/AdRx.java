@@ -90,6 +90,7 @@ public class AdRx {
                             if (creative.clickUrl == null) {
                                 creative.clickUrl = SAJsonParser.getString(jsonObject, "clickUrl");
                             }
+
                             return creative;
                         }
                     });
