@@ -1,6 +1,10 @@
 package aademo.superawesome.tv.awesomeadsdemo.activities.creatives;
 
 import android.graphics.Bitmap;
+import android.text.TextUtils;
+
+import java.util.Arrays;
+import java.util.StringJoiner;
 
 import aademo.superawesome.tv.awesomeadsdemo.aux.AdFormat;
 import tv.superawesome.lib.samodelspace.saad.SACreative;
@@ -95,6 +99,10 @@ public class CreativesViewModel implements Comparable {
 
     public String getVideoStartThumbnailUrl() {
         return videoStartThumbnailUrl;
+    }
+
+    public String getOSTarget () {
+        return "System: " + (creative.osTarget.size() == 0 ? "All" : TextUtils.join(",", creative.osTarget));
     }
 
     @Override

@@ -39,7 +39,7 @@ class CreativesAdapter extends RecyclerView.Adapter<CreativesAdapter.CreativesVi
     class CreativesViewHolder extends RecyclerView.ViewHolder {
 
         ImageView creativeIcon;
-        TextView creativeName, creativeFormat, creativeSource;
+        TextView creativeName, creativeFormat, creativeSource, creativeOSTarget;
         LinearLayout creativeRoot;
 
         CreativesViewHolder(View itemView) {
@@ -48,6 +48,7 @@ class CreativesAdapter extends RecyclerView.Adapter<CreativesAdapter.CreativesVi
             creativeName = (TextView) itemView.findViewById(R.id.CreativeName);
             creativeFormat = (TextView) itemView.findViewById(R.id.CreativeFormat);
             creativeSource = (TextView) itemView.findViewById(R.id.CreativeSource);
+            creativeOSTarget = (TextView) itemView.findViewById(R.id.CreativeOsTarget);
             creativeRoot = (LinearLayout) itemView.findViewById(R.id.CreativeRoot);
         }
     }
@@ -65,6 +66,7 @@ class CreativesAdapter extends RecyclerView.Adapter<CreativesAdapter.CreativesVi
         holder.creativeName.setText(model.getCreativeName());
         holder.creativeFormat.setText(model.getCreativeFormat());
         holder.creativeSource.setText(model.getCreativeSource());
+        holder.creativeOSTarget.setText(model.getOSTarget());
         holder.creativeIcon.setImageBitmap(providers.get(position).getPlaceholder(context));
 
         if (model.getBitmap() != null) {
