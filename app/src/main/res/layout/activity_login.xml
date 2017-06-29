@@ -15,13 +15,17 @@
 
         <ImageView
             android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginBottom="20dp"
             android:src="@drawable/awesomeads"/>
 
         <EditText
             android:id="@+id/UsernameTextView"
-            android:layout_marginTop="40dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_width="match_parent"
