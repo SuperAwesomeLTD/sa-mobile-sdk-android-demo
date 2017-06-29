@@ -62,7 +62,7 @@ class CreativesAdapter extends RecyclerView.Adapter<CreativesAdapter.CreativesVi
     @Override
     public void onBindViewHolder(CreativesViewHolder holder, int position) {
         CreativesViewModel model = models.get(position);
-        holder.creativeRoot.setBackgroundColor(position % 2 == 0 ? 0xFFF7F7F7 : Color.WHITE);
+        holder.creativeRoot.setBackgroundColor(position % 2 == 0 ? Color.WHITE : 0xFFF7F7F7);
         holder.creativeName.setText(model.getCreativeName());
         holder.creativeFormat.setText(model.getCreativeFormat());
         holder.creativeSource.setText(model.getCreativeSource());

@@ -90,7 +90,7 @@ public class UserPlacementFragment extends Fragment {
                             .bindTo(history)
                             .customiseRow(R.layout.row_history, UserHistoryViewModel.class, (i, view1, model) -> {
 
-                                view1.setBackgroundColor(i % 2 == 0 ? 0xFFF7F7F7 : Color.WHITE);
+                                view1.setBackgroundColor(i % 2 == 0 ?  Color.WHITE : 0xFFF7F7F7);
                                 ((TextView) view1.findViewById(R.id.PlacementId)).setText(model.getPlacementString());
                                 ((TextView) view1.findViewById(R.id.LoadingDate)).setText(model.getDate());
 

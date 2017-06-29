@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
+    android:background="@color/colorLightGrey"
     tools:context=".activities.creatives.CreativesActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -25,7 +26,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/CreativesRecyclerView"
         android:scrollbars="none"
-        android:background="@color/colorWhite"
+        android:background="@color/colorLightGrey"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

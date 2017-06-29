@@ -62,7 +62,7 @@ public class SettingsActivity extends BaseActivity {
                                         .bindTo(listView)
                                         .customiseRow(R.layout.row_settings, SettingsViewModel.class, (i, view, viewModel) -> {
 
-                                            view.setBackgroundColor(i % 2 == 0 ? 0xFFF7F7F7 : Color.WHITE);
+                                            view.setBackgroundColor(i % 2 == 0 ?  Color.WHITE : 0xFFF7F7F7);
 
                                             Switch itemSwitch = (Switch) view.findViewById(R.id.OptionSwitch);
                                             itemSwitch.setChecked(viewModel.isValue());

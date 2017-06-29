@@ -15,7 +15,7 @@
 
     <!-- ToolBar Style -->
     <style name="BigToolBarStyle">
-        <item name="android:background">@color/colorLightGrey</item>
+        <item name="android:background">@color/colorWhite</item>
         <item name="android:textColorPrimary">@color/colorBlack</item>
         <item name="android:textColorSecondary">@color/colorBlack</item>
     </style>
@@ -29,7 +29,7 @@
     </style>
 
     <style name="TabBarStyle" parent="Theme.AppCompat">
-        <item name="android:background">@color/colorLightGrey</item>
+        <item name="android:background">@color/colorWhite</item>
         <item name="android:textColorPrimary">@color/colorAccent</item>
         <item name="android:textColorSecondary">@color/colorBlack</item>
     </style>
