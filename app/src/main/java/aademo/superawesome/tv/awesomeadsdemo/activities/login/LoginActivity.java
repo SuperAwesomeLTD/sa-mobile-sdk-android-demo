@@ -9,15 +9,11 @@ import android.widget.TextView;
 
 import com.jakewharton.rxbinding.view.RxView;
 import com.jakewharton.rxbinding.widget.RxTextView;
-import com.jakewharton.rxbinding.widget.TextViewTextChangeEvent;
 
 import aademo.superawesome.tv.awesomeadsdemo.R;
 import aademo.superawesome.tv.awesomeadsdemo.activities.main.MainActivity;
-import aademo.superawesome.tv.awesomeadsdemo.loginaux.LoginManager;
-import aademo.superawesome.tv.awesomeadsdemo.loginaux.LoginUser;
+import aademo.superawesome.tv.awesomeadsdemo.workers.UserWorker;
 import rx.Observable;
-import rx.functions.Action1;
-import rx.functions.Func1;
 import tv.superawesome.lib.sautils.SAAlert;
 import tv.superawesome.lib.sautils.SALoadScreen;
 
@@ -35,15 +31,6 @@ public class LoginActivity extends AppCompatActivity {
         TextView password = (TextView) findViewById(R.id.PasswordTextView);
         Button login = (Button) findViewById(R.id.ButtonLogin);
 
-        LoginManager.getManager()
-                .check(this)
-                .toObservable()
-                .filter(LoginUser::isValid)
-                .subscribe(loginUser -> {
-                    LoginManager.getManager().setLoggedUser(loginUser);
-                    gotoMain();
-                });
-
         Observable<String> rxUsername = RxTextView.textChanges(username).map(charSequence -> charSequence.toString().trim());
         Observable<String> rxPassword = RxTextView.textChanges(password).map(charSequence -> charSequence.toString().trim());
 
@@ -54,31 +41,14 @@ public class LoginActivity extends AppCompatActivity {
 
         RxView.clicks(login)
                 .doOnNext(aVoid -> SALoadScreen.getInstance().show(LoginActivity.this))
-                .flatMap(new Func1<Void, Observable<LoginUser>>() {
-                    @Override
-                    public Observable<LoginUser> call(Void aVoid) {
-                        return LoginManager.getManager().login(LoginActivity.this, model.getUsername(), model.getPassword());
-                    }
-                })
-                .subscribe(loginUser -> {
-
-                    SALoadScreen.getInstance().hide();
-
-                    if (loginUser.isValid()) {
-                        LoginManager.getManager().setLoggedUser(loginUser);
-                        LoginManager.getManager().saveUser(LoginActivity.this, loginUser);
-                        gotoMain();
-                    } else {
-                        authError();
-                    }
-
-                });
-
+                .flatMap(aVoid -> UserWorker.loginUser(LoginActivity.this, model.getUsername(), model.getPassword()).toObservable())
+                .doOnNext(logedUser -> SALoadScreen.getInstance().hide())
+                .doOnError(throwable -> SALoadScreen.getInstance().hide())
+                .subscribe(logedUser -> gotoMain(), throwable -> authError());
     }
 
     private void gotoMain () {
-        Intent mainIntent = new Intent(this, MainActivity.class);
-        this.startActivity(mainIntent);
+        this.startActivity(new Intent(this, MainActivity.class));
     }
 
     private void authError() {

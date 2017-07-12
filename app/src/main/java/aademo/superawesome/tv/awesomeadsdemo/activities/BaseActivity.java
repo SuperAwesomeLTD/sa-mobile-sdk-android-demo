@@ -10,6 +10,11 @@ import rx.Single;
 
 public class BaseActivity extends AppCompatActivity {
 
+    public void finishOK () {
+        setResult(RESULT_OK);
+        finish();
+    }
+
     public Single<String> getStringExtras (String key) {
         return Single.create(singleSubscriber -> {
 

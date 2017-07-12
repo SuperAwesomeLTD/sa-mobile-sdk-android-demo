@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -34,7 +33,7 @@ public class DemoPlacementFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_demoplacement, container, false);
+        View view = inflater.inflate(R.layout.fragment_demo, container, false);
 
         ListView listView = (ListView) view.findViewById(R.id.DemoFormatsListView);
 
@@ -59,11 +58,8 @@ public class DemoPlacementFragment extends Fragment {
                                 ((TextView) view1.findViewById(R.id.DemoFormatsDetails)).setText(viewModel.getFormatDetails());
 
                             })
-                            .onRowClick(R.layout.row_demoplacement, new Action2<Integer, DemoPlacementViewModel>() {
-                                @Override
-                                public void call(Integer integer, DemoPlacementViewModel viewModel) {
-                                    loadAd(viewModel.getPlacementId());
-                                }
+                            .onRowClick(R.layout.row_demoplacement, (Action2<Integer, DemoPlacementViewModel>) (integer, demoPlacementViewModel) -> {
+                                loadAd(demoPlacementViewModel.getPlacementId());
                             })
                             .update(viewModels);
 
@@ -94,9 +90,9 @@ public class DemoPlacementFragment extends Fragment {
     private void showError () {
         SAAlert.getInstance().show(
                 getActivity(),
-                getString(R.string.page_user_popup_error_title),
-                getString(R.string.page_user_popup_error_message),
-                getString(R.string.page_user_popup_error_ok_button),
+                getString(R.string.page_demo_popup_error_title),
+                getString(R.string.page_demo_popup_error_message),
+                getString(R.string.page_demo_popup_error_ok_button),
                 null,
                 false,
                 0,

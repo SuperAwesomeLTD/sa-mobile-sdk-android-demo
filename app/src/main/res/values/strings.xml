@@ -15,20 +15,8 @@
     <string name="page_login_popup_more_message">Username of password incorrect.</string>
     <string name="page_login_popup_more_ok_button">Try again!</string>
 
-    <!-- for the "user" fragment -->
-    <string name="page_user_title">Your placement</string>
-
-    <string name="page_user_button_more_title">Where can I find this?</string>
-    <string name="page_user_button_next_title">Load</string>
-    <string name="page_user_textfield_placement_placeholder">Placement ID ... </string>
-
-    <string name="page_user_popup_more_title">Log in to AwesomeAds</string>
-    <string name="page_user_popup_more_message">Under the \'Apps and Sites\' section you\'ll see a \'Placement ID\' column next to each of your placements.</string>
-    <string name="page_user_popup_more_ok_button">Got it!</string>
-
-    <string name="page_user_popup_error_title">Something went wrong!</string>
-    <string name="page_user_popup_error_message">Could not load ad data for this test placement.</string>
-    <string name="page_user_popup_error_ok_button">Got it!</string>
+    <!-- for the "app" fragment -->
+    <string name="page_app_title">Your placement</string>
 
     <!-- for the "demo formats" fragment -->
     <string name="page_demo_title">Default formats</string>
@@ -62,6 +50,10 @@
 
     <string name="page_demo_table_row_def_title">Title</string>
     <string name="page_demo_table_row_def_details">Details</string>
+
+    <string name="page_demo_popup_error_title">Something went wrong!</string>
+    <string name="page_demo_popup_error_message">Could not load ad data for this test placement.</string>
+    <string name="page_demo_popup_error_ok_button">Got it!</string>
 
     <!-- for the "settings" activity -->
     <string name="page_settings_title">Settings</string>
@@ -114,7 +106,17 @@
     <string name="page_creatives_popup_error_format_message">The format you\'re tyring to display is not supported on mobile.</string>
     <string name="page_creatives_popup_error_format_ok_button">Got it!</string>
 
-    <!-- logout -->
-    <string name="page_logout">Logout</string>
+    <!-- for the profile activity -->
+    <string name="page_profile_title">Profile</string>
+
+    <string name="page_profile_value_username">Username</string>
+    <string name="page_profile_value_email">Email</string>
+    <string name="page_profile_value_phone">Phone</string>
+    <string name="page_profile_value_company">Company</string>
+
+    <!-- for the companies activity -->
+    <string name="page_companies_title">Companies</string>
+
+    <string name="page_companies_search_placeholder">Search ...</string>
 
 </resources>

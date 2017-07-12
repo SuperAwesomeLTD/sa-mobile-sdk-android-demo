@@ -1,23 +1,26 @@
 package aademo.superawesome.tv.awesomeadsdemo.activities.main;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
 
 import java.util.Arrays;
 import java.util.List;
 
 import aademo.superawesome.tv.awesomeadsdemo.R;
+import aademo.superawesome.tv.awesomeadsdemo.activities.main.app.AppFragment;
 import aademo.superawesome.tv.awesomeadsdemo.activities.main.demo.DemoPlacementFragment;
-import aademo.superawesome.tv.awesomeadsdemo.activities.main.user.UserPlacementFragment;
-import aademo.superawesome.tv.awesomeadsdemo.loginaux.LoginManager;
+import aademo.superawesome.tv.awesomeadsdemo.activities.profile.ProfileActivity;
 
 public class MainActivity extends AppCompatActivity {
+
+    private AppFragment appFragment;
+    private DemoPlacementFragment demoFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +32,10 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
 
-        List<String> tabs = Arrays.asList(getString(R.string.page_user_title), getString(R.string.page_demo_title));
-        List<Fragment> fragments = Arrays.asList(new UserPlacementFragment(), new DemoPlacementFragment());
+        List<String> tabs = Arrays.asList(getString(R.string.page_app_title), getString(R.string.page_demo_title));
+        appFragment = new AppFragment();
+        demoFragment = new DemoPlacementFragment();
+        List<Fragment> fragments = Arrays.asList(appFragment, demoFragment);
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
@@ -47,25 +52,13 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+    public void startProfileActivity (View view) {
+        startActivityForResult(new Intent(this, ProfileActivity.class), 101);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.ActionLogout) {
-
-            LoginManager.getManager().logout(this);
-            finish();
-
-            return true;
-        }
-        else {
-            return super.onOptionsItemSelected(item);
-        }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        appFragment.loadData();
     }
 }

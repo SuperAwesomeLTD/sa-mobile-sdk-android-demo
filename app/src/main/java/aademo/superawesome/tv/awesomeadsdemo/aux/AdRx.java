@@ -6,7 +6,7 @@ import org.json.JSONObject;
 
 import java.util.List;
 
-import aademo.superawesome.tv.awesomeadsdemo.loginaux.LoginManager;
+import aademo.superawesome.tv.awesomeadsdemo.library.DataStore;
 import rx.Observable;
 import rx.Single;
 import tv.superawesome.lib.saadloader.SALoader;
@@ -69,11 +69,9 @@ public class AdRx {
 
         String url = session.getBaseUrl() + "/ad/" + placementId;
 
-        JSONObject query = SAJsonParser.newObject(new Object[] {
-                "debug", "json",
+        JSONObject query = SAJsonParser.newObject("debug", "json",
                 "forceCreative", 1,
-                "jwtToken", LoginManager.getManager().getLoggedUserToken()
-        });
+                "jwtToken", DataStore.getShared().getJwtToken(context));
 
         return Observable.create(subscriber -> {
 

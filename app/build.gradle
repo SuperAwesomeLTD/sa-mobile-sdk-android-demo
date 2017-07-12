@@ -8,8 +8,8 @@ android {
         applicationId "aademo.superawesome.tv.awesomeadsdemo"
         minSdkVersion 17
         targetSdkVersion 23
-        versionCode 8
-        versionName "3.1"
+        versionCode 9
+        versionName "4.0"
         jackOptions {
             enabled true
         }
@@ -46,6 +46,8 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
 
     compile 'tv.superawesome.sdk:superawesome:5.5.7'
+
+    compile 'com.google.code.gson:gson:2.8.0'
 
     compile project(':aadatabase')
 }
