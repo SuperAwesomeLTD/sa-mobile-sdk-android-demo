@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="saevents-1.0.4">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/tv.superawesome.lib.saevents/saevents/1.0.4/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/tv.superawesome.lib.saevents/saevents/1.0.4/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/saevents-1.0.4.aar/2f0745bdd65aa8ee5efd351ea6cd4aa8/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/saevents-1.0.4.aar/2f0745bdd65aa8ee5efd351ea6cd4aa8/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

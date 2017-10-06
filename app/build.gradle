@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "24.0.1"
+    buildToolsVersion '26.0.0'
 
     defaultConfig {
         applicationId "aademo.superawesome.tv.awesomeadsdemo"
@@ -10,9 +10,6 @@ android {
         targetSdkVersion 23
         versionCode 10
         versionName "5.0"
-        jackOptions {
-            enabled true
-        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="saadloader-1.1.1">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/tv.superawesome.lib.saadloader/saadloader/1.1.1/res" />
-      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/tv.superawesome.lib.saadloader/saadloader/1.1.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/saadloader-1.1.1.aar/86849ee68849a8d804c22ce9b4bad486/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/saadloader-1.1.1.aar/86849ee68849a8d804c22ce9b4bad486/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
