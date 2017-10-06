@@ -1,5 +1,6 @@
 package aademo.superawesome.tv.awesomeadsdemo.aux;
 
+import butterknife.BindView;
 import tv.superawesome.lib.samodelspace.saad.SAAd;
 import tv.superawesome.lib.samodelspace.saad.SACreative;
 import tv.superawesome.lib.samodelspace.saad.SACreativeFormat;
@@ -112,31 +113,23 @@ public enum AdFormat {
                 int width = ad.creative.details.width;
                 int height = ad.creative.details.height;
 
-                if (width == 300 && height == 50) {
-                    return AdFormat.smallbanner;
-                }
-                if (width == 320 && height == 50) {
-                    return AdFormat.normalbanner;
-                }
-                if (width == 728 && height == 90) {
-                    return AdFormat.bigbanner;
-                }
-                if (width == 300 && height == 250) {
-                    return AdFormat.mpu;
-                }
-                if (width == 320 && height == 480) {
-                    return AdFormat.mobile_portrait_interstitial;
-                }
-                if (width == 480 && height == 320) {
-                    return AdFormat.mobile_landscape_interstitial;
-                }
-                if (width == 768 && height == 1024) {
-                    return AdFormat.tablet_portrait_interstitial;
-                }
-                if (width == 1024 && height == 768) {
-                    return AdFormat.tablet_landscape_interstitial;
-                }
-
+                if (width == 720 && height == 90) return bigbanner;
+                if (width == 300 && height == 250) return mpu;
+                if (width == 468 && height == 60) return normalbanner;
+                if (width == 120 && height == 600) return mpu;
+                if (width == 300 && height == 600) return mpu;
+                if (width == 160 && height == 600) return mpu;
+                if (width == 970 && height == 250) return bigbanner;
+                if (width == 970 && height == 90) return bigbanner;
+                if (width == 300 && height == 50) return smallbanner;
+                if (width == 320 && height == 50) return normalbanner;
+                if (width == 728 && height == 90) return bigbanner;
+                if (width == 320 && height == 480) return mobile_portrait_interstitial;
+                if (width == 400 && height == 600) return mobile_portrait_interstitial;
+                if (width == 768 && height == 1024) return tablet_portrait_interstitial;
+                if (width == 480 && height == 320) return mobile_landscape_interstitial;
+                if (width == 600 && height == 400) return mobile_landscape_interstitial;
+                if (width == 1024 && height == 768) return tablet_landscape_interstitial;
                 return AdFormat.unknown;
             } else {
                 return AdFormat.unknown;
@@ -165,31 +158,23 @@ public enum AdFormat {
                         int width = creative.details.width;
                         int height = creative.details.height;
 
-                        if (width == 300 && height == 50) {
-                            return AdFormat.smallbanner;
-                        }
-                        if (width == 320 && height == 50) {
-                            return AdFormat.normalbanner;
-                        }
-                        if (width == 728 && height == 90) {
-                            return AdFormat.bigbanner;
-                        }
-                        if (width == 300 && height == 250) {
-                            return AdFormat.mpu;
-                        }
-                        if (width == 320 && height == 480) {
-                            return AdFormat.mobile_portrait_interstitial;
-                        }
-                        if (width == 480 && height == 320) {
-                            return AdFormat.mobile_landscape_interstitial;
-                        }
-                        if (width == 768 && height == 1024) {
-                            return AdFormat.tablet_portrait_interstitial;
-                        }
-                        if (width == 1024 && height == 768) {
-                            return AdFormat.tablet_landscape_interstitial;
-                        }
-
+                        if (width == 720 && height == 90) return bigbanner;
+                        if (width == 300 && height == 250) return mpu;
+                        if (width == 468 && height == 60) return normalbanner;
+                        if (width == 120 && height == 600) return mpu;
+                        if (width == 300 && height == 600) return mpu;
+                        if (width == 160 && height == 600) return mpu;
+                        if (width == 970 && height == 250) return bigbanner;
+                        if (width == 970 && height == 90) return bigbanner;
+                        if (width == 300 && height == 50) return smallbanner;
+                        if (width == 320 && height == 50) return normalbanner;
+                        if (width == 728 && height == 90) return bigbanner;
+                        if (width == 320 && height == 480) return mobile_portrait_interstitial;
+                        if (width == 400 && height == 600) return mobile_portrait_interstitial;
+                        if (width == 768 && height == 1024) return tablet_portrait_interstitial;
+                        if (width == 480 && height == 320) return mobile_landscape_interstitial;
+                        if (width == 600 && height == 400) return mobile_landscape_interstitial;
+                        if (width == 1024 && height == 768) return tablet_landscape_interstitial;
                         return AdFormat.unknown;
                     }
                 }

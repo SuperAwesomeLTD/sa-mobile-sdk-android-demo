@@ -4,14 +4,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.support.v7.widget.Toolbar;
 
 import aademo.superawesome.tv.awesomeadsdemo.R;
 import aademo.superawesome.tv.awesomeadsdemo.aux.AdFormat;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import tv.superawesome.lib.samodelspace.saad.SAResponse;
 import tv.superawesome.sdk.views.SABannerAd;
 
 public class DisplayActivity extends AppCompatActivity {
+
+    @BindView(R.id.DisplayToolbar) Toolbar toolbar;
+    @BindView(R.id.Banner1) SABannerAd normalAndSmallBanner;
+    @BindView(R.id.Banner2) SABannerAd bigBanner;
+    @BindView(R.id.Banner3) SABannerAd mpuBanner;
 
     private static SAResponse response;
     private static boolean parentalGate;
@@ -22,18 +29,14 @@ public class DisplayActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display);
+        ButterKnife.bind(this);
 
-        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.DisplayToolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
-
-        SABannerAd normalAndSmallBanner = (SABannerAd) findViewById(R.id.Banner1);
-        SABannerAd bigBanner = (SABannerAd) findViewById(R.id.Banner2);
-        SABannerAd mpuBanner = (SABannerAd) findViewById(R.id.Banner3);
 
         switch (format) {
 

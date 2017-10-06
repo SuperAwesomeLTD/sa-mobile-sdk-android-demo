@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -9,6 +9,7 @@
     tools:context=".activities.creatives.CreativesActivity">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/CreativesAppBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/MyMaterialTheme.Base">
@@ -23,11 +24,22 @@
 
     </android.support.design.widget.AppBarLayout>
 
+    <EditText
+        android:id="@+id/CreativesSearch"
+        android:layout_below="@+id/CreativesAppBar"
+        android:layout_margin="20dp"
+        android:textColorHint="@color/colorDarkGrey"
+        android:layout_width="match_parent"
+        android:hint="@string/page_creatives_search_placeholder"
+        android:inputType="text"
+        android:layout_height="40dp" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/CreativesRecyclerView"
+        android:layout_below="@+id/CreativesSearch"
         android:scrollbars="none"
         android:background="@color/colorLightGrey"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-</LinearLayout>
+</RelativeLayout>

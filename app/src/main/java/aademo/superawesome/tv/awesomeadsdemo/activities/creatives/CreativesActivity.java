@@ -5,28 +5,44 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.widget.EditText;
 
+import com.jakewharton.rxbinding.widget.RxTextView;
+
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import aademo.superawesome.tv.awesomeadsdemo.R;
 import aademo.superawesome.tv.awesomeadsdemo.activities.BaseActivity;
 import aademo.superawesome.tv.awesomeadsdemo.activities.settings.SettingsActivity;
 import aademo.superawesome.tv.awesomeadsdemo.aux.AdFormat;
 import aademo.superawesome.tv.awesomeadsdemo.aux.AdRx;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import rx.functions.Action1;
 import tv.superawesome.lib.samodelspace.saad.SAAd;
+import tv.superawesome.lib.samodelspace.saad.SACreative;
 import tv.superawesome.lib.samodelspace.saad.SACreativeFormat;
 import tv.superawesome.lib.sautils.SAAlert;
 
 public class CreativesActivity extends BaseActivity {
 
+    private List<SACreative> originals = new ArrayList<>();
     private CreativesAdapter adapter;
+
+    @BindView(R.id.CreativesRecyclerView) RecyclerView recyclerView;
+    @BindView(R.id.CreativesSearch) EditText editText;
+    @BindView(R.id.CreativesToolbar) Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_creatives);
+        ButterKnife.bind(this);
 
-        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.CreativesToolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -34,19 +50,22 @@ public class CreativesActivity extends BaseActivity {
         }
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.CreativesRecyclerView);
-
         getIntExtras(getString(R.string.k_intent_pid))
                 .subscribe(placementId -> {
 
                     AdRx.loadCreative(CreativesActivity.this, placementId)
-                            .map(CreativesViewModel::new)
                             .toList()
-                            .subscribe(viewModels -> {
+                            .subscribe(saCreatives -> {
 
-                                Collections.sort(viewModels);
+                                //
+                                // copy
+                                originals = saCreatives;
 
-                                adapter = new CreativesAdapter(CreativesActivity.this, viewModels);
+                                //
+                                // transform to view models
+                                List<CreativesViewModel> models = search(null, originals);
+
+                                adapter = new CreativesAdapter(CreativesActivity.this, models);
 
                                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
                                 recyclerView.setLayoutManager(mLayoutManager);
@@ -77,11 +96,17 @@ public class CreativesActivity extends BaseActivity {
                                         .filter(AdFormat::isUnknownType)
                                         .subscribe(this::unsupportedFormatError);
 
+                                RxTextView.textChanges(editText)
+                                        .map(charSequence -> charSequence.toString().trim())
+                                        .subscribe(searchTerm -> {
+                                            List<CreativesViewModel> newModels = search(searchTerm, originals);
+                                            adapter.updateData(newModels);
+                                        }, throwable -> {
+                                            // abc
+                                        });
 
                             }, this::loadAdError);
-
                 });
-
     }
 
     private void startSettingsActivityWithAd (String jsonData) {
@@ -112,5 +137,24 @@ public class CreativesActivity extends BaseActivity {
                 false,
                 0,
                 null);
+    }
+
+    private List<CreativesViewModel> search (String searchTerm, List<SACreative> original) {
+
+        List<CreativesViewModel> models = new ArrayList<>();
+
+        for (SACreative creative : original) {
+            if (searchTerm == null || searchTerm.isEmpty()) {
+                models.add(new CreativesViewModel(creative));
+            } else {
+                if (creative.name.toLowerCase().contains(searchTerm.toLowerCase())) {
+                    models.add(new CreativesViewModel(creative));
+                }
+            }
+        }
+
+        Collections.sort(models);
+
+        return models;
     }
 }

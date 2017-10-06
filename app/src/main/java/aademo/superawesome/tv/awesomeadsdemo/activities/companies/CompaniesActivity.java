@@ -2,6 +2,7 @@ package aademo.superawesome.tv.awesomeadsdemo.activities.companies;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -16,6 +17,8 @@ import aademo.superawesome.tv.awesomeadsdemo.activities.BaseActivity;
 import aademo.superawesome.tv.awesomeadsdemo.library.DataStore;
 import aademo.superawesome.tv.awesomeadsdemo.library.models.Company;
 import aademo.superawesome.tv.awesomeadsdemo.workers.UserWorker;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import gabrielcoman.com.rxdatasource.RxDataSource;
 import rx.functions.Action2;
 
@@ -23,21 +26,22 @@ public class CompaniesActivity extends BaseActivity {
 
     private RxDataSource dataSource;
 
+    @BindView(R.id.CompanySearch) EditText editText;
+    @BindView(R.id.CompaniesListView) ListView listView;
+    @BindView(R.id.CompaniesToolbar) Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_companies);
+        ButterKnife.bind(this);
 
-        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.CompaniesToolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
-
-        EditText editText = (EditText) findViewById(R.id.CompanySearch);
-        ListView listView = (ListView) findViewById(R.id.CompaniesListView);
 
         //
         // customise

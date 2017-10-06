@@ -2,6 +2,7 @@ package aademo.superawesome.tv.awesomeadsdemo.activities.settings;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.ListView;
@@ -10,11 +11,15 @@ import android.widget.TextView;
 
 import com.jakewharton.rxbinding.view.RxView;
 
+import java.util.List;
+
 import aademo.superawesome.tv.awesomeadsdemo.R;
 import aademo.superawesome.tv.awesomeadsdemo.activities.BaseActivity;
 import aademo.superawesome.tv.awesomeadsdemo.activities.display.DisplayActivity;
 import aademo.superawesome.tv.awesomeadsdemo.aux.AdFormat;
 import aademo.superawesome.tv.awesomeadsdemo.aux.AdRx;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import gabrielcoman.com.rxdatasource.RxDataSource;
 import tv.superawesome.lib.samodelspace.saad.SAResponse;
 import tv.superawesome.lib.sautils.SAAlert;
@@ -25,21 +30,22 @@ import tv.superawesome.sdk.views.SAVideoAd;
 
 public class SettingsActivity extends BaseActivity {
 
+    @BindView(R.id.SettingsToolbar) Toolbar toolbar;
+    @BindView(R.id.SettingsListView) ListView listView;
+    @BindView(R.id.LoadAdButton) Button loadBtn;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        ButterKnife.bind(this);
 
-        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.SettingsToolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
-
-        ListView listView = (ListView) findViewById(R.id.SettingsListView);
-        Button loadBtn = (Button) findViewById(R.id.LoadAdButton);
 
         SALoadScreen.getInstance().show(this);
 

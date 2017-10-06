@@ -5,6 +5,11 @@
     <string name="k_intent_pid">SETTINGS_PID</string>
     <string name="k_intent_format">SETTINGS_FORMAT</string>
 
+    <!-- main activity -->
+    // main controller
+    <string name="page_main_search_placeholder">Search apps or placements ..."</string>
+    <string name="page_main_change_company">Change company</string>
+
     <!-- for the login activity -->
     <string name="page_login_title">Login to AwesomeAds</string>
     <string name="page_login_textfield_user_placeholder">User name</string>
@@ -14,39 +19,6 @@
     <string name="page_login_popup_more_title">Login failed</string>
     <string name="page_login_popup_more_message">Username of password incorrect.</string>
     <string name="page_login_popup_more_ok_button">Try again!</string>
-
-    <!-- for the "app" fragment -->
-    <string name="page_app_title">Your placement</string>
-
-    <!-- for the "demo formats" fragment -->
-    <string name="page_demo_title">Default formats</string>
-
-    <string name="page_demo_table_row_1_title">Mobile Small Leaderboard</string>
-    <string name="page_demo_table_row_1_details">Size: 300x50</string>
-
-    <string name="page_demo_table_row_2_title">Mobile Leaderboard</string>
-    <string name="page_demo_table_row_2_details">Size: 320x50</string>
-
-    <string name="page_demo_table_row_3_title">Tablet Leaderboard</string>
-    <string name="page_demo_table_row_3_details">Size: 728x90</string>
-
-    <string name="page_demo_table_row_4_title">Tablet MPU</string>
-    <string name="page_demo_table_row_4_details">Size: 300x250</string>
-
-    <string name="page_demo_table_row_5_title">Mobile Interstitial Portrait</string>
-    <string name="page_demo_table_row_5_details">Size: 320x480</string>
-
-    <string name="page_demo_table_row_6_title">Mobile Interstitial Landscape</string>
-    <string name="page_demo_table_row_6_details">Size: 480x320</string>
-
-    <string name="page_demo_table_row_7_title">Tablet Interstitial Portrait</string>
-    <string name="page_demo_table_row_7_details">Size: 768x1024</string>
-
-    <string name="page_demo_table_row_8_title">Tablet Interstitial Landscape</string>
-    <string name="page_demo_table_row_8_details">Size: 1024x768</string>
-
-    <string name="page_demo_table_row_9_title">Mobile Video</string>
-    <string name="page_demo_table_row_9_details">Size: 600x480</string>
 
     <string name="page_demo_table_row_def_title">Title</string>
     <string name="page_demo_table_row_def_details">Details</string>
@@ -97,6 +69,8 @@
     <!-- for the "creatives" activity -->
     <string name="page_creatives_title">Select Ad</string>
 
+    <string name="page_creatives_search_placeholder">Search ads by name …</string>
+
     <string name="page_creatives_popup_error_load_title">Hey!</string>
     <string name="page_creatives_popup_error_load_message">The Placement ID you tried to load an ad for doesn\'t appear to have any data.</string>
     <string name="page_creatives_popup_error_load_ok_button">Got it!</string>
@@ -117,6 +91,6 @@
     <!-- for the companies activity -->
     <string name="page_companies_title">Companies</string>
 
-    <string name="page_companies_search_placeholder">Search ...</string>
+    <string name="page_companies_search_placeholder">Search companies …</string>
 
 </resources>

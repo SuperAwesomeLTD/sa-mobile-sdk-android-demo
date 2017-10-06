@@ -36,6 +36,11 @@ class CreativesAdapter extends RecyclerView.Adapter<CreativesAdapter.CreativesVi
         }
     }
 
+    void updateData (List<CreativesViewModel> models) {
+        this.models = models;
+        this.notifyDataSetChanged();
+    }
+
     class CreativesViewHolder extends RecyclerView.ViewHolder {
 
         ImageView creativeIcon;
@@ -44,12 +49,12 @@ class CreativesAdapter extends RecyclerView.Adapter<CreativesAdapter.CreativesVi
 
         CreativesViewHolder(View itemView) {
             super(itemView);
-            creativeIcon = (ImageView) itemView.findViewById(R.id.CreativeIcon);
-            creativeName = (TextView) itemView.findViewById(R.id.CreativeName);
-            creativeFormat = (TextView) itemView.findViewById(R.id.CreativeFormat);
-            creativeSource = (TextView) itemView.findViewById(R.id.CreativeSource);
-            creativeOSTarget = (TextView) itemView.findViewById(R.id.CreativeOsTarget);
-            creativeRoot = (LinearLayout) itemView.findViewById(R.id.CreativeRoot);
+            creativeIcon = itemView.findViewById(R.id.CreativeIcon);
+            creativeName = itemView.findViewById(R.id.CreativeName);
+            creativeFormat = itemView.findViewById(R.id.CreativeFormat);
+            creativeSource = itemView.findViewById(R.id.CreativeSource);
+            creativeOSTarget = itemView.findViewById(R.id.CreativeOsTarget);
+            creativeRoot = itemView.findViewById(R.id.CreativeRoot);
         }
     }
 
@@ -68,16 +73,6 @@ class CreativesAdapter extends RecyclerView.Adapter<CreativesAdapter.CreativesVi
         holder.creativeSource.setText(model.getCreativeSource());
         holder.creativeOSTarget.setText(model.getOSTarget());
         holder.creativeIcon.setImageBitmap(providers.get(position).getPlaceholder(context));
-
-        if (model.getBitmap() != null) {
-            holder.creativeIcon.setImageBitmap(model.getBitmap());
-        } else {
-            providers.get(position).getBitmap(context, position, model, (position1, bitmap) -> {
-                models.get(position1).setBitmap(bitmap);
-                holder.creativeIcon.setImageBitmap(bitmap);
-            });
-
-        }
 
         holder.itemView.setOnClickListener(v -> {
             clickSubject.onNext(model);

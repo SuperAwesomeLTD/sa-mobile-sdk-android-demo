@@ -13,12 +13,17 @@ import com.jakewharton.rxbinding.widget.RxTextView;
 import aademo.superawesome.tv.awesomeadsdemo.R;
 import aademo.superawesome.tv.awesomeadsdemo.activities.main.MainActivity;
 import aademo.superawesome.tv.awesomeadsdemo.workers.UserWorker;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import rx.Observable;
 import tv.superawesome.lib.sautils.SAAlert;
 import tv.superawesome.lib.sautils.SALoadScreen;
 
 public class LoginActivity extends AppCompatActivity {
 
+    @BindView(R.id.UsernameTextView) TextView username;
+    @BindView(R.id.PasswordTextView) TextView password;
+    @BindView(R.id.ButtonLogin) Button login;
 
     private LoginModel model;
 
@@ -26,10 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        TextView username = (TextView) findViewById(R.id.UsernameTextView);
-        TextView password = (TextView) findViewById(R.id.PasswordTextView);
-        Button login = (Button) findViewById(R.id.ButtonLogin);
+        ButterKnife.bind(this);
 
         Observable<String> rxUsername = RxTextView.textChanges(username).map(charSequence -> charSequence.toString().trim());
         Observable<String> rxPassword = RxTextView.textChanges(password).map(charSequence -> charSequence.toString().trim());

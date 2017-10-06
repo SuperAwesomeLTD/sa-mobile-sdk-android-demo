@@ -14,7 +14,6 @@ public class CreativesViewModel implements Comparable {
     private static final String cdnUrl = "https://s3-eu-west-1.amazonaws.com/beta-ads-video-transcoded-thumbnails/";
     private SACreative creative;
     private AdFormat mFormat;
-    private Bitmap bitmap;
     private String imageThumbnailUrl;
     private String videoMidpointThumbnailUrl;
     private String videoStartThumbnailUrl;
@@ -79,14 +78,6 @@ public class CreativesViewModel implements Comparable {
             case appwall: source += "App Wall"; break;
         }
         return source;
-    }
-
-    public Bitmap getBitmap() {
-        return bitmap;
-    }
-
-    public void setBitmap(Bitmap bitmap) {
-        this.bitmap = bitmap;
     }
 
     public String getImageThumbnailUrl () {
