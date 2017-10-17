@@ -41,21 +41,27 @@ public class DisplayActivity extends AppCompatActivity {
         switch (format) {
 
             case smallbanner:
-            case normalbanner: {
+            case banner: {
                 normalAndSmallBanner.setParentalGate(parentalGate);
                 normalAndSmallBanner.setColor(background);
                 normalAndSmallBanner.setAd(response.ads.get(0));
                 normalAndSmallBanner.play(this);
                 break;
             }
-            case bigbanner: {
+            case smallleaderboard:
+            case leaderboard:
+            case pushdown:
+            case billboard:{
                 bigBanner.setParentalGate(parentalGate);
                 bigBanner.setColor(background);
                 bigBanner.setAd(response.ads.get(0));
                 bigBanner.play(this);
                 break;
             }
-            case mpu: {
+            case skinnysky:
+            case sky:
+            case mpu:
+            case doublempu:{
                 mpuBanner.setParentalGate(parentalGate);
                 mpuBanner.setColor(background);
                 mpuBanner.setAd(response.ads.get(0));

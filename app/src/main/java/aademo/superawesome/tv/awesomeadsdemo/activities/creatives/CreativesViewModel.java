@@ -1,11 +1,8 @@
 package aademo.superawesome.tv.awesomeadsdemo.activities.creatives;
 
-import android.graphics.Bitmap;
 import android.text.TextUtils;
 
-import java.util.Arrays;
-import java.util.StringJoiner;
-
+import aademo.superawesome.tv.awesomeadsdemo.R;
 import aademo.superawesome.tv.awesomeadsdemo.aux.AdFormat;
 import tv.superawesome.lib.samodelspace.saad.SACreative;
 
@@ -14,9 +11,8 @@ public class CreativesViewModel implements Comparable {
     private static final String cdnUrl = "https://s3-eu-west-1.amazonaws.com/beta-ads-video-transcoded-thumbnails/";
     private SACreative creative;
     private AdFormat mFormat;
-    private String imageThumbnailUrl;
-    private String videoMidpointThumbnailUrl;
-    private String videoStartThumbnailUrl;
+    private String remoteUrl;
+    private int localUrl;
 
     CreativesViewModel(SACreative creative) {
 
@@ -25,7 +21,7 @@ public class CreativesViewModel implements Comparable {
 
         switch (creative.format) {
             case image: {
-                imageThumbnailUrl = creative.details.image;
+                remoteUrl = creative.details.image;
                 break;
             }
             case video: {
@@ -34,24 +30,70 @@ public class CreativesViewModel implements Comparable {
                     String[] parts = videoUrl.split("/");
                     if (parts.length > 0) {
                         String startName = parts[parts.length - 1].replace(".mp4", "-low-00001.jpg");
-                        videoStartThumbnailUrl = cdnUrl + startName;
-                        String midpointName = parts[parts.length - 1].replace(".mp4", "-low-00002.jpg");
-                        videoMidpointThumbnailUrl = cdnUrl + midpointName;
+                        remoteUrl = cdnUrl + startName;
                     }
                 }
                 break;
             }
-            case invalid:
-            case rich:
-            case tag:
-            case appwall: {
-                // do nothing
+            default:break;
+        }
+
+        switch (mFormat) {
+            case unknown:
+                localUrl = R.drawable.icon_placeholder;
                 break;
-            }
+            case smallbanner:
+                localUrl = R.drawable.smallbanner;
+                break;
+            case banner:
+                localUrl = R.drawable.banner;
+                break;
+            case smallleaderboard:
+                localUrl = R.drawable.imac468x60;
+                break;
+            case leaderboard:
+                localUrl = R.drawable.leaderboard;
+                break;
+            case pushdown:
+                localUrl = R.drawable.imac970x90;
+                break;
+            case billboard:
+                localUrl = R.drawable.imac970x250;
+                break;
+            case skinnysky:
+                localUrl = R.drawable.imac120x600;
+                break;
+            case sky:
+                localUrl = R.drawable.imac160x600;
+                break;
+            case mpu:
+                localUrl = R.drawable.mpu;
+                break;
+            case doublempu:
+                localUrl = R.drawable.imac300x600;
+                break;
+            case mobile_portrait_interstitial:
+                localUrl = R.drawable.small_inter_port;
+                break;
+            case mobile_landscape_interstitial:
+                localUrl = R.drawable.small_inter_land;
+                break;
+            case tablet_portrait_interstitial:
+                localUrl = R.drawable.large_inter_port;
+                break;
+            case tablet_landscape_interstitial:
+                localUrl = R.drawable.large_inter_land;
+                break;
+            case video:
+                localUrl = R.drawable.video;
+                break;
+            case appwall:
+                localUrl = R.drawable.appwall;
+                break;
         }
     }
 
-    public SACreative getCreative() {
+    SACreative getCreative() {
         return creative;
     }
 
@@ -80,19 +122,15 @@ public class CreativesViewModel implements Comparable {
         return source;
     }
 
-    public String getImageThumbnailUrl () {
-        return imageThumbnailUrl;
+    String getRemoteUrl () {
+        return remoteUrl;
     }
 
-    public String getVideoMidpointThumbnailUrl() {
-        return videoMidpointThumbnailUrl;
+    int getLocalUrl () {
+        return localUrl;
     }
 
-    public String getVideoStartThumbnailUrl() {
-        return videoStartThumbnailUrl;
-    }
-
-    public String getOSTarget () {
+    String getOSTarget() {
         return "System: " + (creative.osTarget.size() == 0 ? "All" : TextUtils.join(",", creative.osTarget));
     }
 

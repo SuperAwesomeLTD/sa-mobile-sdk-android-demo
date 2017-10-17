@@ -12,10 +12,12 @@ import com.jakewharton.rxbinding.widget.RxTextView;
 
 import aademo.superawesome.tv.awesomeadsdemo.R;
 import aademo.superawesome.tv.awesomeadsdemo.activities.main.MainActivity;
+import aademo.superawesome.tv.awesomeadsdemo.library.models.LogedUser;
 import aademo.superawesome.tv.awesomeadsdemo.workers.UserWorker;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import rx.Observable;
+import rx.functions.Func1;
 import tv.superawesome.lib.sautils.SAAlert;
 import tv.superawesome.lib.sautils.SALoadScreen;
 

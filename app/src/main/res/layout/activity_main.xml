@@ -16,15 +16,17 @@
 
         <Button
             android:id="@+id/ChangeCompButton"
-            android:onClick="startCompaniesActivity"
-            android:layout_alignParentEnd="true"
-            android:layout_margin="12dp"
-            android:textAllCaps="false"
-            android:textColor="@color/colorBlue"
-            android:background="@color/colorTransparent"
-            android:text="@string/page_main_change_company"
             android:layout_width="wrap_content"
-            android:layout_height="26dp" />
+            android:layout_height="26dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="13dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/colorTransparent"
+            android:onClick="startCompaniesActivity"
+            android:text="@string/page_main_change_company"
+            android:textAllCaps="false"
+            android:textColor="@color/colorBlue" />
 
         <ImageView
             android:id="@+id/MainLogo"

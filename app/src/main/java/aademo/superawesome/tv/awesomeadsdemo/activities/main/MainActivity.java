@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.jakewharton.rxbinding.widget.RxTextView;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,8 +58,9 @@ public class MainActivity extends AppCompatActivity {
                     ((TextView) view12.findViewById(R.id.ItemTitle)).setText(placement.getPlacementName());
                     ((TextView) view12.findViewById(R.id.ItemPlacementId)).setText(placement.getPlacementID());
                     ((TextView) view12.findViewById(R.id.ItemDetails)).setText(placement.getPlacementSize());
-                    ((ImageView) view12.findViewById(R.id.ItemIcon)).setImageDrawable(placement.getPlacementIcon(MainActivity.this));
 
+                    ImageView ItemIcon = view12.findViewById(R.id.ItemIcon);
+                    Picasso.with(MainActivity.this).load(placement.getPlacementIcon()).into(ItemIcon);
                 })
                 .onRowClick(R.layout.row_placement, (Action2<Integer, PlacementViewModel>) (integer, placement) -> {
                     startCreativesActivity(placement.getPlacement().getId());

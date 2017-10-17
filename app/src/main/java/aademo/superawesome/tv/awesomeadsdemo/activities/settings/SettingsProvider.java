@@ -85,37 +85,21 @@ class SettingsProvider {
             // customise options
             this.getParentalGate().setActive(true);
 
-            switch (format) {
-                case unknown: {
-                    this.getParentalGate().setActive(false);
-                    break;
-                }
-                case smallbanner:
-                case normalbanner:
-                case bigbanner:
-                case mpu: {
-                    this.getTransparentBg().setActive(true);
-                    break;
-                }
-                case mobile_portrait_interstitial:
-                case mobile_landscape_interstitial:
-                case tablet_portrait_interstitial:
-                case tablet_landscape_interstitial: {
-                    this.getBackButton().setActive(true);
-                    this.getLockToPortrait().setActive(true);
-                    this.getLockToLandscape().setActive(true);
-                    break;
-                }
-                case video: {
-                    this.getBackButton().setActive(true);
-                    this.getLockToPortrait().setActive(true);
-                    this.getLockToLandscape().setActive(true);
-                    this.getCloseButton().setActive(true);
-                    this.getAutoClose().setActive(true);
-                    this.getSmallClick().setActive(true);
-                    break;
-                }
-                case appwall: break;
+            if (format.isBannerType()) {
+                this.getTransparentBg().setActive(true);
+            }
+            else if (format.isInterstitialType()) {
+                this.getBackButton().setActive(true);
+                this.getLockToPortrait().setActive(true);
+                this.getLockToLandscape().setActive(true);
+            }
+            else if (format.isVideoType()) {
+                this.getBackButton().setActive(true);
+                this.getLockToPortrait().setActive(true);
+                this.getLockToLandscape().setActive(true);
+                this.getCloseButton().setActive(true);
+                this.getAutoClose().setActive(true);
+                this.getSmallClick().setActive(true);
             }
 
             // create an array of settings to use for observer

@@ -26,14 +26,10 @@ class CreativesAdapter extends RecyclerView.Adapter<CreativesAdapter.CreativesVi
     private Context context;
     private List<CreativesViewModel> models;
     private PublishSubject<CreativesViewModel> clickSubject = PublishSubject.create();
-    private List<BitmapProvider> providers = new ArrayList<>();
 
     CreativesAdapter(Context context, List<CreativesViewModel> models) {
         this.context = context;
         this.models = models;
-        for (int i = 0; i < models.size(); i++){
-            providers.add(new BitmapProvider());
-        }
     }
 
     void updateData (List<CreativesViewModel> models) {
@@ -72,7 +68,7 @@ class CreativesAdapter extends RecyclerView.Adapter<CreativesAdapter.CreativesVi
         holder.creativeFormat.setText(model.getCreativeFormat());
         holder.creativeSource.setText(model.getCreativeSource());
         holder.creativeOSTarget.setText(model.getOSTarget());
-        holder.creativeIcon.setImageBitmap(providers.get(position).getPlaceholder(context));
+        Picasso.with(context).load(model.getRemoteUrl()).placeholder(model.getLocalUrl()).into(holder.creativeIcon);
 
         holder.itemView.setOnClickListener(v -> {
             clickSubject.onNext(model);
