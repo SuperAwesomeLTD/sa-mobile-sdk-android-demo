@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: tv.superawesome.lib.samodelspace:samodelspace-0.6.8">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/samodelspace-0.6.8.aar/cbe76079dc11385e55eb4535e881b6fc/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/samodelspace-0.6.8.aar/cbe76079dc11385e55eb4535e881b6fc/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

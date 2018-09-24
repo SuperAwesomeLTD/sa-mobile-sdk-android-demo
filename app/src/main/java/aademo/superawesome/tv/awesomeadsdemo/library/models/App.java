@@ -5,7 +5,7 @@ import java.util.List;
 
 public class App {
 
-    private int id;
+    private String id;
     private String name;
     private List<Placement> placements = new ArrayList<>();
 
@@ -13,7 +13,7 @@ public class App {
         // do nothing
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 

@@ -3,6 +3,7 @@ package aademo.superawesome.tv.awesomeadsdemo.activities.profile;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -87,7 +88,7 @@ public class ProfileActivity extends BaseActivity {
                                 // do nothing
                             });
                 }, throwable -> {
-                    // do nothing
+                    Log.e("SuperAwesome", "Error is " + throwable.getMessage());
                 });
 
     }

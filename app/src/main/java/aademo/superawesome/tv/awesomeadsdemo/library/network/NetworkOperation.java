@@ -78,7 +78,7 @@ public abstract class NetworkOperation implements RequestOptions {
         };
     }
 
-    public static NetworkOperation getApps(int company, String jwtToken) {
+    public static NetworkOperation getApps(String company, String jwtToken) {
         return new NetworkOperation() {
             @NonNull
             @Override
@@ -146,7 +146,7 @@ public abstract class NetworkOperation implements RequestOptions {
         };
     }
 
-    public static NetworkOperation getCompany (int id, String jwtToken) {
+    public static NetworkOperation getCompany (String id, String jwtToken) {
         return new NetworkOperation() {
             @NonNull
             @Override

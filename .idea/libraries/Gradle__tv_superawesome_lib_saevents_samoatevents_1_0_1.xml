@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: tv.superawesome.lib.saevents:samoatevents-1.0.1">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/samoatevents-1.0.1.aar/fd6067a74a6871261a3f27cec31acf00/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/samoatevents-1.0.1.aar/fd6067a74a6871261a3f27cec31acf00/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/samoatevents-1.0.1.aar/fd6067a74a6871261a3f27cec31acf00/jars/libs/moatlib.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

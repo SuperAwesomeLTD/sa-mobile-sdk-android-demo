@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -86,7 +87,9 @@ public class AppFragment extends Fragment {
 
                     return result;
                 })
-                .subscribe(objects -> dataSource.update(objects), throwable -> {});
+                .subscribe(objects -> dataSource.update(objects), throwable -> {
+                    Log.e("SuperAwesome", "Error is " + throwable.getMessage());
+                });
     }
 
     private void startCreativesActivity(int placementId) {

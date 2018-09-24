@@ -2,14 +2,14 @@ package aademo.superawesome.tv.awesomeadsdemo.library.models;
 
 public class Permission {
 
-    private int id;
+    private String id;
     private String name;
 
     public Permission() {
         // do nothing
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 

@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: tv.superawesome.lib.sanetwork:sanetwork-0.3.7">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/sanetwork-0.3.7.aar/05db1230dc8049b8de1c3127a4048353/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/sanetwork-0.3.7.aar/05db1230dc8049b8de1c3127a4048353/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

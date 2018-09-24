@@ -9,7 +9,7 @@ public class UserProfile {
     private String username;
     private String email;
     private String phoneNumber;
-    private int companyId;
+    private String companyId;
     private List<Permission> permissions = new ArrayList<>();
     private LogedUser logedUser;
 
@@ -33,7 +33,7 @@ public class UserProfile {
         return phoneNumber;
     }
 
-    public int getCompanyId() {
+    public String getCompanyId() {
         return companyId;
     }
 
@@ -62,7 +62,7 @@ public class UserProfile {
         return logedUser != null && logedUser.isValid();
     }
 
-    public void setCompanyId(int companyId) {
+    public void setCompanyId(String companyId) {
         this.companyId = companyId;
     }
 }

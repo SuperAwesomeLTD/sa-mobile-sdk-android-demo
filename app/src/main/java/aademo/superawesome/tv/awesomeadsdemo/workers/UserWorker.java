@@ -61,7 +61,7 @@ public class UserWorker {
         }
     }
 
-    public static Single<AppData> getApps(Context context, int companyId, String jwtToken) {
+    public static Single<AppData> getApps(Context context, String companyId, String jwtToken) {
 
         NetworkOperation operation = NetworkOperation.getApps(companyId, jwtToken);
         NetworkRequest request = new NetworkRequest(operation);
@@ -71,7 +71,7 @@ public class UserWorker {
 
     }
 
-    public static Single<Company> getCompany(Context context, int id, String jwtToken) {
+    public static Single<Company> getCompany(Context context, String id, String jwtToken) {
 
         NetworkOperation operation = NetworkOperation.getCompany(id, jwtToken);
         NetworkRequest request = new NetworkRequest(operation);

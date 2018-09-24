@@ -2,14 +2,14 @@ package aademo.superawesome.tv.awesomeadsdemo.library.models;
 
 public class Company {
 
-    private int id;
+    private String id;
     private String name;
 
     public Company () {
         // do nothing
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
